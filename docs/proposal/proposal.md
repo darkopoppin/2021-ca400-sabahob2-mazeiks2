@@ -35,7 +35,7 @@ The motivation behind this project is that we have often found ourselves struggl
 
 The main goal of this project is to have a web-app, with working front-end and back-end, offering the following functionalities:
 - Algorithm that will be able to create a plan from the list of activities that will match the user’s budget, available time, transportation, location
-- Recommendation algorithm (classification model/collaborative filtering or hybrid) that would be able to improve the choice of activities for each user
+- Machine learning algorithm (classification model/collaborative filtering or hybrid) that would be able to improve the choice of activities for each user
 - Real-time updates of the planned activities if the user is behind schedule
 
 Customer base:
@@ -77,7 +77,7 @@ None
 
 #### Bozhidar Sabahov
 
-- UI design and front-end implementation
+- UI design
 - Frontend API implementation
 - Design the web app architecture
 - Server-side implementation
