@@ -3,6 +3,7 @@
       <h3>Welcome</h3>
       <p>{{ user }}</p>
 
+      <ion-button @click="() => this.$router.push('/categorySelection')" >Category selection</ion-button>
       <ion-button
         type="submit"
         v-on:click="logOut()"

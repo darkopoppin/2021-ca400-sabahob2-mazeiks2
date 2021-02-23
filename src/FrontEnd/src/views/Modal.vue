@@ -1,27 +1,32 @@
 <template>
   <ion-page>
-    <ion-grid>
-      <ion-item>
-      <ion-button class="Button" >Something</ion-button>
-      <ion-button class="Button" >Something</ion-button>
-      <ion-button class="Button" >Something</ion-button>
+    <ion-list>
+      <ion-item v-for="item in categories" v-bind:key="item">
+        <ion-label>{{ item.val }}</ion-label>
+        <ion-checkbox
+          @update:modelValue="item.isChecked = $event"
+          :modelValue="item.isChecked"
+        >
+        </ion-checkbox>
       </ion-item>
-      <ion-item>
-      <ion-button class="Button" >Something</ion-button>
-      <ion-button class="Button" >Something</ion-button>
-      </ion-item>
-    </ion-grid>
+    </ion-list>
+
+    <ion-button v-on:click= "submit()"> Submit</ion-button>
   </ion-page>
 </template>
 
 <script>
 import {
   IonPage,
-  IonGrid,
+  IonList,
   IonItem,
+  IonCheckbox,
+  IonLabel,
   IonButton,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
+import axios from "axios";
+import firebase from "firebase";
 
 export default defineComponent({
   name: "Modal",
@@ -30,13 +35,22 @@ export default defineComponent({
   },
   data() {
     return {
+      categories : [ { val: 'Acai Bowls', isChecked: true }, { val: 'Aerial Tours', isChecked: false }, { val: 'Afghan', isChecked: false }, ],
       content: "Content",
+      items : ['Acai Bowls', 'Aerial Tours','Afghan','African','Airsoft','Amateur Sports Teams','Amusement Parks','Andalusian','Aquariums','Arabian','Arcades','Archery','Architectural Tours'],
     };
   },
-  created() {
-    console.log("here")
+  methods: {
+    created() {
+      console.log("here")
+    },
+    submit() {
+      const user = firebase.auth().currentUser;
+      console.log(user)
+      axios.post('http://127.0.0.1:5000/categorySelection', { params: [this.categories, user.uid]}).then(response => console.log(response)).catch(error => console.log(error))
+    },
   },
-  components: { IonPage, IonGrid, IonItem, IonButton, },
+  components: { IonPage, IonList, IonButton, IonItem, IonCheckbox, IonLabel },
 });
 </script>
 
