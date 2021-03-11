@@ -1,4 +1,5 @@
 import json
+import random
 import argparse
 import numpy as np
 import pandas as pd
@@ -9,7 +10,8 @@ parser = argparse.ArgumentParser(description="Extracts all the values of a key i
                     Filter the categories.")
 parser.add_argument("-e", "--extract",
                     help="Extracts the values of the passed key")
-parser.add_argument("-f", "--filter", help="Filter the categories")
+parser.add_argument("-f", "--filter", help="Filter the categories",
+                    action='store_true')
 parser.add_argument("-c", "--categories",
                     help="Extract the required categories from the YELP json")
 parser.add_argument('-s', '--statistics',
@@ -18,8 +20,11 @@ parser.add_argument('-r', '--reviews',
                     help="Extract reviews of the businesses from \
                     filtered_dataset.json")
 parser.add_argument('-C', '--csv', help="Save the json dataset as csv")
+parser.add_argument('-U', '--user', help="Create a dummy user",
+                    action='store_true')
 
-parent_categories_titles = set([
+# not interested in theses parent categories
+not_relevant_parents = set([
     'Automotive',
     'Beauty & Spas',
     'Bicycles',
@@ -39,8 +44,8 @@ parent_categories_titles = set([
     'Shopping',
 ])
 
-activities_per_category = {}
-reviews = 0
+relevant_parents = ['Active Life', 'Nightlife', 'Local Flavor', 'Arts & Entertainment', 'Restaurants']
+restaurants = {}
 
 
 def main():
@@ -58,7 +63,7 @@ def main():
 
     if args.filter:
         categories = []
-        with open(args.filter, "r") as f:
+        with open('my_categories.txt', "r") as f:
             line = f.readline()
             while line:
                 categories.append(line.strip())
@@ -74,6 +79,9 @@ def main():
 
     if args.csv:
         convert_to_csv(args.csv)
+
+    if args.user:
+        create_user()
 
 
 def open_json(path):
@@ -114,14 +122,20 @@ def extract_categories(categories):
         'fitness',
         'gourmet'
     ]
+    cuisine_endings = ['an', 'se', 'ne', 'hi', 'sh', 'ch', 'no', 'nd']
     with open('my_categories.txt', 'w') as f:
         for category in categories:
             for parent in category['parents']:
                 if (parent in parent_categories and
                         parent not in avoid_categories):
-                    print(category['title'])
-                    title = category['title']
-                    f.write(f'{title}\n')
+                    if parent == 'restaurants':
+                        if category['alias'][-2:] in cuisine_endings:
+                            print(category['title'])
+                            title = category['title']
+                            f.write(f'{title}\n')
+                    else:
+                        title = category['title']
+                        f.write(f'{title}\n')
 
     return my_categories
 
@@ -129,18 +143,24 @@ def extract_categories(categories):
 def filter_categories(businesses, my_categories):
     filtered = []
     my_categories = set(my_categories)
-    global parent_categories_titles
+    global not_relevant_parents
 
-    reviews_count = []
     print("Filtering categories...")
     for business in businesses:
         if (business['categories'] is not None):
             full_categories = set(business['categories'].split(', '))
-            categories = full_categories.difference(parent_categories_titles)
+            categories = full_categories.difference(not_relevant_parents)
             filtered_categories = categories.intersection(my_categories)
+
             # 1009 businesses have only parent categories
-            if (len(categories) != 0 and
-                    len(filtered_categories)/len(categories) >= 0.7):
+            if ((len(filtered_categories) == 1 and
+                    list(filtered_categories)[0] in relevant_parents) or
+                    len(categories) == 0):
+                interest_percent = 0
+            else:
+                interest_percent = len(filtered_categories)/len(categories)
+
+            if (interest_percent >= 0.7 and restaurant_reducer(filtered_categories) and not repeated(business, filtered)):
                 filtered.append({
                     "business_id": business["business_id"],
                     "name": business["name"],
@@ -148,7 +168,7 @@ def filter_categories(businesses, my_categories):
                     "review_count": business["review_count"],
                     "categories": list(filtered_categories)
                 })
-                reviews_count.append(business["review_count"])
+                print(len(filtered), flush=True)
 
     print(f'Filtered: {len(filtered)}')
     print(f'All: {len(businesses)}')
@@ -157,9 +177,29 @@ def filter_categories(businesses, my_categories):
     with open("filtered_dataset.json", "w") as f:
         json.dump(filtered, f, indent=4)
 
-    print(f"Total reviews in the dataset:{sum(reviews_count)}")
-    median_deviation(reviews_count)
-    histogram_reviews(reviews_count)
+
+def repeated(business, businesses):
+    name = business['name']
+    for b in businesses:
+        if name == b['name']:
+            return True
+    return False
+
+
+def restaurant_reducer(categories):
+    global restaurants
+
+    if 'Restaurants' not in categories:
+        return True
+
+    for category in categories:
+        if category in restaurants and restaurants.get(category, 100) < 30:
+            restaurants[category] += 1
+            return True
+        elif category not in restaurants:
+            restaurants[category] = 1
+            return True
+    return False
 
 
 def generate_statistics(path):
@@ -241,7 +281,20 @@ def convert_to_csv(path):
         data['Categories'].append(' '.join(business['categories']))
 
     df = pd.DataFrame(data, columns=columns)
-    df.to_csv('path'))
+    df.to_csv('path')
+
+
+def create_user():
+    with open('filtered_dataset.json', 'r') as f:
+        dataset = json.load(f)
+
+    user = []
+    for i in range(0, 10):
+        poi_id = random.randrange(0, len(dataset))
+        poi = dataset[poi_id]
+        user.append(poi)
+
+    print(user)
 
 
 if __name__ == "__main__":
