@@ -144,5 +144,4 @@ npm-debug.log*
 /plugins
 /www
 node_modules/
-/confidential.ts
-confidential.ts/
+confidential.ts
