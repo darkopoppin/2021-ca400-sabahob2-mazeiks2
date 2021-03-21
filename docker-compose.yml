@@ -5,17 +5,11 @@ services:
      - backend
     build: './FrontEnd'
     image: "frontend-container"
-    networks:
-     - webnet
     ports:
      - "8100:8100"
     command: nginx -g "daemon off";
   backend:
     build: './BackEnd'
     image: "user-informtion-container"
-    network:
-      - webnet
     ports:
      - "5000:5000"
-networks:
-  webnet
