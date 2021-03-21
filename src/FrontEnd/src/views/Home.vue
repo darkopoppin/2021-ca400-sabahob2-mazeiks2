@@ -28,7 +28,7 @@ export default defineComponent({
   name: "Home",
   components: {
     // IonContent,
-    // IonHeader,
+    // IonHeader, pipeline test
     IonPage,
     IonButton,
     // IonTitle,
