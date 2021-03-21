@@ -1,0 +1,14 @@
+version: '3'
+services:
+  frontend:
+    depends_on:
+     - backend
+    build: './src/FrontEnd'
+    image: "frontend-container"
+    ports:
+     - "8080:8100"
+  backend:
+    build: './src/BackEnd'
+    image: "user-informtion-container"
+    ports:
+     - "5000:5000"
