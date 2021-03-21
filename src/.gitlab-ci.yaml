@@ -1,0 +1,22 @@
+image: docker
+
+services:
+  - docker:dind
+
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  script:
+  - echo run tests in this section
+
+step-deploy-master:
+  stage: deploy
+  only:
+  - master
+  script:
+  docker-compose up -d --build
+  environment: production
+  when: automatic
