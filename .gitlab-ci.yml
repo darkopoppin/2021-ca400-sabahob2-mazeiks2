@@ -20,4 +20,4 @@ step-deploy-docker-deployment:
   - docker-compose build
   - docker-compose up -d
   environment: production
-  when: manual
+  when: always
