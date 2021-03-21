@@ -19,3 +19,13 @@ def userCategories():
     except Exception as e:
         print(e)
         return "not assigned"
+
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    if args.debug:
+        print("Running in debug mode")
+        cors = CORS(app)
+        app.run(host='0.0.0.0', port=port, debug=True)
+    else:
+        app.run(host='0.0.0.0', port=port, debug=False)
