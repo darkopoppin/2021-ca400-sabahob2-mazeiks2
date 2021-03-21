@@ -145,5 +145,3 @@ npm-debug.log*
 /www
 node_modules/
 confidential.ts
-confidential.ts/
-/confidentia.ts
