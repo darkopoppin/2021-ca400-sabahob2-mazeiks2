@@ -22,7 +22,7 @@ services:
     volumes:
       - ./mysite.template:/etc/nginx/conf.d/mysite.template
     ports:
-      - "8081:8100"
+      - "8081:8080"
     networks:
       - webnet
     depends_on:
