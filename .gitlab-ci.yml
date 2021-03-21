@@ -17,6 +17,7 @@ step-deploy-docker-deployment:
   only:
   - docker-deployment
   script:
-  - docker-compose up -d --build
+  - docker-compose build
+  - docker-compose up -d
   environment: production
   when: manual
