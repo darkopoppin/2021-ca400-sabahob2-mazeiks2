@@ -3,13 +3,13 @@ services:
   frontend:
     depends_on:
      - backend
-    build: './FrontEnd'
+    build: './src/FrontEnd'
     image: "frontend-container"
     ports:
      - "8100:8100"
     command: nginx -g "daemon off";
   backend:
-    build: './BackEnd'
+    build: './src/BackEnd'
     image: "user-informtion-container"
     ports:
      - "5000:5000"
