@@ -17,6 +17,6 @@ step-deploy-master:
   only:
   - master
   script:
-  docker-compose up -d --build
+  - docker-compose up -d --build
   environment: production
   when: automatic
