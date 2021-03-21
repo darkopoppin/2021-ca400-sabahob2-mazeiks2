@@ -12,11 +12,11 @@ test:
   script:
   - echo run tests in this section
 
-step-deploy-master:
+step-deploy-docker-deployment:
   stage: deploy
   only:
-  - master
+  - docker-deployment
   script:
   - docker-compose up -d --build
   environment: production
-  when: always
+  when: manual
