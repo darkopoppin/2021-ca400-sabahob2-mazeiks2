@@ -6,7 +6,7 @@ services:
     build: './src/FrontEnd'
     image: "frontend-container"
     ports:
-     - "8080:8100"
+     - "80:8100"
   backend:
     build: './src/BackEnd'
     image: "user-informtion-container"
