@@ -144,6 +144,7 @@ def filter_categories(businesses, my_categories):
     filtered = []
     my_categories = set(my_categories)
     global not_relevant_parents
+    global relevant_parents
 
     print("Filtering categories...")
     for business in businesses:
@@ -151,21 +152,22 @@ def filter_categories(businesses, my_categories):
             full_categories = set(business['categories'].split(', '))
             categories = full_categories.difference(not_relevant_parents)
             filtered_categories = categories.intersection(my_categories)
+            parents = filtered_categories.intersection(relevant_parents)
 
             # 1009 businesses have only parent categories
-            if ((len(filtered_categories) == 1 and
-                    list(filtered_categories)[0] in relevant_parents) or
+            if (len(filtered_categories) == len(parents)  or
                     len(categories) == 0):
                 interest_percent = 0
             else:
                 interest_percent = len(filtered_categories)/len(categories)
 
             if (interest_percent >= 0.7 and restaurant_reducer(filtered_categories) and not repeated(business, filtered)):
+                filtered_categories = filtered_categories.difference(relevant_parents)
                 filtered.append({
                     "business_id": business["business_id"],
                     "name": business["name"],
                     "stars": business["stars"],
-                    "review_count": business["review_count"],
+                    "parents": list(parents),
                     "categories": list(filtered_categories)
                 })
                 print(len(filtered), flush=True)
@@ -205,30 +207,21 @@ def restaurant_reducer(categories):
 def generate_statistics(path):
     number_activities_per_category = {}
     reviews_per_business = []
-    parent_categories = set([
-        'Active Life',
-        'Arts & Entertainment',
-        'Restaurants',
-        'Nightlife',
-        'Local Flavor'])
 
     with open(path, 'r') as f:
         dataset = json.load(f)
 
     for business in dataset:
-        categories = set(business['categories']).intersection(
-            parent_categories
-        )
-        reviews_per_business.append(business['review_count'])
-        for category in categories:
+        #reviews_per_business.append(business['review_count'])
+        for category in business['parents']:
             if category in number_activities_per_category:
                 number_activities_per_category[category] += 1
             else:
                 number_activities_per_category[category] = 0
 
-    median_deviation(reviews_per_business)
+    #median_deviation(reviews_per_business)
     print(number_activities_per_category)
-    histogram_reviews(reviews_per_business)
+    #histogram_reviews(reviews_per_business)
 
 
 def histogram_reviews(reviews_count):
@@ -281,7 +274,7 @@ def convert_to_csv(path):
         data['Categories'].append(' '.join(business['categories']))
 
     df = pd.DataFrame(data, columns=columns)
-    df.to_csv('path')
+    df.to_csv(path.split('.')[0] + '.csv')
 
 
 def create_user():
@@ -289,12 +282,26 @@ def create_user():
         dataset = json.load(f)
 
     user = []
+    categories = set()
     for i in range(0, 10):
         poi_id = random.randrange(0, len(dataset))
         poi = dataset[poi_id]
+        poi['rating'] = random.randrange(0,2)
+        if poi['rating'] == 1:
+            categories.update(set(poi['categories']))
         user.append(poi)
 
-    print(user)
+    with open("./users/user.json", "w") as f:
+        json.dump(user, f, indent=4)
+    
+    user_profile = {
+        'age': 20,
+        'gender': 'male',
+        'liked_categories': list(categories)
+    }
+
+    with open("./users/user_profile.json", "w") as f:
+        json.dump(user_profile, f, indent=4)
 
 
 if __name__ == "__main__":
