@@ -1,36 +1,18 @@
-# CA400 template repo
+# CiteC
 
-This is a template for CA400 projects.
+Bozhidar Sabahov's and Salvijus Mazeikis' final year CASE4 project.
 
-## 1. Create your repo
+## 1. What is CiteC
 
-One person from your project team should fork this repo, then add other teammates as project members on GitLab.
+CiteC (pronounced sight see) is a progressive web application which aids the user in the planning of their holiday or leisure day. Itdoes so by creating a planned day with activities ranging from sightseeing, dining, escape rooms and visiting museums! The activities are tailored to the user's interest and the plan fits in their available free time.
 
-## 2. Name your repo appropriately
+## 2. How to get it running
 
-The name of your project must be of the form `2021-ca400-XXXXXXX`, where "`XXXXXXX`"
-should be replaced with your usernames (e.g. `2021-ca400-sblott-pclarke`).
-**Note** that the year should be set as appropriate to your year of study (e.g. in the
-2021/2022 academic year, this would change to '2022-ca400-sblott-pclarke')
+   - download and install [Docker](https://www.docker.com/products/docker-desktop)
+   - clone this project
+   - run "docker-compose up" from terminal in the cloned directory
+   - access on http://localhost
+   
 
-It is the *name of your repo* which matters (not the name of your project).
+    See indivdual service folder in src for instructions.
 
-You can change the name of your repo on GitLab under:
-
-- Settings / General / Advanced / Change path
-
-It looks like this:
-
-![change-repo-path](./res/repo-change-path.png "Change repo path.")
-
-You should replace all of this file with a README describing your own project.
-
-## Additional resources
-
-- Repo [hygiene](https://gitlab.computing.dcu.ie/sblott/local-gitlab-documentation/blob/master/repo-hygiene.md)
-- Git [cheat sheet](https://gitlab.computing.dcu.ie/sblott/local-gitlab-documentation/blob/master/cheat-sheet.md)
-- Gitlab [CI environment](https://gitlab.computing.dcu.ie/sblott/docker-ci-environment) and it's [available software](https://gitlab.computing.dcu.ie/sblott/docker-ci-environment/blob/master/Dockerfile)
-- Example projects with CI configured:
-   * [Python](https://gitlab.computing.dcu.ie/sblott/test-project-python)
-   * [Java](https://gitlab.computing.dcu.ie/sblott/test-project-java)
-   * [MySql](https://gitlab.computing.dcu.ie/sblott/test-project-mysql)

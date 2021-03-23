@@ -3,8 +3,6 @@
     <ion-content>
       <ion-card>
           <form @submit.prevent="userLogin">
-            <h3>Sign In</h3>
-
             <ion-item>
               <ion-input
                 type="email"

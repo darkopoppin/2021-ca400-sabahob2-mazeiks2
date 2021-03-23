@@ -1,14 +1,23 @@
 version: '3'
 services:
   frontend:
+    restart: always
     depends_on:
      - backend
-    build: './src/FrontEnd'
+    build:
+      context: './src/FrontEnd'
+      dockerfile: Dockerfile
     image: "frontend-container"
+    volumes:
+      - ~/2021-ca400-sabahob2-mazeiks2/src/FrontEnd:/app
+      - nodemodules:/app/node_modules
     ports:
-     - "80:8100"
+     - '80:8100'
+
   backend:
     build: './src/BackEnd'
     image: "user-informtion-container"
+    volumes:
+      - ~/2021-ca400-sabahob2-mazeiks2/src/BackEnd:/user-information
     ports:
-     - "5000:5000"
+     - '5000:5000'

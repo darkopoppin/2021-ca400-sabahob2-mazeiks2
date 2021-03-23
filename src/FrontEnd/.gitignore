@@ -142,6 +142,7 @@ npm-debug.log*
 /node_modules
 /platforms
 /plugins
-/www
+/www/
 node_modules/
+android/
 # confidential.ts
