@@ -1,5 +1,6 @@
 from flask import Flask
-import pyrebase
+import firebase_admin
+from firebase_admin import firestore
 
 app = Flask(__name__)
 
@@ -8,7 +9,7 @@ if app.config["ENV"] == "production":
 else:
     app.config.from_object("config.DevelopmentConfig")
 
-firebase = pyrebase.initialize_app(app.config["FIREBASE_CONFIG"])
-db = firebase.database()
+firebase_admin.initialize_app()
+db = firestore.client()
 
 from service import service

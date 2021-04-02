@@ -1,13 +1,27 @@
 # Add files names (and patterns) you want git to ignore here.
 
-# Ignore java .class files.
-*.class
+#VS Code
+**/.vscode
 
-# Ignore compiled C/C++ files.
-*.o
+# Flask stuff:
+instance/
+.webassets-cache
 
-# Ignore everything in the build directory.
-build/
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
-# Do not store node modules in your repo.
-node_modules/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Unnecessary json files and txt
+**/recommender_utils/**/*.json
+**/recommender_utils/**/*.txt
+
+# Credentials
+**/credentials
