@@ -1,5 +1,5 @@
 from service import app, db
-from flask import request, jsonify, make_response
+from flask import request
 from recommenders.collab_cosine import collab_cosine
 from api.user_api import get_similar_users
 

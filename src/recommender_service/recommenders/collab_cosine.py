@@ -1,17 +1,14 @@
-from service import db
 from gql import Client, gql
 import json
 from gql.transport.requests import RequestsHTTPTransport
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
-import numpy as np
 
 
 def collab_cosine(user_profile, related_users):
-    global all_categories
     user = user_profile.to_dict()
-    
-    potential_recommendations = {}
+
+    potential_reccomms = {}
     for related_user in related_users:
         if user_profile.id != related_user.id:
             user_score = calculate_user_score(user, related_user)
@@ -21,19 +18,17 @@ def collab_cosine(user_profile, related_users):
                 rating = related_user_dict['visited'][poi_id]['rating']
                 categories = related_user_dict['visited'][poi_id]['categories']
 
-                if potential_recommendations.get(poi_id):
-                    potential_recommendations[poi_id]["poi_score"] += 1
-                    if user_score > potential_recommendations[poi_id]["user_score"]:
-                        potential_recommendations[poi_id]["user_score"] = user_score
+                if potential_reccomms.get(poi_id):
+                    potential_reccomms[poi_id]["poi_score"] += 1
+                    if user_score > potential_reccomms[poi_id]["user_score"]:
+                        potential_reccomms[poi_id]["user_score"] = user_score
                 elif 4 <= rating <= 5:
-                    potential_recommendations[poi_id] = {
+                    potential_reccomms[poi_id] = {
                         "user_score": user_score,
                         "poi_score": 1,
                         "categories": ' '.join(categories)
                     }
-    
-    print(json.dumps(potential_recommendations, indent=4))
-    
+
     user_history = []
     for poi_id in user['visited'].keys():
         categories = user['visited'][poi_id]['categories']
@@ -41,20 +36,24 @@ def collab_cosine(user_profile, related_users):
         if 4 <= rating <= 5:
             user_history.append(' '.join(categories))
 
-
     cv = CountVectorizer()
-    for poi_id in potential_recommendations.keys():
+    for poi_id in potential_reccomms.keys():
         pois_categories = user_history
-        pois_categories.append(potential_recommendations[poi_id]['categories'])
+        pois_categories.append(potential_reccomms[poi_id]['categories'])
         count_matrix = cv.fit_transform(pois_categories)
         cosine_values = cosine_similarity(count_matrix[-1], count_matrix[:-1])
 
-        user_score = potential_recommendations[poi_id]['user_score']
-        poi_score = potential_recommendations[poi_id]['poi_score'] / len(pois_categories)
-        score = cosine_values.max() * 100  * user_score * poi_score
-        potential_recommendations[poi_id]['final_score'] = score
+        user_score = potential_reccomms[poi_id]['user_score']
+        poi_score = potential_reccomms[poi_id]['poi_score'] / len(pois_categories)
+        score = cosine_values.max() * 100 * user_score * poi_score
+        potential_reccomms[poi_id]['final_score'] = score
 
-    sorted_recommendations = sorted(potential_recommendations, key=lambda x: x[3])
+    # print(json.dumps(potential_reccomms, indent=4))
+    sorted_recommendations = sorted(
+        potential_reccomms.items(),
+        key=lambda x: x[1]['final_score'],
+        reverse=True)
+    print(json.dumps(sorted_recommendations, indent=4))
 
 
 def calculate_user_score(user, related_user):
@@ -72,11 +71,11 @@ def calculate_user_score(user, related_user):
 def request_categories(business_id):
     print(business_id)
     sample_transport = RequestsHTTPTransport(
-        url='https://api.yelp.com/v3/graphql', 
+        url='https://api.yelp.com/v3/graphql',
         headers={
-        'Authorization': 'Bearer f-625oQS3C7MH4ksSS2Bz30c5vtkbg669c4DHqzqrrmMStzihXNwEClzXZ6vrya_38Ol2aw0Inf6z90IePHjjAG7UZGCDhXbP3hhskIGaiyygD15bhvUtqsb6swjYHYx',
-        'Content-Type': 'application/json'
-    })
+            'Authorization': 'Bearer f-625oQS3C7MH4ksSS2Bz30c5vtkbg669c4DHqzqrrmMStzihXNwEClzXZ6vrya_38Ol2aw0Inf6z90IePHjjAG7UZGCDhXbP3hhskIGaiyygD15bhvUtqsb6swjYHYx',
+            'Content-Type': 'application/json'
+        })
     client = Client(
         transport=sample_transport,
         fetch_schema_from_transport=True,
@@ -85,16 +84,15 @@ def request_categories(business_id):
     query = gql('''
     query business($code: String!)
     {
-        business(id: $code) {   
-            name                               
+        business(id: $code) {
+            name
             id
             categories{
                 title
-            }                                 
+            }
         }
     }
     ''')
     result = client.execute(query, variable_values=params)
     print(result)
     return result.get('categories')
-    
