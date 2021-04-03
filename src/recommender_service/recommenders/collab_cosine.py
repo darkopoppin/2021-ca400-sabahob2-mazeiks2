@@ -68,12 +68,15 @@ def calculate_user_score(user, related_user):
     return user_score
 
 
+#
+# Leave it for future use
+#
 def request_categories(business_id):
     print(business_id)
     sample_transport = RequestsHTTPTransport(
         url='https://api.yelp.com/v3/graphql',
         headers={
-            'Authorization': 'Bearer f-625oQS3C7MH4ksSS2Bz30c5vtkbg669c4DHqzqrrmMStzihXNwEClzXZ6vrya_38Ol2aw0Inf6z90IePHjjAG7UZGCDhXbP3hhskIGaiyygD15bhvUtqsb6swjYHYx',
+            'Authorization': 'Bearer ,
             'Content-Type': 'application/json'
         })
     client = Client(
