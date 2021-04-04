@@ -2,34 +2,30 @@
   <ion-page>
     <ion-content>
       <ion-card>
-          <form @submit.prevent="userLogin">
-            <h3>Sign In</h3>
+        <form @submit.prevent="userLogin">
+          <h3>Sign in!</h3>
 
-            <ion-item>
-              <ion-input
-                type="email"
-                placeholder="email"
-                v-model="user.email"
-              />
-            </ion-item>
+          <ion-item>
+            <ion-input type="email" placeholder="email" v-model="user.email" />
+          </ion-item>
 
-            <ion-item>
-              <ion-input
-                type="password"
-                placeholder="password"
-                v-model="user.password"
-              />
-            </ion-item>
+          <ion-item>
+            <ion-input
+              type="password"
+              placeholder="password"
+              v-model="user.password"
+            />
+          </ion-item>
 
-            <ion-button type="submit">Sign In </ion-button>
+          <ion-button type="submit">Sign In </ion-button>
 
-            <p>
-              <router-link to="/ForgotPassword">Forgot password?</router-link>
-            </p>
-            <p>
-              <router-link to="/SignUp">Sign Up instead?</router-link>
-            </p>
-          </form>
+          <p>
+            <router-link to="/ForgotPassword">Forgot password?</router-link>
+          </p>
+          <p>
+            <router-link to="/SignUp">Sign Up instead?</router-link>
+          </p>
+        </form>
       </ion-card>
     </ion-content>
   </ion-page>
@@ -39,17 +35,14 @@
 <script>
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
   IonButton,
   IonCard,
   IonInput,
   IonItem,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import firebase from "firebase";
+import firebase from "firebase/app";
 
 export default defineComponent({
   name: "SignIn",
@@ -58,11 +51,8 @@ export default defineComponent({
     IonCard,
     IonInput,
     IonItem,
-    // IonHeader,
     IonButton,
     IonPage,
-    // IonTitle,
-    // IonToolbar
   },
   data() {
     return {

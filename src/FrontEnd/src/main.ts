@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
 import { IonicVue } from '@ionic/vue';
 
@@ -40,7 +40,7 @@ firebase.initializeApp(firebaseConfig);
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
-  
+
 router.isReady().then(() => {
   app.mount('#app');
 });
