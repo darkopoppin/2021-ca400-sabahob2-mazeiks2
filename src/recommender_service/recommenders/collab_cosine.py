@@ -76,7 +76,7 @@ def request_categories(business_id):
     sample_transport = RequestsHTTPTransport(
         url='https://api.yelp.com/v3/graphql',
         headers={
-            'Authorization': 'Bearer ,
+            'Authorization': 'Bearer ,',
             'Content-Type': 'application/json'
         })
     client = Client(
