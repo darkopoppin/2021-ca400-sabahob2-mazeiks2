@@ -4,7 +4,8 @@ from firebase_admin import db
 
 if (not len(firebase_admin._apps)):
     cred = credentials.Certificate('./confidential.json')
-    default_app = firebase_admin.initialize_app(cred, {'databaseURL': 'https://citecy-default-rtdb.europe-west1.firebasedatabase.app/'})
+    default_app = firebase_admin.initialize_app(
+        cred, {'databaseURL': 'https://citecy-default-rtdb.europe-west1.firebasedatabase.app/'})
 
 datab = db
 

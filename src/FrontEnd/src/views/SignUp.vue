@@ -5,25 +5,21 @@
         <form @submit.prevent="userRegistration">
           <h3 class="header">Sign Up</h3>
 
-            <ion-item>
-              <ion-input type="text" v-model="user.name" placeholder="Name" />
-            </ion-item>
+          <ion-item>
+            <ion-input type="text" v-model="user.name" placeholder="Name" />
+          </ion-item>
 
-            <ion-item>
-              <ion-input
-                type="email"
-                v-model="user.email"
-                placeholder="Email"
-              />
-            </ion-item>
+          <ion-item>
+            <ion-input type="email" v-model="user.email" placeholder="Email" />
+          </ion-item>
 
-            <ion-item>
-              <ion-input
-                type="password"
-                v-model="user.password"
-                placeholder="Password"
-              />
-            </ion-item>
+          <ion-item>
+            <ion-input
+              type="password"
+              v-model="user.password"
+              placeholder="Password"
+            />
+          </ion-item>
 
           <ion-button type="submit" class="submit-button"> Sign Up </ion-button>
 
@@ -41,10 +37,7 @@
 <script>
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
   IonButton,
   IonCard,
   IonInput,
@@ -58,10 +51,7 @@ export default defineComponent({
   name: "SignUp",
   components: {
     IonContent,
-    // IonHeader,
     IonPage,
-    // IonTitle,
-    // IonToolbar,
     IonButton,
     IonCard,
     IonInput,

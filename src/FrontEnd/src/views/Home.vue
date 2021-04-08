@@ -31,8 +31,6 @@ import { auth } from "../firebase";
 export default defineComponent({
   name: "Home",
   components: {
-    // IonContent,
-    // IonHeader,
     IonPage,
     IonButton,
     IonContent

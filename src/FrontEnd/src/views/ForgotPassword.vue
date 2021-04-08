@@ -5,14 +5,9 @@
         <form @submit.prevent="forgetPassword">
           <h3 class="header">Forgot Password</h3>
 
-            
-              <ion-item>
-                <ion-input
-                  type="email"
-                  placeholder="Email"
-                  v-model="user.email"
-                />
-              </ion-item>
+          <ion-item>
+            <ion-input type="email" placeholder="Email" v-model="user.email" />
+          </ion-item>
 
           <ion-button type="submit" class="submit-button" >Reset password</ion-button>
 
@@ -29,10 +24,7 @@
 <script>
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
   IonButton,
   IonCard,
   IonInput,
@@ -45,14 +37,11 @@ export default defineComponent({
   name: "ForgotPassword",
   components: {
     IonContent,
-    // IonHeader,
     IonInput,
     IonCard,
     IonItem,
     IonButton,
     IonPage,
-    // IonTitle,
-    // IonToolbar
   },
   data() {
     return {
