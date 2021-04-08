@@ -24,11 +24,15 @@ def userCategories():
 def recommender():
     user_id = request.args.get('user_id')
     recommendations = requests.get(
-            "http://127.0.0.1:5001/recommendations",
+            "http://recommender:5001/recommendations",
             params={'user_id': user_id}).json()
 
+    # TODO:
+    # Speed up the requests
+    '''
     yelp = YelpGQL()
 
     for key in recommendations.keys():
         yelp.get_business_info(key)
+    '''
     return recommendations

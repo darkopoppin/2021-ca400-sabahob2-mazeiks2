@@ -68,7 +68,7 @@ export default defineComponent({
     },
     recommend(){
       axios.get('http://127.0.0.1:5000/recommender', 
-      {params: ['test']})
+      { params: {'user_id': 'KbcIgBXo6bhtfRtO6iWe'} })
       .then(response => console
       .log(response))
       .catch(error => console.log(error))
