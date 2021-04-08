@@ -1,9 +1,9 @@
 <template>
   <ion-page>
     <ion-content>
-      <ion-card>
-          <form @submit.prevent="userRegistration">
-            <h3>Sign Up</h3>
+      <ion-card class="card">
+        <form @submit.prevent="userRegistration">
+          <h3 class="header">Sign Up</h3>
 
             <ion-item>
               <ion-input type="text" v-model="user.name" placeholder="Name" />
@@ -25,13 +25,13 @@
               />
             </ion-item>
 
-            <ion-button type="submit"> Sign Up </ion-button>
+          <ion-button type="submit" class="submit-button"> Sign Up </ion-button>
 
-            <p>
-              Already registered
-              <router-link to="/">sign in?</router-link>
-            </p>
-          </form>
+          <p class="SignIn">
+            Already registered
+            <router-link to="/SignIn">sign in?</router-link>
+          </p>
+        </form>
       </ion-card>
     </ion-content>
   </ion-page>
@@ -51,7 +51,8 @@ import {
   IonItem,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import { auth } from "../firebase";
 
 export default defineComponent({
   name: "SignUp",
@@ -77,22 +78,41 @@ export default defineComponent({
   },
   methods: {
     userRegistration() {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.user.email, this.user.password)
-        .then((res) => {
-          res.user
-            .updateProfile({
-              displayName: this.user.name,
+        auth
+        .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(() => {
+          return auth
+            .createUserWithEmailAndPassword(this.user.email, this.user.password)
+            .then((res) => {
+              res.user
+                .updateProfile({
+                  displayName: this.user.name,
+                })
+                .then(() => {
+                  this.$router.push("/categorySelection");
+                });
             })
-            .then(() => {
-              this.$router.push("/Home");
+            .catch((error) => {
+              alert(error.message);
             });
-        })
-        .catch((error) => {
-          alert(error.message);
         });
     },
   },
 });
 </script>
+
+<style scoped>
+.submit-button{
+  margin-top: 5%;
+}
+
+.SignIn{
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  padding-bottom: 1%;
+  padding-top: 10%;
+  color: #7a7a7a;
+  margin: 0;
+}
+</style>

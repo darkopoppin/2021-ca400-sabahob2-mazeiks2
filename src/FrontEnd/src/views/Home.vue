@@ -1,8 +1,15 @@
 <template>
   <ion-page>
       <h3>Welcome</h3>
-      <p>{{ user }}</p>
+      <ion-content v-if="loggedIn"> {{user.displayName}}</ion-content>
 
+      <ion-button @click="redirect" >Category selection</ion-button>
+      <ion-button
+        type="submit"
+        v-on:click="recommender()"
+      >
+        plan me a day!
+      </ion-button>
       <ion-button
         type="submit"
         v-on:click="logOut()"
@@ -14,15 +21,12 @@
 
 <script>
 import {
-  IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
   IonButton,
+  IonContent
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import firebase from "firebase";
+import { auth } from "../firebase";
 
 export default defineComponent({
   name: "Home",
@@ -31,33 +35,41 @@ export default defineComponent({
     // IonHeader,
     IonPage,
     IonButton,
-    // IonTitle,
-    // IonToolbar
+    IonContent
   },
   data() {
     return {
       user: null,
+      loggedIn: false,
     };
   },
   created() {
-    firebase.auth().onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
       if (user) {
         this.user = user;
+        this.loggedIn = true;
       } else {
         this.user = null;
+        this.loggedIn = false;
       }
     });
   },
   methods: {
     logOut() {
-      firebase
-        .auth()
+      this.$router.push("/SignIn");
+        auth
         .signOut()
         .then(() => {
-          firebase.auth().onAuthStateChanged(() => {
-            this.$router.push("/");
+          auth.onAuthStateChanged(() => {
+            // this.$router.push("/");
           });
         });
+    },
+    redirect() {
+      this.$router.push('/categorySelection')
+    },
+    recommender() {
+      this.$router.push("/planner")
     },
   },
 });
