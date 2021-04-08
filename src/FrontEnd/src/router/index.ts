@@ -4,6 +4,8 @@ import SignUp from '../views/SignUp.vue';
 import SignIn from '../views/SignIn.vue';
 import Home from '../views/Home.vue';
 import ForgotPassword from '../views/ForgotPassword.vue';
+import CategorySelection from '../views/CategorySelection.vue';
+import Modal from '../views/Modal.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -30,7 +32,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/home',
     name: 'home',
     component: Home
-  }
+  },
+  {
+    path: '/CategorySelection',
+    name: 'CategorySelection',
+    component: CategorySelection
+  },
+  {
+    path: '/Modal',
+    name: 'Modal',
+    component: Modal
+  },
 ]
 
 const router = createRouter({
