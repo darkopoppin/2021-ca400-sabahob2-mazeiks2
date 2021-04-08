@@ -15,7 +15,10 @@ services:
      - '80:8100'
 
   backend:
-    build: './src/BackEnd'
+    restart: always
+    build:
+      context: './src/FrontEnd'
+      dockerfile: Dockerfile
     image: "user-informtion-container"
     volumes:
       - ~/2021-ca400-sabahob2-mazeiks2/src/BackEnd:/user-information

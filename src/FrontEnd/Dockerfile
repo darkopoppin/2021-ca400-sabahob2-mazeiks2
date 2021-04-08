@@ -7,13 +7,13 @@ RUN npm install -g @ionic/cli
 WORKDIR /app
 
 # copy both 'package.json' and 'package-lock.json' (if available)
-COPY package*.json /app
+COPY package*.json /app/
 
 # install project dependencies
 RUN npm install
 
 # copy project files and folders to the current working directory (i.e. 'app' folder)
-COPY . /app
+COPY . /app/
 
 EXPOSE 8100
 CMD [ "ionic", "serve", "--external"]

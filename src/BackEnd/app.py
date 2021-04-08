@@ -1,7 +1,8 @@
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS, cross_origin
 from user import assignCategories
-import os, argparse
+import os
+import argparse
 
 
 app = Flask(__name__)
@@ -23,18 +24,4 @@ def userCategories():
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(
-        description="Seans-Python-Flask-REST-Boilerplate")
-
-    parser.add_argument('--debug', action='store_true',
-                        help="Use flask debug/dev mode with file change reloading")
-
-    args = parser.parse_args()
-    #  test
-    port = int(os.environ.get('PORT', 5000))
-    if args.debug:
-        print("Running in debug mode")
-        cors = CORS(app)
-        app.run(host='0.0.0.0', port=port, debug=True)
-    else:
-        app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=5000, debug=False)

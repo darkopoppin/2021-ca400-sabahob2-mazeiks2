@@ -10,6 +10,7 @@
       >
         Log out
       </ion-button>
+
   </ion-page>
 </template>
 
@@ -20,19 +21,14 @@ import {
   IonContent
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import firebase from "firebase";
+import firebase from "firebase/app";
 
 export default defineComponent({
   name: "Home",
   components: {
-    // IonContent,
-    // IonHeader, pipeline test
     IonContent,
-    // IonHeader,
     IonPage,
     IonButton,
-    // IonTitle,
-    // IonToolbar
   },
   data() {
     return {

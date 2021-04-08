@@ -4,7 +4,7 @@ Bozhidar Sabahov's and Salvijus Mazeikis' final year CASE4 project.
 
 ## 1. What is CiteC
 
-CiteC (pronounced sight see) is a progressive web application which aids the user in the planning of their holiday or leisure day. Itdoes so by creating a planned day with activities ranging from sightseeing, dining, escape rooms and visiting museums! The activities are tailored to the user's interest and the plan fits in their available free time.
+CiteC (pronounced sight see) is a progressive web application which aids the user in the planning of their holiday or leisure day. It does so by creating a planned day with activities ranging from sightseeing, dining, escape rooms and visiting museums! The activities are tailored to the user's interest and the plan fits in their available free time.
 
 ## 2. How to get it running
 

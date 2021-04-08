@@ -37,26 +37,20 @@
 <script>
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
   IonButton,
   IonCard,
   IonInput,
   IonItem,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import firebase from "firebase";
+import firebase from "firebase/app";
 
 export default defineComponent({
   name: "SignUp",
   components: {
     IonContent,
-    // IonHeader,
     IonPage,
-    // IonTitle,
-    // IonToolbar,
     IonButton,
     IonCard,
     IonInput,
