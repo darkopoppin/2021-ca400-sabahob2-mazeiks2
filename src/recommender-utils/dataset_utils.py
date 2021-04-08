@@ -126,6 +126,7 @@ def extract_categories(categories):
         'gourmet'
     ]
     cuisine_endings = ['an', 'se', 'ne', 'hi', 'sh', 'ch', 'no', 'nd']
+    groups = {'active':[], 'arts':[], 'localflavor':[], 'tours':[], 'nightlife':[], 'restaurants':[]}
     with open('my_categories.txt', 'w') as f:
         for category in categories:
             for parent in category['parents']:
@@ -133,12 +134,14 @@ def extract_categories(categories):
                         parent not in avoid_categories):
                     if parent == 'restaurants':
                         if category['alias'][-2:] in cuisine_endings:
-                            print(category['title'])
                             title = category['title']
-                            f.write(f'{title}\n')
+                            groups[parent].append(title)
+                            # f.write(f'{title}\n')
                     else:
                         title = category['title']
-                        f.write(f'{title}\n')
+                        groups[parent].append(title)
+                        # f.write(f'{title}\n')
+        json.dump(groups, f, indent=4)
 
     return my_categories
 

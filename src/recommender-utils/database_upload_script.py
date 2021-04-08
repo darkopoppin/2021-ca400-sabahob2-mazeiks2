@@ -5,7 +5,7 @@ import random
 from firebase_admin import credentials
 from firebase_admin import firestore
 
-cred = credentials.Certificate('../recommender_service/credentials/citycydev-firebase.json')
+cred = credentials.Certificate('../recommender-service/credentials/citycydev-firebase.json')
 firebase_admin.initialize_app(cred, {
         'databaseURL': 'https://citycydev-default-rtdb.firebaseio.com'
 })
