@@ -1,6 +1,4 @@
-from gql import Client, gql
 import json
-from gql.transport.requests import RequestsHTTPTransport
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 
@@ -55,6 +53,8 @@ def collab_cosine(user_profile, related_users):
         reverse=True)
     print(json.dumps(sorted_recommendations, indent=4))
 
+    return potential_reccomms
+
 
 def calculate_user_score(user, related_user):
     user_categories = set(user['liked_categories'])
@@ -66,36 +66,3 @@ def calculate_user_score(user, related_user):
 
     user_score = len(intersection) / len(union)
     return user_score
-
-
-#
-# Leave it for future use
-#
-def request_categories(business_id):
-    print(business_id)
-    sample_transport = RequestsHTTPTransport(
-        url='https://api.yelp.com/v3/graphql',
-        headers={
-            'Authorization': 'Bearer ,',
-            'Content-Type': 'application/json'
-        })
-    client = Client(
-        transport=sample_transport,
-        fetch_schema_from_transport=True,
-    )
-    params = {"code": business_id}
-    query = gql('''
-    query business($code: String!)
-    {
-        business(id: $code) {
-            name
-            id
-            categories{
-                title
-            }
-        }
-    }
-    ''')
-    result = client.execute(query, variable_values=params)
-    print(result)
-    return result.get('categories')
