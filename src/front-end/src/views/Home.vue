@@ -10,6 +10,7 @@
       >
         Log out
       </ion-button>
+      <ion-button @click="recommend">Recommend</ion-button>
   </ion-page>
 </template>
 
@@ -21,6 +22,7 @@ import {
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import firebase from "firebase";
+import axios from "axios";
 
 export default defineComponent({
   name: "Home",
@@ -64,6 +66,13 @@ export default defineComponent({
     redirect() {
       this.$router.push('/categorySelection')
     },
+    recommend(){
+      axios.get('http://127.0.0.1:5000/recommender', 
+      {params: ['test']})
+      .then(response => console
+      .log(response))
+      .catch(error => console.log(error))
+    }
   },
 });
 </script>

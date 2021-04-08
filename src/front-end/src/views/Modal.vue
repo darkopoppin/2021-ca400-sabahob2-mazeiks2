@@ -46,7 +46,7 @@ export default defineComponent({
     submit() {
       const user = firebase.auth().currentUser;
       console.log(user)
-      axios.post('http://127.0.0.1:5000/categorySelection', { params: [this.categories, user.uid]}).then(response => console.log(response)).catch(error => console.log(error))
+      axios.post('http://127.0.0.1:5000/categorySelection', {params: [this.categories, user.uid]}).then(response => console.log(response)).catch(error => console.log(error))
     },
     dismiss() {
       this.close()
