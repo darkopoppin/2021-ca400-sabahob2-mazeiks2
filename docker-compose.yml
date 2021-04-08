@@ -1,0 +1,21 @@
+version: '3'
+services:
+  frontend:
+    restart: always
+    depends_on:
+     - backend
+    build:
+      context: './src/FrontEnd'
+      dockerfile: Dockerfile
+    image: "frontend-container"
+    ports:
+     - '80:8100'
+
+  backend:
+    restart: always
+    build:
+      context: './src/FrontEnd'
+      dockerfile: Dockerfile
+    image: "user-informtion-container"
+    ports:
+     - '5000:5000'
