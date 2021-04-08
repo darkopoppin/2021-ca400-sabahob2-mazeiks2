@@ -25,6 +25,7 @@ __pycache__/
 
 # Credentials
 **/credentials
+
 # FrontEnd built files
 **/android/
 **/dist/
