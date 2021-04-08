@@ -8,16 +8,14 @@ services:
       context: './src/FrontEnd'
       dockerfile: Dockerfile
     image: "frontend-container"
-    volumes:
-      - ~/2021-ca400-sabahob2-mazeiks2/src/FrontEnd:/app
-      - /app/node_modules
     ports:
      - '80:8100'
 
   backend:
-    build: './src/BackEnd'
+    restart: always
+    build:
+      context: './src/FrontEnd'
+      dockerfile: Dockerfile
     image: "user-informtion-container"
-    volumes:
-      - ~/2021-ca400-sabahob2-mazeiks2/src/BackEnd:/user-information
     ports:
      - '5000:5000'
