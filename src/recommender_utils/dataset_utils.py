@@ -10,17 +10,20 @@ parser = argparse.ArgumentParser(description="Extracts all the values of a key i
                     Filter the categories.")
 parser.add_argument("-e", "--extract",
                     help="Extracts the values of the passed key")
-parser.add_argument("-f", "--filter", help="Filter the categories",
+parser.add_argument("-f", "--filter", help="Filter the categories.",
                     action='store_true')
 parser.add_argument("-c", "--categories",
-                    help="Extract the required categories from the YELP json")
+                    help="Extract the required categories from the YELP json",
+                    action='store_true')
 parser.add_argument('-s', '--statistics',
-                    help="Statistics")
+                    help="Statistics of dataset. Pass the path to the json.")
 parser.add_argument('-r', '--reviews',
                     help="Extract reviews of the businesses from \
                     filtered_dataset.json")
 parser.add_argument('-C', '--csv', help="Save the json dataset as csv")
 parser.add_argument('-U', '--user', help="Create a dummy user",
+                    action='store_true')
+parser.add_argument('-x', '--export', help='Export the json dataset to firebase json',
                     action='store_true')
 
 # not interested in theses parent categories
@@ -56,7 +59,7 @@ def main():
         extract(businesses, args.extract)
 
     if args.categories:
-        with open(args.categories, "r") as f:
+        with open('categories.json', "r") as f:
             categories = json.load(f)
 
         extract_categories(categories)
@@ -281,28 +284,53 @@ def create_user():
     with open('filtered_dataset.json', 'r') as f:
         dataset = json.load(f)
 
-    user = []
+    users = {'users':{}}
     categories = set()
+    visited = {}
     for i in range(0, 10):
-        poi_id = random.randrange(0, len(dataset))
-        poi = dataset[poi_id]
-        poi['rating'] = random.randrange(0,2)
-        if poi['rating'] == 1:
-            categories.update(set(poi['categories']))
-        user.append(poi)
+        for j in range(0, 20):
+            poi_id = random.randrange(0, len(dataset))
+            poi = dataset[poi_id]
+            poi['rating'] = random.randrange(0,2)
+            if poi['rating'] == 1:
+                categories.update(set(poi['categories']))
+            visited.update({poi['business_id']:poi['rating']})
+        
+        user_profile = {
+            'id': i,            
+            'age': random.randrange(20, 30),
+            'gender': random.sample(['male', 'female'],1)[0],
+            'liked_categories': list(categories),
+            'visited': visited
+        }
 
-    with open("./users/user.json", "w") as f:
-        json.dump(user, f, indent=4)
+        users['users'].update({i: user_profile})
+        
+        visited = {}
+        categories = set()
     
-    user_profile = {
-        'age': 20,
-        'gender': 'male',
-        'liked_categories': list(categories)
-    }
+    with open('./users/users.json', 'w') as f:
+        json.dump(users, f, indent=4)
 
-    with open("./users/user_profile.json", "w") as f:
-        json.dump(user_profile, f, indent=4)
-
+def export_dataset():
+    businesses = []
+    with open('./filtered_dataset.json', 'r') as f:
+        businesses = json.load(f)
+    
+    exported = {'businesses': {}}
+    for business in businesses:
+        exported['businesses'].update({business['business_id']:
+            {
+            'name': business['name'],
+            'stars': business['stars'],
+            'parents': business['parents'],
+            'categories': business['categories']
+            }
+        })
+        
+    
+    with open("exported_dataset.json", "w") as f:
+        json.dump(exported, f, indent=4)
 
 if __name__ == "__main__":
     main()
