@@ -31,7 +31,7 @@ env.bak/
 venv.bak/
 
 # Byte-compiled / optimized / DLL files
-__pycache__/
+**/__pycache__/
 
 # Unnecessary json files and txt
 **/recommender_utils/**/*.json
