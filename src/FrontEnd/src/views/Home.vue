@@ -16,6 +16,7 @@
       >
         Log out
       </ion-button>
+
   </ion-page>
 </template>
 
