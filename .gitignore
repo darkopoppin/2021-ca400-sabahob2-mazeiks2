@@ -1,7 +1,7 @@
 # All files and folders ignored for Git purposes
 
-# Ignore java .class files.
-*.class
+#VS Code
+**/.vscode
 
 # FrontEnd built files
 **/android/
@@ -17,5 +17,25 @@
 # Diagnostic reports (https://nodejs.org/api/report.html)
 **/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
-# python cached files
-**/__pycache__
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Unnecessary json files and txt
+**/recommender_utils/**/*.json
+**/recommender_utils/**/*.txt
+
+# Credentials
+**/credentials
