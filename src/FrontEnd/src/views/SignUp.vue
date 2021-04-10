@@ -69,18 +69,23 @@ export default defineComponent({
     userRegistration() {
       firebase
         .auth()
-        .createUserWithEmailAndPassword(this.user.email, this.user.password)
-        .then((res) => {
-          res.user
-            .updateProfile({
-              displayName: this.user.name,
+        .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(() => {
+          return firebase
+            .auth()
+            .createUserWithEmailAndPassword(this.user.email, this.user.password)
+            .then((res) => {
+              res.user
+                .updateProfile({
+                  displayName: this.user.name,
+                })
+                .then(() => {
+                  this.$router.push("/categorySelection");
+                });
             })
-            .then(() => {
-              this.$router.push("/Home");
+            .catch((error) => {
+              alert(error.message);
             });
-        })
-        .catch((error) => {
-          alert(error.message);
         });
     },
   },
