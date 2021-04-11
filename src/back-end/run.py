@@ -1,4 +1,4 @@
-from main_service import app
+from main_service import create_service
 
-if __name__ == "__main__":
-    app.run()
+app = create_service()
+app.run()

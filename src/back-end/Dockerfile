@@ -4,7 +4,7 @@ WORKDIR /user-information
 ADD ./ /user-information
 
 ENV GOOGLE_APPLICATION_CREDENTIALS=credentials/citycydev-firebase.json
-ENV FLASK_APP=run.py
+ENV FLASK_APP=run.py:app
 ENV FLASK_ENV=development
 ENV FLASK_RUN_HOST=0.0.0.0
 

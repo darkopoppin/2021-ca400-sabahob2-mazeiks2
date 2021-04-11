@@ -10,7 +10,7 @@ main_service = Blueprint("main_service_bp", __name__)
 
 
 @main_service.errorhandler(ClientError)
-def handle_clien_error(error):
+def handle_client_error(error):
     response = jsonify(error.to_dict())
     response.status_code = error.status_code
     return response
