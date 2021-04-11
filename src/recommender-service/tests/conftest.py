@@ -1,6 +1,6 @@
 import pytest
 
-from main_service import create_service
+from service import create_service
 
 
 @pytest.fixture(scope='session')
