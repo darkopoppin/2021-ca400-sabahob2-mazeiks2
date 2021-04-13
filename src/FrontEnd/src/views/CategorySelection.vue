@@ -1,20 +1,11 @@
 <template>
   <ion-page>
     <ion-list>
-      <ion-item>
-      <ion-button @click="openModal" >Active Life</ion-button>
-      </ion-item>
-      <ion-item>
-      <ion-button @click="openModal" >Local Flavor</ion-button>
-      </ion-item>
-      <ion-item>
-      <ion-button @click="openModal" >NightLife</ion-button>
-      </ion-item>
-      <ion-item>
-      <ion-button @click="openModal" >Restaurants</ion-button>
-      </ion-item>
-      <ion-item>
-      <ion-button @click="openModal" >Arts & Entertainment</ion-button>
+      <ion-item v-for="(item,key) in categories" v-bind:key="item">
+        <ion-button
+          @click="openModal(key)">
+        <ion-label>{{ key }}</ion-label>
+        </ion-button>
       </ion-item>
     </ion-list>
     <ion-button @click="() => this.$router.push('/Home')"> Home  </ion-button>
@@ -29,28 +20,34 @@ import {
   modalController,
   IonList,
   IonItem,
+  IonLabel
 } from "@ionic/vue";
 import Modal from "./Modal.vue";
 import { useRouter } from "vue-router";
 import { defineComponent } from "vue";
+import categories from "../../categories";
+
 
 export default defineComponent({
-  components: { IonButton, IonPage, IonList, IonItem },
+  components: { IonButton, IonPage, IonList, IonItem, IonLabel },
   data() {
-    return { currentModal: null };
+    return { 
+      categories: categories,
+      currentModal: null };
   },
   methods: {
     setup() {
       const router = useRouter();
       return { router };
     },
-    async openModal() {
+    async openModal(category) {
       const modal = await modalController
         .create({
           component: Modal,
-          cssClass: "my-custom-class",
+          cssClass: "my-modal",
           componentProps: {
-            title: "New Title",
+            values: categories[category],
+            title: "Category selection",
             close: () => this.closeModal(),
           },
         })
