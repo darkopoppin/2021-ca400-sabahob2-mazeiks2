@@ -1,14 +1,16 @@
 <template>
+  <ion-page>
+  <button @click="dismiss"> Cancel</button>
   <ion-content >
-      <button @click="dismiss"> Cancel</button>
-    <ion-list>
-      <ion-item v-for="(value) in values" v-bind:key="value">
+    <ion-list style="display: inline-block;">
+      <ion-item style="display: inline-block; width:50%;" lines="none" v-for="(value) in values" v-bind:key="value">
         <ion-chip v-on:click="selected(value)" v-bind:class="{selected: selectedCategories[value]}">{{ value }}</ion-chip>
       </ion-item>
     </ion-list>
 
     <ion-button v-on:click= "submit()"> Submit</ion-button>
   </ion-content>
+  </ion-page>
 </template>
 
 <script>
@@ -17,6 +19,7 @@ import {
   IonList,
   IonItem,
   // IonLabel,
+  IonPage,
   IonButton,
   IonChip
 } from "@ionic/vue";
@@ -53,7 +56,7 @@ export default defineComponent({
       this.close()
     },
   },
-  components: { IonContent, IonList, IonButton, IonItem, IonChip },
+  components: { IonContent, IonList, IonButton, IonItem, IonChip, IonPage },
 });
 </script>
 

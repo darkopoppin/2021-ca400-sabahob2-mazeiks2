@@ -1,26 +1,36 @@
 <template>
   <ion-page>
-    <ion-list>
-      <ion-item v-for="(item,key) in categories" v-bind:key="item">
-        <ion-button
-          @click="openModal(key)">
-        <ion-label>{{ key }}</ion-label>
+  <ion-content>
+  <ion-card class="card">
+    <ion-grid>
+      <ion-row>
+      <ion-col class= "columns">
+        <ion-button class='category' v-for="(item,key) in categories" v-bind:key="item"
+          @click="openModal(key)"> {{key}}
         </ion-button>
-      </ion-item>
-    </ion-list>
-    <ion-button @click="() => this.$router.push('/Home')"> Home  </ion-button>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button class="homeButton" @click="regress"> Home  </ion-button>
+  </ion-card>
+  </ion-content>
   </ion-page>
 </template>
 
 
 <script>
 import {
-  IonButton,
   IonPage,
+  IonButton,
+  IonContent,
+  IonGrid,
+  IonRow,
+  IonCol,
+  IonCard,
   modalController,
-  IonList,
-  IonItem,
-  IonLabel
+  // IonList,
+  // IonItem,
+  // IonLabel
 } from "@ionic/vue";
 import Modal from "./Modal.vue";
 import { useRouter } from "vue-router";
@@ -29,16 +39,15 @@ import categories from "../../categories";
 
 
 export default defineComponent({
-  components: { IonButton, IonPage, IonList, IonItem, IonLabel },
+  components: { IonPage, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent },
   data() {
     return { 
       categories: categories,
       currentModal: null };
   },
   methods: {
-    setup() {
-      const router = useRouter();
-      return { router };
+    regress() {
+      this.$router.push('home')
     },
     async openModal(category) {
       const modal = await modalController
@@ -64,3 +73,37 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.card {
+  position: relative;
+  /* margin-top: 10%;
+  margin-left: 30%;
+  margin-right: 30%; */
+  background: #ffffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  padding: 40px 55px 45px 55px;
+  border-radius: 15px;
+  transition: all .3s;
+}
+.columns {
+  text-align: center;
+}
+.category {
+  width: 40%;
+  min-width: fit-content;
+  margin-top: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.homeButton {
+  width: 40%;
+  min-width: fit-content;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 10%;
+  --background: black;
+}
+
+</style>
