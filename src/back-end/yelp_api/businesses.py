@@ -21,7 +21,6 @@ class YelpGQL(object):
         )
 
     def get_business_info(self, business_id):
-
         params = {"code": business_id}
         query = gql('''
         query business($code: String!)
@@ -37,8 +36,47 @@ class YelpGQL(object):
             }
         }
         ''')
+        try:
+            result = self.client.execute(query, variable_values=params)
+        except Exception:
+            # business doesn't exist on YELP
+            return None
+
+        return result['business']
+
+    def get_n_businesses_info(self, ids):
+        pool = ThreadPool(6)
+
         start = time.perf_counter()
-        result = self.client.execute(query, variable_values=params)
+
+        results = pool.map_async(self.get_business_info, ids)
+        pool.close()
+        pool.join()
+
         finish = time.perf_counter()
         print(f'{finish - start}')
+        return results
+
+    def search_by_categories(self, category):
+        params = {'category': category}
+        query = gql('''
+        query search($category: String!)
+        {
+            search(categories: $category,
+                   limit: 50,
+                   location: "dublin") {
+                total
+                business {
+                    id
+                    categories
+                }
+            }
+        }
+        ''')
+        try:
+            result = self.client.execute(query, variable_values=params)
+        except Exception:
+            # business doesn't exist on YELP
+            return None
+        
         print(result)

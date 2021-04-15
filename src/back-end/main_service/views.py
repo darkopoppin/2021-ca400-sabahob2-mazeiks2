@@ -3,8 +3,8 @@ from flask_cors import cross_origin
 import requests
 
 from main_service.user import assignCategories
-from yelp_api.businesses import YelpGQL
 from main_service.errors import ClientError
+from yelp_api.businesses import YelpGQL
 
 main_service = Blueprint("main_service_bp", __name__)
 
@@ -34,17 +34,13 @@ def recommender():
         user_id = request.args.get('user_id')
     else:
         raise ClientError("Invalid parameter passed")
+
     print(user_id)
     recommendations = requests.get(
             "http://recommender:5001/recommendations",
             params={'user_id': user_id}).json()
 
-    # TODO:
-    # Speed up the requests
-    '''
     yelp = YelpGQL()
 
-    for key in recommendations.keys():
-        yelp.get_business_info(key)
-    '''
+    results = yelp.get_n_businesses_info(recommendations.keys())
     return recommendations
