@@ -4,7 +4,7 @@ import requests
 
 from main_service.user import assignCategories
 from main_service.errors import ClientError
-from yelp_api.businesses import YelpGQL
+from yelp_api import get_businesses_info
 
 main_service = Blueprint("main_service_bp", __name__)
 
@@ -35,12 +35,10 @@ def recommender():
     else:
         raise ClientError("Invalid parameter passed")
 
-    print(user_id)
     recommendations = requests.get(
-            "http://recommender:5001/recommendations",
+            "http://127.0.0.1:5001/recommendations",
             params={'user_id': user_id}).json()
 
-    yelp = YelpGQL()
-
-    results = yelp.get_n_businesses_info(recommendations.keys())
-    return recommendations
+    recommendations_ids = list(recommendations)
+    results = get_businesses_info(recommendations_ids)
+    return results

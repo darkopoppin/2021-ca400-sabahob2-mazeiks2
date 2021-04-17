@@ -4,7 +4,7 @@ import json
 from service import db
 from service.errors import ClientError
 from api.user_api import get_similar_users
-from yelp_api.businesses import YelpGQL
+from yelp_api.businesses import search_by_categories
 from recommenders.collab_cosine import collab_cosine
 
 service = Blueprint("service_bp", __name__)
@@ -19,15 +19,14 @@ def recommender():
         raise ClientError("User does not exist")
 
     user_visited = user.to_dict().get('visited')
-    if len(user_visited) != 0:
-        yelp = YelpGQL()
+    if len(user_visited) == 0:
         liked_categories = user.to_dict().get('liked_categories')
-        result = yelp.search_by_categories(liked_categories)
-        
-    similar_users = get_similar_users(user)
-    recommendations = collab_cosine(user, similar_users)
-
-    return json.dumps(recommendations)
+        result = search_by_categories(liked_categories)
+        return json.dumps(result, indent=4)
+    else:
+        similar_users = get_similar_users(user)
+        recommendations = collab_cosine(user, similar_users)
+        return recommendations
 
 
 @service.errorhandler(ClientError)
