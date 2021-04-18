@@ -36,7 +36,7 @@ def recommender():
         raise ClientError("Invalid parameter passed")
 
     recommendations = requests.get(
-            "http://127.0.0.1:5001/recommendations",
+            "http://recommender:5001/recommendations",
             params={'user_id': user_id}).json()
 
     recommendations_ids = list(recommendations)

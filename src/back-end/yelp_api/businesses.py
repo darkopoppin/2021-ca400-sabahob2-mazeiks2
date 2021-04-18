@@ -1,11 +1,12 @@
 import time
+from os import environ
 from gql import gql, Client
 from gql.transport.requests import RequestsHTTPTransport
 
 transport = RequestsHTTPTransport(
     url='https://api.yelp.com/v3/graphql',
     headers={
-        'Authorization': 'Bearer f-625oQS3C7MH4ksSS2Bz30c5vtkbg669c4DHqzqrrmMStzihXNwEClzXZ6vrya_38Ol2aw0Inf6z90IePHjjAG7UZGCDhXbP3hhskIGaiyygD15bhvUtqsb6swjYHYx',
+        'Authorization': 'Bearer ' + environ.get('YELP_API'),
         'Content-Type': 'application/json'
     })
 client = Client(

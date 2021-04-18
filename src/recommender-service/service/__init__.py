@@ -1,6 +1,6 @@
-from flask import Flask
 import firebase_admin
 from firebase_admin import firestore
+from flask import Flask
 
 
 firebase_admin.initialize_app()
