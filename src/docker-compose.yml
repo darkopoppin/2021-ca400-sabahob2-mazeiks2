@@ -1,0 +1,29 @@
+version: '3'
+services:
+  frontend:
+    container_name: frontend
+    restart: always
+    depends_on:
+     - backend
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    image: frontend-container
+    ports:
+     - 80:8100
+
+  backend:
+    container_name: backend
+    build: ./back-end
+    image: user-informtion-container
+    ports:
+     - 5000:5000
+  
+  recommender:
+    container_name: recommender
+    depends_on:
+      - backend
+    build: ./recommender-service
+    image: recommender-service
+    ports:
+      - 5001
