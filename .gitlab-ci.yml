@@ -1,7 +1,6 @@
 image: python:3.6
 
 stages:
-  - init
   - verif
   
 # Change pip's cache directory to be inside the project directory since we can
@@ -19,15 +18,14 @@ cache:
     - .cache/pip
     - venv/
 
-init:
-  stage: init
-  script:
-    - python -V  # Print out python version for debugging
-    - pip install virtualenv
-    - virtualenv venv
-    - source venv/bin/activate
-    - pip install -r ./src/back-end/requirements.txt
-    - pip install -r ./src/reommender-service/requirements.txt
+before-script:
+  - python -V  # Print out python version for debugging
+  - pip install virtualenv
+  - virtualenv venv
+  - source venv/bin/activate
+  - pip install -r ./src/back-end/requirements.txt
+  - pip install -r ./src/reommender-service/requirements.txt
+ 
 verif:
   stage: verif
   script:
