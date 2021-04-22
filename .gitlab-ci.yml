@@ -1,4 +1,3 @@
-
 image: python:3.6
 
 stages:
@@ -21,12 +20,14 @@ cache:
     - venv/
 
 init:
-  - python -V  # Print out python version for debugging
-  - pip install virtualenv
-  - virtualenv venv
-  - source venv/bin/activate
-  - pip install -r ./src/back-end/requirements.txt
-  - pip install -r ./src/reommender-service/requirements.txt
+  stage: init
+  script:
+    - python -V  # Print out python version for debugging
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - pip install -r ./src/back-end/requirements.txt
+    - pip install -r ./src/reommender-service/requirements.txt
 verif:
   stage: verif
   script:
