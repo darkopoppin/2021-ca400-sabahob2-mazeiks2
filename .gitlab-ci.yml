@@ -2,6 +2,7 @@ image: python:3.7-buster
 
 before_script:
   - python3 --version
+  - sudo apt-get install python-pip
 
 stages:
   - verif
@@ -9,5 +10,6 @@ stages:
 flake8:
   stage: verif
   script:
+  - python3 --version
   - pip install -r ./src/back-end/requirements.txt
   - flake8 src/back-end/**/*.py
