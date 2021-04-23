@@ -3,7 +3,8 @@ image: python:latest
 
 test:
   script:
-    - sudo apt-get update -y
+    - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    - python3 get-pip.py
     - python3 -m pip --version
     - pip install flake8  # you can also use tox
     - flake8 ./src/back-end/**/*.py
