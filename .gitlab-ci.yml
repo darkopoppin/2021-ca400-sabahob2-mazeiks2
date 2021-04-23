@@ -20,7 +20,7 @@ cache:
     - venv/
 
 before_script:
-  - python3.6 --version  # Print out python version for debugging
+  - python3 --version  # Print out python version for debugging
   - pip3 install virtualenv
   - virtualenv venv
   - source venv/bin/activate
