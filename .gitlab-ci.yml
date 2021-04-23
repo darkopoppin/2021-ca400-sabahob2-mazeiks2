@@ -1,32 +1,13 @@
-default:
-  image: python:3.6-slim
+image: "python:3.7"
+
+before_script:
+  - python --version
+  - pip install -r requirements.txt
 
 stages:
   - verif
-  
-# Change pip's cache directory to be inside the project directory since we can
-# only cache local items.
-variables:
-  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
 
-# Pip's cache doesn't store the python packages
-# https://pip.pypa.io/en/stable/reference/pip_install/#caching
-#
-# If you want to also cache the installed packages, you have to install
-# them in a virtualenv and cache it as well.
-cache:
-  paths:
-    - .cache/pip
-    - venv/
-
-before_script:
-  - python3 --version  # Print out python version for debugging
-  - pip3 install virtualenv
-  - virtualenv venv
-  - source venv/bin/activate
- 
-verif:
+flake8:
   stage: verif
   script:
-    - flake8 src/back-end
-    - flake8 src/front-end
+  - flake8 src/front-end/**/*.py
