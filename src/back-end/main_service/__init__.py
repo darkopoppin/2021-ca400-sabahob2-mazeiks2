@@ -1,10 +1,10 @@
-from flask import Flask
 import firebase_admin
 from firebase_admin import firestore
+from flask import Flask
+
 
 firebase_admin.initialize_app()
 db = firestore.client()
-
 
 def init_blueprints(app):
     from main_service.views import main_service

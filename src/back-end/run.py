@@ -1,4 +1,6 @@
 from main_service import create_service
 
 app = create_service()
-app.run()
+
+if __name__ == "__main__":
+    app.run()
