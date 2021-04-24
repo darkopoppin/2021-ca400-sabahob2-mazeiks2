@@ -3,6 +3,7 @@ image: python
 stages:
   - verify syntax
   - test back-end
+  - test front-end
 
 variables:
   FLASK_APP: "./run.py"
@@ -28,6 +29,17 @@ back-end:
 
   script:
     - cd ./src/back-end
+    - pip3 install -r requirements.txt
+    - pytest --setup-show
+
+front-end:
+  stage: test back-end
+  variables:
+    GOOGLE_APPLICATION_CREDENTIALS: "./credentials/citycydev-firebase.json"
+    FLASK_ENV: "testing"
+
+  script:
+    - cd ./src/front-end
     - pip3 install -r requirements.txt
     - pytest --setup-show
     
