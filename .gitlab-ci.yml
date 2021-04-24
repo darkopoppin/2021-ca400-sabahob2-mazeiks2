@@ -20,7 +20,7 @@ scan:
     - flake8 --per-file-ignores='**/__init__.py:F401,F403' ./src/recommender-service/**/*.py
   allow_failure: true
 
-test:
+back-end:
   stage: test back-end
   variables:
     GOOGLE_APPLICATION_CREDENTIALS: "./credentials/citycydev-firebase.json"
@@ -28,7 +28,6 @@ test:
 
   script:
     - cd ./src/back-end
-    - echo $YELP_API
     - pip3 install -r requirements.txt
     - pytest --setup-show
     
