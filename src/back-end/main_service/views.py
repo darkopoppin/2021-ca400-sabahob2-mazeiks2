@@ -48,7 +48,9 @@ def recommender():
             params={'user_id': user_id})
 
     if response.status_code != 200:
-        return (response.content, response.status_code, response.headers.items())
+        return (response.content,
+                response.status_code,
+                response.headers.items())
 
     recommendations = response.json()
     recommendations_ids = list(recommendations)
