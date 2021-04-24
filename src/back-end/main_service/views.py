@@ -2,6 +2,7 @@ import requests
 from flask import request, Blueprint, jsonify
 from flask_cors import cross_origin
 
+import settings
 from main_service import redis_client
 from main_service.user import assignCategories
 from main_service.errors import ClientError
@@ -41,7 +42,7 @@ def recommender():
         recommendations_ids = string.split(' ')
     else:
         response = requests.get(
-                "http://127.0.0.1:5001/recommendations",
+                f'http://{settings.RECOMM_HOST}:5001/recommendations',
                 params={'user_id': user_id})
         if response.status_code != 200:
             return (
