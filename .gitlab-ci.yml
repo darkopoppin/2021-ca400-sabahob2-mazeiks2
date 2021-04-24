@@ -1,9 +1,9 @@
 image: python
 
 stages:
-  - verify syntax
+  - verify style
   - test back-end
-  - test recommender-service
+  - test recommender
 
 variables:
   FLASK_APP: "./run.py"
@@ -16,7 +16,7 @@ before_script:
   - python3 -m pip --version
 
 scan:
-  stage: verify syntax
+  stage: verify style
   script:
     - pip3 install flake8
     - flake8 --per-file-ignores='**/__init__.py:F401,F403' ./src/back-end/**/*.py
@@ -31,7 +31,7 @@ unit-tests:
     - pytest --setup-show
 
 unit-tests:
-  stage: test recommender-service
+  stage: test recommender
   script:
     - cd ./src/recommender-service
     - pip3 install -r requirements.txt
