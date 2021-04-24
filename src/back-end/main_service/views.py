@@ -1,7 +1,8 @@
+import requests
 from flask import request, Blueprint, jsonify
 from flask_cors import cross_origin
-import requests
 
+from main_service import redis_client
 from main_service.user import assignCategories
 from main_service.errors import ClientError
 from yelp_api import get_businesses_info, search_yelp
@@ -34,12 +35,26 @@ def recommender():
         user_id = request.args.get('user_id')
     else:
         raise ClientError("Invalid or no parameter/s was passed")
-    # TODO add try catch
-    recommendations = requests.get(
-            "http://recommender:5001/recommendations",
-            params={'user_id': user_id}).json()
 
-    recommendations_ids = list(recommendations)
+    if redis_client.get(user_id) is not None:
+        string = redis_client.get(user_id).decode('UTF-8')
+        recommendations_ids = string.split(' ')
+    else:
+        response = requests.get(
+                "http://127.0.0.1:5001/recommendations",
+                params={'user_id': user_id})
+        if response.status_code != 200:
+            return (
+                response.content,
+                response.status_code,
+                response.headers.items())
+        else:
+            recommendations = response.json()
+
+        recommendations_ids = list(recommendations)    
+        redis_client.set(user_id, ' '.join(recommendations_ids))
+        redis_client.expire(user_id, 60*60*24)
+
     results = get_businesses_info(recommendations_ids)
     return results
 
