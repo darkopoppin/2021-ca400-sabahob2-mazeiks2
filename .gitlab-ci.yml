@@ -7,6 +7,8 @@ stages:
 
 variables:
   FLASK_APP: "./run.py"
+  GOOGLE_APPLICATION_CREDENTIALS: "./credentials/citycydev-firebase.json"
+  FLASK_ENV: "testing"
 
 before_script:
   - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
@@ -23,10 +25,6 @@ scan:
 
 back-end:
   stage: test back-end
-  variables:
-    GOOGLE_APPLICATION_CREDENTIALS: "./credentials/citycydev-firebase.json"
-    FLASK_ENV: "testing"
-
   script:
     - cd ./src/back-end
     - pip3 install -r requirements.txt
@@ -34,10 +32,6 @@ back-end:
 
 recommender:
   stage: test recommender-service
-  variables:
-    GOOGLE_APPLICATION_CREDENTIALS: "./credentials/citycydev-firebase.json"
-    FLASK_ENV: "testing"
-
   script:
     - cd ./src/recommender-service
     - pip3 install -r requirements.txt
