@@ -16,7 +16,5 @@ def test_client():
 
 @pytest.fixture(scope='session')
 def test_db():
-    app = firebase_admin.initialize_app()
-    db = firestore.client(app)
+    db = firestore.client()
     yield db
-    firebase_admin.delete_app(app)
