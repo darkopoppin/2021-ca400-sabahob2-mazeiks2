@@ -38,3 +38,30 @@ def get_businesses_info(ids):
     finish = time.perf_counter()
     print(f'{finish - start}')
     return results
+
+
+def search_yelp(term, location):
+    query = gql('''
+        query search($term: String! $loc: String!)
+        {
+            search(term: $term, location: $loc) {
+                business {
+                    name
+                    rating
+                    price
+                    review_count
+                    location {
+                        address1
+                        city
+                    }
+                }
+            }
+        }
+    ''')
+    params = {
+        'term': term,
+        'loc': location
+    }
+    results = client.execute(query, variable_values=params)
+
+    return results['search']['business']
