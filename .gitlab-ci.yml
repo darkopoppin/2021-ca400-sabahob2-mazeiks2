@@ -1,12 +1,32 @@
 image: python
 
+stages:
+  - verify syntax
+  - test back-end
+
+variables:
+  FLASK_APP: "./run.py"
+
 before_script:
   - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
   - python3 get-pip.py
   - python3 -m pip --version
-  - pip3 install flake8
+
+scan:
+  stage: verify syntax
+  script:
+    - pip3 install flake8
+    - flake8 --per-file-ignores='**/__init__.py:F401,F403' ./src/back-end/**/*.py
+    - flake8 --per-file-ignores='**/__init__.py:F401,F403' ./src/recommender-service/**/*.py
+  allow_failure: true
 
 test:
+  stage: test back-end
+  variables:
+    GOOGLE_APPLICATION_CREDENTIALS: "./credentials/citycydev-firebase.json"
+    FLASK_ENV: "testing"
+
   script:
-    - flake8 --per-file-ignores='**/__init__.py:F401,F403' ./src/back-end/**/*.py
-  allow_failure: true
+    - cd ./src/back-end
+    - pytest --setup-show
+    
