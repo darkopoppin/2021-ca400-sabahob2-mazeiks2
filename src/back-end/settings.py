@@ -12,3 +12,5 @@ if environ.get('FLASK_ENV') == 'development':
     RECOMM_HOST = '127.0.0.1'
 else:
     RECOMM_HOST = 'recommender'
+
+YELP_API = environ.get('YELP_API')
