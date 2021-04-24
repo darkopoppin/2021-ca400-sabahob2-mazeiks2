@@ -29,8 +29,6 @@ unit-tests:
     - cd ./src/back-end
     - pip3 install -r requirements.txt
     - pytest --setup-show
-
-unit-tests:
   stage: test recommender
   script:
     - cd ./src/recommender-service
