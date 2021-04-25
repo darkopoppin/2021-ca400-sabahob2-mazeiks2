@@ -27,3 +27,12 @@ services:
     image: recommender-service
     ports:
       - 5001
+
+  redis-server:
+    container_name: redis-server
+    depends_on:
+      - backend
+    build: ./redis-conf
+    image: redis-conf
+    ports:
+      - 6379
