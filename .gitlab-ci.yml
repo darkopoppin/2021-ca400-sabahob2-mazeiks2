@@ -18,8 +18,8 @@ scan:
   stage: verify style
   script:
     - pip3 install flake8
-    - flake8 --per-file-ignores='**/__init__.py:F401,F403' ./src/back-end/**/*.py
-    - flake8 --per-file-ignores='**/__init__.py:F401,F403' ./src/recommender-service/**/*.py
+    - flake8 --per-file-ignores='**/__init__.py:F401,F403,E402' ./src/back-end/**/*.py
+    - flake8 --per-file-ignores='**/__init__.py:F401,F403,E402' ./src/recommender-service/**/*.py
   allow_failure: true
 
 back-end:
