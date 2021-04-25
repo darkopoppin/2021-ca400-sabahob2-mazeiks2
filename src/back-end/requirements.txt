@@ -4,3 +4,4 @@ flask_cors==3.0.10
 gql==2.0.0
 pytest-flask==1.2.0
 redis==3.5.3
+python-dotenv==0.17.0

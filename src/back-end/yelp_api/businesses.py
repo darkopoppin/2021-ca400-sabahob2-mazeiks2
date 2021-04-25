@@ -43,6 +43,9 @@ def search_yelp(term, location):
                         address1
                         city
                     }
+                    categories {
+                        title
+                    }
                 }
             }
         }
@@ -53,4 +56,4 @@ def search_yelp(term, location):
     }
     results = yelp_client.execute(query, variable_values=params)
 
-    return results['search']['business']
+    return results['search']
