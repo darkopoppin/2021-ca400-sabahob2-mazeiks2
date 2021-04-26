@@ -28,7 +28,7 @@ back-end:
   script:
     - cd ./src/back-end
     - pip3 install -r requirements.txt
-    - pytest --setup-show
+    - pytest tests/unit --setup-show
   only:
     - merge_requests
 
