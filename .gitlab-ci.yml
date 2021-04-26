@@ -1,23 +1,38 @@
-image: docker
-
-services:
-  - docker:dind
+image: python
 
 stages:
-  - test
-  - deploy
+  - verify style
+  - unit-tests
 
-test:
-  stage: test
-  script:
-  - echo run tests in this section
+variables:
+  FLASK_APP: "./run.py"
+  GOOGLE_APPLICATION_CREDENTIALS: "./credentials/citycydev-firebase.json"
+  FLASK_ENV: "testing"
 
-step-deploy-master:
-  stage: deploy
-  only:
-  - master
+before_script:
+  - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+  - python3 get-pip.py
+  - python3 -m pip --version
+
+scan:
+  stage: verify style
   script:
-  - docker-compose build
-  - docker-compose up -d
-  environment: production
-  when: always
+    - pip3 install flake8
+    - flake8 --per-file-ignores='**/__init__.py:F401,F403,E402' ./src/back-end/**/*.py
+    - flake8 --per-file-ignores='**/__init__.py:F401,F403,E402' ./src/recommender-service/**/*.py
+  allow_failure: true
+
+back-end:
+  stage: unit-tests
+  script:
+    - cd ./src/back-end
+    - pip3 install -r requirements.txt
+    - pytest --setup-show
+
+recommender-service:
+  stage: unit-tests
+  script:
+    - cd ./src/recommender-service
+    - pip3 install -r requirements.txt
+    - pytest --setup-show
+    
