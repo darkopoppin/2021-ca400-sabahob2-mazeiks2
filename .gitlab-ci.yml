@@ -30,7 +30,7 @@ back-end:
   script:
     - cd ./src/back-end
     - pip3 install -r requirements.txt
-    - pytest tests/unit --setup-show
+    - pytest --setup-show
   only:
     - merge_requests
 
@@ -43,8 +43,5 @@ recommender-service:
   only:
     - merge_requests
 
-functional-tests:
-  stage: triggers
-  trigger: 'src/.gitlab-ci.yml'
-  only:
-    - merge_requests
+include: 'src/.gitlab-ci.yml'
+
