@@ -8,14 +8,15 @@ services:
     build:
       context: ./front-end
       dockerfile: Dockerfile
-    image: frontend-container
+    image: front-end
     ports:
      - 80:8100
 
   backend:
     container_name: backend
     build: ./back-end
-    image: user-informtion-container
+    image: back-end
+    command: ["sh", "-c", "flask run --no-debugger"]
     ports:
      - 5000:5000
   
@@ -33,6 +34,6 @@ services:
     depends_on:
       - backend
     build: ./redis-conf
-    image: redis-conf
+    image: redis
     ports:
       - 6379
