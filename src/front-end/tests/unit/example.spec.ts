@@ -4,6 +4,6 @@ import Home from '@/views/Home.vue'
 describe('Home.vue', () => {
   it('renders home vue', () => {
     const wrapper = mount(Home)
-    expect(wrapper.text()).toMatch('Ready to create an app?')
+    expect(wrapper.find("h3").text()).toMatch('Welcome')
   })
 })

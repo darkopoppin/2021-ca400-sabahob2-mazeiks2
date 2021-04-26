@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "cy:open": "cypress open",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
@@ -16,9 +17,11 @@
     "@ionic/vue-router": "^5.4.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "cypress": "^7.1.0",
     "firebase": "^8.2.7",
     "vue": "^3.0.0-0",
-    "vue-router": "^4.0.0-0"
+    "vue-router": "^4.0.0-0",
+    "xvfb": "^0.4.0"
   },
   "devDependencies": {
     "@capacitor/cli": "2.4.6",
