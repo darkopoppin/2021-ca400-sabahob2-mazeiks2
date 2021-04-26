@@ -49,5 +49,5 @@ functional-tests:
     - docker-compose version
     - docker-compose down
     - docker-compose -f docker-compose.yml -f docker-compose.testing.yml build
-    - docker-compose -f docker-compose.yml -f docker-compose.testing.yml up up --exit-code-from backend
+    - docker-compose -f docker-compose.yml -f docker-compose.testing.yml up --exit-code-from backend
 
