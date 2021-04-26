@@ -43,6 +43,8 @@ recommender-service:
   only:
     - merge_requests
 
+include: 'https://gitlab.computing.dcu.ie/'
+
 functional-tests:
   stage: triggers
   trigger: src/.gitlab-ci.yml
