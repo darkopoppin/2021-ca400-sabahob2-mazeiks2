@@ -3,6 +3,7 @@ image: python
 stages:
   - verify style
   - unit-tests
+  - triggers
 
 variables:
   FLASK_APP: "./run.py"
@@ -35,4 +36,10 @@ recommender-service:
     - cd ./src/recommender-service
     - pip3 install -r requirements.txt
     - pytest --setup-show
-    
+
+trigger:
+  stage: triggers
+  trigger:
+    include: ./src/.gitlab-ci.yml
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
