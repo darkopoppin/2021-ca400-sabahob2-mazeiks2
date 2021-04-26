@@ -43,5 +43,7 @@ recommender-service:
   only:
     - merge_requests
 
-include: 'src/.gitlab-ci.yml'
+triggers:
+  stage: triggers
+  include: 'src/.gitlab-ci.yml'
 
