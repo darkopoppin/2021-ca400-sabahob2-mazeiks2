@@ -6,7 +6,7 @@ services:
     image: back-end
     command: ["sh", "-c", "flask run --no-debugger"]
     ports:
-     - 5000:5000
+     - 5144:5000
   
   recommender:
     container_name: recommender
