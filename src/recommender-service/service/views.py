@@ -1,5 +1,4 @@
 from flask import request, Blueprint, jsonify
-import json
 
 from service import db
 from service.errors import ClientError
