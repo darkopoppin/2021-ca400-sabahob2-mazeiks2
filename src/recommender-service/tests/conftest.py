@@ -1,11 +1,11 @@
 import pytest
 import json
-import firebase_admin
 from gql import Client, gql
 from gql.transport.requests import RequestsHTTPTransport
 from os import environ
+from firebase_admin import firestore
 
-from service import create_service, db
+from service import create_service
 
 
 @pytest.fixture(scope='session')
@@ -18,8 +18,8 @@ def test_client():
 
 @pytest.fixture(scope='session')
 def test_db():
+    db = firestore.client()
     yield db
-    firebase_admin.delete_app(db)
 
 
 @pytest.fixture(scope='module')
