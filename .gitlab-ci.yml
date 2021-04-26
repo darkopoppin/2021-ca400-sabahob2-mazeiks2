@@ -1,8 +1,8 @@
-image: python
 
 stages:
   - verify style
   - unit-tests
+  - functional-tests
 
 variables:
   FLASK_APP: "./run.py"
@@ -42,5 +42,16 @@ recommender-service:
   only:
     - merge_requests
 
-include: 'src/.gitlab-ci.yml'
+before_script:
+
+
+build:
+  stage: functional-tests
+  script:
+    - cd ./src
+    - docker version
+    - docker-compose version
+    - docker-compose down
+    - docker-compose -f docker-compose.yml -f docker-compose.testing.yml build
+    - docker-compose -f docker-compose.yml -f docker-compose.testing.yml up
 
