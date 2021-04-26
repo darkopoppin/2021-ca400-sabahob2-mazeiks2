@@ -1,8 +1,7 @@
-
 stages:
   - verify style
   - unit-tests
-  - functional-tests
+  - beta
 
 variables:
   FLASK_APP: "./run.py"
@@ -42,11 +41,8 @@ recommender-service:
   only:
     - merge_requests
 
-before_script:
-
-
-build:
-  stage: functional-tests
+functional-tests:
+  stage: beta
   script:
     - cd ./src
     - docker version
