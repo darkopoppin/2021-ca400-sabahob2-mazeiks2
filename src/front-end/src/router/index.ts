@@ -29,6 +29,20 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     component: Home,
+    children: [
+      {
+        path: '',
+        redirect: 'categories'
+      },
+      {
+        path: 'categories',
+        component: () => import('@/views/CategorySelection.vue')
+      },
+      {
+        path: 'mobilePlanner',
+        component: () => import('@/views/Planner.vue')
+      },
+    ],
     meta: {
       requiresAuth: true
     }
