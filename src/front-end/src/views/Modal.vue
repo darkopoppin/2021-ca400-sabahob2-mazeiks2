@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-  <button @click="dismiss"> Cancel</button>
+  <button class="return" @click="dismiss"> Cancel</button>
   <ion-content >
     <ion-list style="display: inline-block;">
       <ion-item style="display: inline-block; width:50%;" lines="none" v-for="(value) in values" v-bind:key="value">
@@ -8,7 +8,7 @@
       </ion-item>
     </ion-list>
 
-    <ion-button v-on:click= "submit()"> Submit</ion-button>
+    <ion-button class="button" v-on:click="submit()"> Submit</ion-button>
   </ion-content>
   </ion-page>
 </template>
@@ -58,15 +58,22 @@ export default defineComponent({
 <style scoped>
 
 .selected {
-  color: red;
+  color: green;
 }
 
-.Button {
-  display: block;
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  border: 1px solid red;
+.return {
+  height: 5%;
+  color: white;
+  background-color: blue;
+  font-weight: 15px;
+}
+
+.button {
+  width: 40%;
+  min-width: fit-content;
+  margin-left: 30%;
+  margin-right: 30%;
+  --background: blue;
 }
 
 .myModal {

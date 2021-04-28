@@ -11,7 +11,7 @@
       </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-button class="homeButton" @click="regress"> Home  </ion-button>
+    <ion-button class="homeButton" @click="regress"> Home </ion-button>
   </ion-card>
   </ion-content>
   </ion-page>
@@ -74,9 +74,6 @@ export default defineComponent({
 <style scoped>
 .card {
   position: relative;
-  /* margin-top: 10%;
-  margin-left: 30%;
-  margin-right: 30%; */
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
   padding: 40px 55px 45px 55px;
