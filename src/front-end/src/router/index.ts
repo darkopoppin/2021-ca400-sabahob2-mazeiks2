@@ -7,6 +7,7 @@ import ForgotPassword from '../views/ForgotPassword.vue';
 import CategorySelection from '../views/CategorySelection.vue';
 import Modal from '../views/Modal.vue';
 import Planner from '../views/Planner.vue';
+import Settings from '../views/Settings.vue';
 import { auth } from '../firebase';
 
 const routes: Array<RouteRecordRaw> = [
@@ -42,6 +43,10 @@ const routes: Array<RouteRecordRaw> = [
         path: 'mobilePlanner',
         component: () => import('@/views/Planner.vue')
       },
+      {
+        path: 'mobileSettings',
+        component: () => import('@/views/Settings.vue')
+      },
     ],
     meta: {
       requiresAuth: true
@@ -51,6 +56,14 @@ const routes: Array<RouteRecordRaw> = [
     path: '/CategorySelection',
     name: 'CategorySelection',
     component: CategorySelection,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/Settings',
+    name: 'Settings',
+    component: Settings,
     meta: {
       requiresAuth: true
     }

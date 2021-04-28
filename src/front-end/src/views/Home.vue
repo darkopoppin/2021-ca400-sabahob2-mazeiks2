@@ -11,6 +11,11 @@
           <ion-icon :icon="calendar"></ion-icon>
           <ion-label>Planner</ion-label>
         </ion-tab-button>
+
+        <ion-tab-button tab="settings" href="/mobileSettings">
+          <ion-icon :icon="settings"></ion-icon>
+          <ion-label>Settings</ion-label>
+        </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
   </ion-page>
@@ -50,7 +55,7 @@ import {
 import { defineComponent } from "vue";
 import { auth } from "../firebase";
 import axios from "axios";
-import { list, calendar } from 'ionicons/icons';
+import { list, calendar, settings } from 'ionicons/icons';
 
 export default defineComponent({
   name: "Home",
@@ -67,7 +72,8 @@ export default defineComponent({
   setup() {
     return {
         list,
-        calendar
+        calendar,
+        settings
         }
   },
   data() {
