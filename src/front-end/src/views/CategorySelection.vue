@@ -17,7 +17,7 @@
       <ion-button @click="openModal" >Arts & Entertainment</ion-button>
       </ion-item>
     </ion-list>
-    <ion-button @click="() => this.$router.push('/Home')"> Home  </ion-button>
+    <ion-button @click="() => this.$router.push('/')"> Home  </ion-button>
   </ion-page>
 </template>
 

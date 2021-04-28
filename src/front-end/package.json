@@ -15,6 +15,7 @@
     "@capacitor/core": "2.4.6",
     "@ionic/vue": "^5.4.0",
     "@ionic/vue-router": "^5.4.0",
+    "chokidar": "^3.5.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "cypress": "^7.1.0",
@@ -24,6 +25,7 @@
     "xvfb": "^0.4.0"
   },
   "devDependencies": {
+    "axios": "^0.21.1",
     "@capacitor/cli": "2.4.6",
     "@types/jest": "^24.0.19",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
