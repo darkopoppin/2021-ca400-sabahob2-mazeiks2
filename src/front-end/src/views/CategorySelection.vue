@@ -44,7 +44,7 @@ export default defineComponent({
   },
   methods: {
     regress() {
-      this.$router.push('home')
+      this.$router.push('/')
     },
     async openModal(category) {
       const modal = await modalController

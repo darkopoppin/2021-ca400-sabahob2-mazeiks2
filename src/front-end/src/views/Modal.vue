@@ -25,7 +25,7 @@ import {
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import axios from "axios";
-import firebase from "firebase";
+import { auth } from "../firebase";
 
 export default defineComponent({
   name: "Modal",
@@ -43,8 +43,7 @@ export default defineComponent({
     },
     submit() {
       const finalCategories = Object.keys(this.selectedCategories).filter(k => this.selectedCategories[k] === true)
-      console.log(finalCategories)
-      const user = firebase.auth().currentUser;
+      const user = auth.currentUser;
       axios.post('http://127.0.0.1:5000/categorySelection', { params: [finalCategories, user.uid]}).then(response => console.log(response)).catch(error => console.log(error))
     },
     dismiss() {
@@ -56,6 +55,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+ion-content {
+  --ion-item-background: white;
+  --ion-text-color: white;
+}
 
 .selected {
   color: green;
@@ -75,22 +78,4 @@ export default defineComponent({
   margin-right: 30%;
   --background: blue;
 }
-
-.myModal {
-background-color: cornflowerblue !important;
-color: Black;
-position: absolute !important;
-width: 600px !important;
-height: 570px !important;
-top: 0 !important;
-bottom: 0 !important;
-left: 0 !important;
-right: 0 !important;
-margin: auto !important;
-border-style: solid;
-border-width: 1px;
-border-radius: 10px !important;
-border-color: black;
-}
-
 </style>

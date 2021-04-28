@@ -1,5 +1,4 @@
 import pytest
-import firebase_admin
 
 from main_service import create_service
 from firebase_admin import firestore
