@@ -57,7 +57,7 @@ export default defineComponent({
 <style scoped>
 ion-content {
   --ion-item-background: white;
-  --ion-text-color: white;
+  --ion-text-color: black;
 }
 
 .selected {

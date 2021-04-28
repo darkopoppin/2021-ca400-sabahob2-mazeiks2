@@ -30,7 +30,6 @@ import {
   modalController
 } from "@ionic/vue";
 import Modal from "./Modal.vue";
-import { useRouter } from "vue-router";
 import { defineComponent } from "vue";
 import categories from "../../categories";
 
@@ -74,7 +73,7 @@ export default defineComponent({
 <style scoped>
 .card {
   position: relative;
-  background: #ffffff;
+  --background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
   padding: 40px 55px 45px 55px;
   border-radius: 15px;
