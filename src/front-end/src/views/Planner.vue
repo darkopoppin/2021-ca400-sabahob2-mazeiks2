@@ -1,56 +1,29 @@
 <template>
   <ion-page>
-      <h3>Output screen!</h3>
-      <ion-back-button></ion-back-button>
-      <p>{{ user.displayName }}</p>
-
-
+      <ion-header>
+        <ion-title class="component-title">Planner! </ion-title>
+      </ion-header>
+    <ion-content>
+    </ion-content>
   </ion-page>
 </template>
 
 <script>
 import {
-  // IonContent,
-  // IonHeader,
+  IonContent,
+  IonHeader,
   IonPage,
-  // IonTitle,
-  // IonToolbar,
-  IonBackButton,
+  IonTitle,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import { auth } from "../firebase";
 
 export default defineComponent({
   name: "planner",
   components: {
-    // IonContent,
-    // IonHeader, pipeline test
+    IonContent,
+    IonHeader,
     IonPage,
-    IonBackButton,
-    // IonTitle,
-    // IonToolbar
-  },
-  data() {
-    return {
-      user: {},
-    };
-  },
-  created() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.user = user;
-      } else {
-        this.user = null;
-      }
-    });
-  },
-  methods: {
-    return() {
-      this.$router.push("/home")
-    },
-    recommender() {
-      this.$router.push("/planner")
-    },
-  },
+    IonTitle,
+  }
 });
 </script>

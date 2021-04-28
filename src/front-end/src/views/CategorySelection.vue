@@ -1,5 +1,8 @@
 <template>
   <ion-page>
+      <ion-header>
+        <ion-title class="component-title"> Categories </ion-title>
+      </ion-header>
     <ion-content>
       <ion-list>
         <ion-item>
@@ -31,14 +34,16 @@ import {
   modalController,
   IonList,
   IonItem,
-  IonContent
+  IonContent,
+  IonHeader,
+  IonTitle,
 } from "@ionic/vue";
 import Modal from "./Modal.vue";
 import { useRouter } from "vue-router";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  components: { IonButton, IonPage, IonList, IonItem, IonContent },
+  components: { IonButton, IonPage, IonList, IonItem, IonContent, IonHeader, IonTitle },
   data() {
     return { currentModal: null };
   },

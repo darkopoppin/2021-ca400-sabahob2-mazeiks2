@@ -33,18 +33,18 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: 'categories'
+        redirect: 'Categories'
       },
       {
-        path: 'categories',
+        path: 'Categories',
         component: () => import('@/views/CategorySelection.vue')
       },
       {
-        path: 'mobilePlanner',
+        path: 'Planner',
         component: () => import('@/views/Planner.vue')
       },
       {
-        path: 'mobileSettings',
+        path: 'Settings',
         component: () => import('@/views/Settings.vue')
       },
     ],
@@ -53,33 +53,9 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: '/CategorySelection',
-    name: 'CategorySelection',
-    component: CategorySelection,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    path: '/Settings',
-    name: 'Settings',
-    component: Settings,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
     path: '/Modal',
     name: 'Modal',
     component: Modal,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    path: '/planner',
-    name: 'Planner',
-    component: Planner,
     meta: {
       requiresAuth: true
     }

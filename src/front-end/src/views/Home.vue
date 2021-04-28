@@ -1,18 +1,36 @@
 <template>
-  <ion-page v-if="isMobile()">
+  <ion-page>
       <ion-tabs>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="category" href="/categories">
+      <ion-tab-bar v-if="isMobile()" slot="bottom">
+        <ion-tab-button tab="category" href="/Categories">
           <ion-icon :icon="list"></ion-icon>
           <ion-label>Categories</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="planner" href="/mobilePlanner">
+        <ion-tab-button tab="planner" href="/Planner">
           <ion-icon :icon="calendar"></ion-icon>
           <ion-label>Planner</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="settings" href="/mobileSettings">
+        <ion-tab-button tab="settings" href="/Settings">
+          <ion-icon :icon="settings"></ion-icon>
+          <ion-label>Settings</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+
+      <ion-tab-bar v-else slot="top">
+        <ion-title class="title">Welcome to CiteCy!</ion-title>
+        <ion-tab-button tab="category" href="/Categories">
+          <ion-icon :icon="list"></ion-icon>
+          <ion-label>Categories</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="planner" href="/Planner">
+          <ion-icon :icon="calendar"></ion-icon>
+          <ion-label>Planner</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="settings" href="/Settings">
           <ion-icon :icon="settings"></ion-icon>
           <ion-label>Settings</ion-label>
         </ion-tab-button>
@@ -20,32 +38,12 @@
     </ion-tabs>
   </ion-page>
   
-  <ion-page v-else>
-      <h3>Welcome to Desktop!</h3>
-      <ion-content v-if="loggedIn"> {{user.displayName}}</ion-content>
-      <ion-button @click="redirect" >Category selection</ion-button>
-      <ion-button
-        type="submit"
-        v-on:click="recommender()"
-      >
-        plan me a day!
-      </ion-button>
-      <ion-button
-        type="submit"
-        v-on:click="logOut()"
-      >
-        Log out
-      </ion-button>
-
-      <ion-button @click="recommend">Recommend</ion-button>
-  </ion-page>
 </template>
 
 <script>
 import {
   IonPage,
-  IonButton,
-  IonContent,
+  IonTitle,
   IonTabBar, 
   IonTabButton, 
   IonTabs,
@@ -60,14 +58,13 @@ import { list, calendar, settings } from 'ionicons/icons';
 export default defineComponent({
   name: "Home",
   components: {
-    IonContent,
     IonPage,
-    IonButton,
+    IonTitle,
     IonTabBar, 
     IonTabButton, 
     IonTabs,
     IonIcon,
-    IonLabel
+    IonLabel,
   },
   setup() {
     return {
@@ -95,12 +92,11 @@ export default defineComponent({
   },
   methods: {
     logOut() {
-      this.$router.push("/SignIn");
         auth
         .signOut()
         .then(() => {
           auth.onAuthStateChanged(() => {
-            // this.$router.push("/");
+            this.$router.push("/SignIn");
           });
         });
     },
@@ -128,3 +124,10 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.title {
+    text-align: left;
+}
+
+</style>
