@@ -1,7 +1,6 @@
 <template>
   <ion-page>
       <div class="main-page">
-      <nav-side-bar></nav-side-bar>
         <ion-header>
           <ion-segment @ionChange="segmentChanged($event)" style="background: #3880ff;">
             <ion-item>
@@ -86,13 +85,13 @@ import {
   IonCol,
   IonThumbnail
 } from "@ionic/vue";
+
 import { defineComponent, ref } from "vue";
 import { auth } from "../firebase";
 import axios from "axios";
-import NavBar from '../components/NavBar'
 
 export default defineComponent({
-  name: "Home",
+  name: "Recommender",
   components: {
     IonContent,
     IonHeader,
@@ -114,7 +113,6 @@ export default defineComponent({
     IonRow,
     IonCol,
     IonThumbnail,
-    'nav-side-bar': NavBar,
   },
   setup() {
     const isDisabled = ref(false);
@@ -171,7 +169,7 @@ export default defineComponent({
       }).catch(error => console.log(error))
     }
 
-    const onIonViewWillEnter = () => {
+    onIonViewWillEnter(() => {
       auth.onAuthStateChanged((user) => {
         if (user) {
           userProfile = user;
@@ -182,7 +180,7 @@ export default defineComponent({
           user = null;
         }
       });
-    };
+    });
 
     return {
       isDisabled,
@@ -191,23 +189,8 @@ export default defineComponent({
       images,
       loggedIn
     }
-  },
-  methods: {
-    logOut() {
-      this.$router.push("/SignIn");
-        auth
-        .signOut()
-        .then(() => {
-          auth.onAuthStateChanged(() => {
-            // this.$router.push("/");
-          });
-        });
-    },
-    redirect() {
-      this.$router.push('/categorySelection')
-    },
-  },
-});
+  }
+})
 </script>
 <style scoped>
   .main-page   {

@@ -16,6 +16,11 @@
           <ion-icon :icon="settings"></ion-icon>
           <ion-label>Settings</ion-label>
         </ion-tab-button>
+
+        <ion-tab-button tab="Recommender" href="/Recommender">
+          <ion-icon :icon="bulb"></ion-icon>
+          <ion-label>Recommender</ion-label>
+        </ion-tab-button>
       </ion-tab-bar>
 
       <ion-tab-bar v-else slot="top">
@@ -34,6 +39,12 @@
           <ion-icon :icon="settings"></ion-icon>
           <ion-label>Settings</ion-label>
         </ion-tab-button>
+
+        <ion-tab-button tab="Recommender" href="/Recommender">
+          <ion-icon :icon="bulb"></ion-icon>
+          <ion-label>Recommender</ion-label>
+        </ion-tab-button>
+
       </ion-tab-bar>
     </ion-tabs>
   </ion-page>
@@ -51,9 +62,8 @@ import {
   IonLabel,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import { auth } from "../firebase";
 import axios from "axios";
-import { list, calendar, settings } from 'ionicons/icons';
+import { list, calendar, settings, bulb } from 'ionicons/icons';
 
 export default defineComponent({
   name: "Home",
@@ -70,7 +80,8 @@ export default defineComponent({
     return {
         list,
         calendar,
-        settings
+        settings,
+        bulb
         }
   },
   data() {
@@ -79,27 +90,7 @@ export default defineComponent({
       loggedIn: false,
     };
   },
-  created() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.user = user;
-        this.loggedIn = true;
-      } else {
-        this.user = null;
-        this.loggedIn = false;
-      }
-    });
-  },
   methods: {
-    logOut() {
-        auth
-        .signOut()
-        .then(() => {
-          auth.onAuthStateChanged(() => {
-            this.$router.push("/SignIn");
-          });
-        });
-    },
     isMobile() {
         if( screen.width <= 760 ) {
             return true;
@@ -108,19 +99,6 @@ export default defineComponent({
             return false;
         }
     },
-    redirect() {
-      this.$router.push('/categorySelection')
-    },
-    recommender() {
-      this.$router.push("/planner")
-    },
-    recommend(){
-      axios.get('http://127.0.0.1:5000/recommender', 
-      { params: {'user_id': 'KbcIgBXo6bhtfRtO6iWe'} })
-      .then(response => console
-      .log(response))
-      .catch(error => console.log(error))
-    }
   },
 });
 </script>

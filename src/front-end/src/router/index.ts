@@ -8,6 +8,7 @@ import CategorySelection from '../views/CategorySelection.vue';
 import Modal from '../views/Modal.vue';
 import Planner from '../views/Planner.vue';
 import Settings from '../views/Settings.vue';
+import Recommender from '../views/Recommender.vue';
 import { auth } from '../firebase';
 
 const routes: Array<RouteRecordRaw> = [
@@ -37,15 +38,19 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'Categories',
-        component: () => import('@/views/CategorySelection.vue')
+        component: CategorySelection
       },
       {
         path: 'Planner',
-        component: () => import('@/views/Planner.vue')
+        component: Planner
       },
       {
         path: 'Settings',
-        component: () => import('@/views/Settings.vue')
+        component: Settings
+      },
+      {
+        path: 'Recommender',
+        component: Recommender
       },
     ],
     meta: {
