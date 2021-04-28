@@ -86,9 +86,8 @@ import {
   IonCol,
   IonThumbnail
 } from "@ionic/vue";
-
 import { defineComponent, ref } from "vue";
-import firebase from "firebase";
+import { auth } from "../firebase";
 import axios from "axios";
 import NavBar from '../components/NavBar'
 
@@ -160,7 +159,7 @@ export default defineComponent({
     let userProfile = null;
     const recommend = () => {
       const userUid = userProfile.uid;
-      axios.get('http://127.0.0.1:5002/recommender', 
+      axios.get('http://127.0.0.1:5000/recommender', 
       { params: {'user_id': userUid} })
       .then(response => {
         const data = response.data;
@@ -172,8 +171,8 @@ export default defineComponent({
       }).catch(error => console.log(error))
     }
 
-    onIonViewWillEnter(() => {
-      firebase.auth().onAuthStateChanged((user) => {
+    const onIonViewWillEnter = () => {
+      auth.onAuthStateChanged((user) => {
         if (user) {
           userProfile = user;
           loggedIn = true;
@@ -183,7 +182,7 @@ export default defineComponent({
           user = null;
         }
       });
-    });
+    };
 
     return {
       isDisabled,
@@ -195,12 +194,11 @@ export default defineComponent({
   },
   methods: {
     logOut() {
-      this.$router.push("/");
-      firebase
-        .auth()
+      this.$router.push("/SignIn");
+        auth
         .signOut()
         .then(() => {
-          firebase.auth().onAuthStateChanged(() => {
+          auth.onAuthStateChanged(() => {
             // this.$router.push("/");
           });
         });

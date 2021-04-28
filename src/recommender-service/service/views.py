@@ -13,12 +13,13 @@ service = Blueprint("service_bp", __name__)
 @service.route('/recommendations', methods=['GET'])
 def recommender():
     user_id = request.args.get('user_id')
-    if user_id is not None:
-        user = db.collection('users').document(user_id).get()
-    else:
-        raise ClientError("User does not exist")
+    user = db.collection('users').document(user_id).get()
 
-    user_visited = user.to_dict().get('visited')
+    if user.exists:
+        user_visited = user.to_dict().get('visited')
+    else:
+        raise ClientError("User id does not exist")
+
     if len(user_visited) == 0:
         liked_categories = user.to_dict().get('liked_categories')
         result = search_by_categories(liked_categories)

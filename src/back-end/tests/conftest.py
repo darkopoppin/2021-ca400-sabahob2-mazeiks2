@@ -1,7 +1,7 @@
 import pytest
-import firebase_admin
 
-from main_service import create_service, db
+from main_service import create_service
+from firebase_admin import firestore
 
 
 @pytest.fixture(scope='session')
@@ -15,5 +15,5 @@ def test_client():
 
 @pytest.fixture(scope='session')
 def test_db():
+    db = firestore.client()
     yield db
-    firebase_admin.delete_app(db)

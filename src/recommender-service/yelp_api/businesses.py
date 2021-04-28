@@ -1,22 +1,9 @@
 import time
 import json
-from os import environ, path
+from os import path
+from gql import gql
 
-from gql import Client, gql
-from gql.transport.requests import RequestsHTTPTransport
-
-
-sample_transport = RequestsHTTPTransport(
-    url='https://api.yelp.com/v3/graphql',
-    headers={
-        'Authorization': 'Bearer ' + environ.get('YELP_API'),
-        'Content-Type': 'application/json',
-    },
-    retries=5)
-client = Client(
-    transport=sample_transport,
-    fetch_schema_from_transport=True,
-)
+from yelp_api import yelp_client
 
 with open(str(path.dirname(__file__)) + '/alias_mappings.txt') as f:
     alias_mappings = json.load(f)
@@ -40,7 +27,7 @@ def search_by_categories(categories):
     query_string.append('} ')
 
     query = gql(''.join(query_string))
-    results = client.execute(query, variable_values=params)
+    results = yelp_client.execute(query, variable_values=params)
 
     finish = time.perf_counter()
     print(f'{finish - start}')

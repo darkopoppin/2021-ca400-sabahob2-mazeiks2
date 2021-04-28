@@ -6,6 +6,8 @@ import Home from '../views/Home.vue';
 import ForgotPassword from '../views/ForgotPassword.vue';
 import CategorySelection from '../views/CategorySelection.vue';
 import Modal from '../views/Modal.vue';
+import Planner from '../views/Planner.vue';
+import { auth } from '../firebase';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -14,12 +16,7 @@ const routes: Array<RouteRecordRaw> = [
     component: SignUp
   },
   {
-    path: '/Home',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/',
+    path: '/SignIn',
     name: 'SignIn',
     component: SignIn
   },
@@ -29,25 +26,52 @@ const routes: Array<RouteRecordRaw> = [
     component: ForgotPassword
   },
   {
-    path: '/home',
-    name: 'home',
-    component: Home
+    path: '/',
+    name: 'Home',
+    component: Home,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/CategorySelection',
     name: 'CategorySelection',
-    component: CategorySelection
+    component: CategorySelection,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/Modal',
     name: 'Modal',
-    component: Modal
+    component: Modal,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/planner',
+    name: 'Planner',
+    component: Planner,
+    meta: {
+      requiresAuth: true
+    }
   },
 ]
+
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
+  if (requiresAuth && !auth.currentUser) {
+    next('/SignIn')
+  }
+  else {
+    next()
+  }
+})
 export default router
