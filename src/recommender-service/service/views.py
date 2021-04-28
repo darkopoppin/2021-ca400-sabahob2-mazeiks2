@@ -3,7 +3,7 @@ import json
 
 from service import db
 from service.errors import ClientError
-from api.user_api import get_similar_users
+from recommenders.utils import get_similar_users
 from yelp_api.businesses import search_by_categories
 from recommenders.collab_cosine import collab_cosine
 
