@@ -19,7 +19,6 @@ def test_client():
 @pytest.fixture(scope='session')
 def test_db():
     yield db
-    firebase_admin.delete_app(db)
 
 
 @pytest.fixture(scope='module')
