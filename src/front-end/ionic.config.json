@@ -1,0 +1,7 @@
+{
+  "name": "CiteCy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}

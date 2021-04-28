@@ -1,0 +1,34 @@
+version: '3'
+services:
+  frontend:
+    container_name: frontend
+    restart: always
+    depends_on:
+     - backend
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    image: frontend-container
+    volumes:
+      - ~/2021-ca400-sabahob2-mazeiks2/src/front-end:/app
+      - /app/node_modules
+    ports:
+     - 80:8100
+
+  backend:
+    container_name: backend
+    build: ./back-end
+    image: user-informtion-container
+    volumes:
+      - ~/2021-ca400-sabahob2-mazeiks2/src/back-end:/user-information
+    ports:
+     - 5000:5000
+  
+  recommender:
+    container_name: recommender
+    depends_on:
+      - backend
+    build: ./recommender-service
+    image: recommender-service
+    ports:
+      - 5001
