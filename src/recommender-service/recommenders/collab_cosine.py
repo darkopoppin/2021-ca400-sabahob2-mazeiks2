@@ -43,15 +43,17 @@ def collab_cosine(user_profile, related_users):
 
         user_score = potential_reccomms[poi_id]['user_score']
         poi_score = potential_reccomms[poi_id]['poi_score'] / len(pois_categories)
-        score = cosine_values.max() * 100 * user_score * poi_score
+        score = 0.5 * cosine_values.max() + 0.3 * user_score + 0.2 * poi_score
+
         potential_reccomms[poi_id]['final_score'] = score
 
+    potential_reccomms = filter(potential_reccomms)
     # print(json.dumps(potential_reccomms, indent=4))
     sorted_recommendations = sorted(
         potential_reccomms.items(),
         key=lambda x: x[1]['final_score'],
         reverse=True)
-    print(json.dumps(sorted_recommendations, indent=4))
+    # print(json.dumps(sorted_recommendations, indent=4))
 
     return potential_reccomms
 
@@ -66,3 +68,14 @@ def calculate_user_score(user, related_user):
 
     user_score = len(intersection) / len(union)
     return user_score
+
+
+def filter(recommendations):
+    filtered = {}
+
+    for key, item in recommendations.items():
+        if item['final_score'] > 0.4:
+            print(item['final_score'])
+            filtered[key] = item
+
+    return filtered
