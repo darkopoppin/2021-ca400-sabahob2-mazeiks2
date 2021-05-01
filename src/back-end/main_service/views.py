@@ -2,9 +2,10 @@ from flask import request, Blueprint, jsonify
 from flask_cors import cross_origin
 import requests
 
-from main_service.user import assignCategories
 from main_service.errors import ClientError
 from yelp_api import get_businesses_info
+from models.user import User
+from main_service import db
 
 main_service = Blueprint("main_service_bp", __name__)
 
@@ -16,17 +17,25 @@ def handle_client_error(error):
     return response
 
 
-@main_service.route('/categorySelection', methods=['GET', 'POST'])
+@main_service.route('/user_profile', methods=['GET', 'POST'])
 @cross_origin()
 def userCategories():
-    if request.is_json:
+    if request.method == 'POST' and request.is_json:
         data = request.get_json()
-        d = assignCategories(data)
-        return d
+        existing_user = db.collection('users').document(data['user_id']).get()
+        if existing_user.exists:
+            user = User.from_dict(existing_user.to_dict())
+        else:
+            user = User(data['age'], data['gender'], data['location'], data['categories'])
     else:
         raise ClientError("Expected JSON")
 
+    if request.method == 'GET':
+        return 'pass'
+        
 
+
+# TODO handle empty recommendations
 @main_service.route('/recommender', methods=['GET'])
 @cross_origin()
 def recommender():
@@ -35,7 +44,7 @@ def recommender():
     else:
         raise ClientError("Invalid parameter passed")
     recommendations = requests.get(
-            "http://recommender:5001/recommendations",
+            "http://127.0.0.1:5001/recommendations",
             params={'user_id': user_id}).json()
 
     recommendations_ids = list(recommendations)
