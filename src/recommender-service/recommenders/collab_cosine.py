@@ -40,12 +40,12 @@ def collab_cosine(user_profile, related_users):
         pois_categories.append(potential_reccomms[poi_id]['categories'])
         count_matrix = cv.fit_transform(pois_categories)
         cosine_values = cosine_similarity(count_matrix[-1], count_matrix[:-1])
-
         user_score = potential_reccomms[poi_id]['user_score']
         poi_score = potential_reccomms[poi_id]['poi_score'] / len(pois_categories)
         score = 0.5 * cosine_values.max() + 0.3 * user_score + 0.2 * poi_score
 
         potential_reccomms[poi_id]['final_score'] = score
+        pois_categories.pop()
 
     potential_reccomms = filter(potential_reccomms)
     # print(json.dumps(potential_reccomms, indent=4))
@@ -53,7 +53,7 @@ def collab_cosine(user_profile, related_users):
         potential_reccomms.items(),
         key=lambda x: x[1]['final_score'],
         reverse=True)
-    # print(json.dumps(sorted_recommendations, indent=4))
+    print(json.dumps(sorted_recommendations, indent=4))
 
     return potential_reccomms
 
