@@ -27,12 +27,12 @@ back-end:
   script:
     - cd ./src/back-end
     - pip3 install -r requirements.txt
-    - pytest --setup-show
+    - pytest --setup-show tests/unit
 
 recommender-service:
   stage: unit-tests
   script:
     - cd ./src/recommender-service
     - pip3 install -r requirements.txt
-    - pytest --setup-show
+    - pytest --setup-show tests/unit
     
