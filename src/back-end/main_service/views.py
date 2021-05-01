@@ -19,20 +19,30 @@ def handle_client_error(error):
 
 @main_service.route('/user_profile', methods=['GET', 'POST'])
 @cross_origin()
-def userCategories():
+def user_profile():
     if request.method == 'POST' and request.is_json:
         data = request.get_json()
-        existing_user = db.collection('users').document(data['user_id']).get()
+        user_id = data.get('user_id')
+        existing_user = db.collection('users').document(user_id).get()
         if existing_user.exists:
-            user = User.from_dict(existing_user.to_dict())
+            user = User.from_dict(user_id, existing_user.to_dict())
+            categories = data.get('liked_categories')
+            user.updateCategories(categories)
+            user.save(categories=True)
         else:
-            user = User(data['age'], data['gender'], data['location'], data['categories'])
+            user = User(
+                data['user_id'],
+                data['age'],
+                data['gender'],
+                data['location'],
+                data['liked_categories']
+            )
+            user.save()
     else:
         raise ClientError("Expected JSON")
 
     if request.method == 'GET':
         return 'pass'
-        
 
 
 # TODO handle empty recommendations
