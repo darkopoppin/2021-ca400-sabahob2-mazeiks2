@@ -14,8 +14,8 @@ before_script:
   - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
   - python3 get-pip.py
   - python3 -m pip --version
-  - cd ./src
   - curl -sL https://firebase.tools | bash
+  - sudo apt-get install openjdk-8-jre
 
 scan:
   stage: verify style
@@ -28,7 +28,7 @@ scan:
 back-end:
   stage: unit-tests
   script:
-    - cd ./back-end
+    - cd ./src/back-end
     - pip3 install -r requirements.txt
     - firebase emulators:exec --only firestore --import ../ "pytest --setup-show tests/unit"
 
@@ -36,7 +36,7 @@ back-end:
 recommender-service:
   stage: unit-tests
   script:
-    - cd ./recommender-service
+    - cd ./src/recommender-service
     - pip3 install -r requirements.txt
     - firebase emulators:exec --only firestore --import ../ "pytest --setup-show tests/unit"
     
