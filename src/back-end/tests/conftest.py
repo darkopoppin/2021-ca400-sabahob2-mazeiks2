@@ -11,7 +11,11 @@ def test_user():
         "age": 21,
         "gender": "male",
         "location": "Dublin",
-        "liked_categories": ["Hiking", "Parks", "Mountain Biking", "Piano Bars"],
+        "liked_categories": [
+            "Hiking",
+            "Parks",
+            "Mountain Biking",
+            "Piano Bars"],
         'visited': {}
     }
     return user
