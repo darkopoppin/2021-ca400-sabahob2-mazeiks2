@@ -49,7 +49,9 @@ class User(object):
         if categories:
             user = db.collection('users').document(self.user_id)
             user.update(
-                {'liked_categories': firestore.ArrayUnion(self.liked_categories)}
+                {'liked_categories': firestore.ArrayUnion(
+                    self.liked_categories
+                )}
             )
         else:
             db.collection('users').document(self.user_id).set(self.to_dict())
