@@ -16,7 +16,6 @@ before_script:
   - python3 -m pip --version
   - cd ./src
   - curl -sL https://firebase.tools | bash
-  - firebase emulators:start --only firestore --import ./
 
 scan:
   stage: verify style
@@ -31,12 +30,13 @@ back-end:
   script:
     - cd ./back-end
     - pip3 install -r requirements.txt
-    - pytest --setup-show tests/unit
+    - firebase emulators:exec --only firestore --import ../ "pytest --setup-show tests/unit"
+
 
 recommender-service:
   stage: unit-tests
   script:
     - cd ./recommender-service
     - pip3 install -r requirements.txt
-    - pytest --setup-show tests/unit
+    - firebase emulators:exec --only firestore --import ../ "pytest --setup-show tests/unit"
     
