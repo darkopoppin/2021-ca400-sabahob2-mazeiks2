@@ -25,7 +25,7 @@ class User(object):
         self.liked_categories = categories
 
     @staticmethod
-    def from_dict(user_id, data):
+    def from_dict(data, user_id=None):
         user = User(
             user_id=user_id,
             age=int(data['age']),
@@ -45,16 +45,14 @@ class User(object):
         user.update({'visited': self.visited})
         return user
 
-    def save(self, categories=False):
-        if categories:
-            user = db.collection('users').document(self.user_id)
-            user.update(
-                {'liked_categories': firestore.ArrayUnion(
-                    self.liked_categories
-                )}
-            )
-        else:
-            db.collection('users').document(self.user_id).set(self.to_dict())
+    def save(self):
+        db.collection('users').document(self.user_id).set(self.to_dict())
+
+    def update_categories(self):
+        user = db.collection('users').document(self.user_id)
+        user.update(
+            {'liked_categories': firestore.ArrayUnion(self.liked_categories)}
+        )
 
     def __repr__(self):
         return (
