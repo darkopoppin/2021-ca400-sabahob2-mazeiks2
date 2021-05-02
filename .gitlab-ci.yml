@@ -8,11 +8,14 @@ variables:
   FLASK_APP: "./run.py"
   GOOGLE_APPLICATION_CREDENTIALS: "./credentials/citycydev-firebase.json"
   FLASK_ENV: "testing"
+  FIRESTORE_EMULATOR_HOST: "localhost:8080"
 
 before_script:
   - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
   - python3 get-pip.py
   - python3 -m pip --version
+  - cd ./src
+  - curl -sL https://firebase.tools | bash
 
 scan:
   stage: verify style
