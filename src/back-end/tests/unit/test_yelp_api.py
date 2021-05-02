@@ -1,7 +1,7 @@
 from yelp_api import get_businesses_info
 
 
-def test_get_business_info(test_db):
+def test_get_business_info():
     ids = [
         'TYzPPCO4ZWHQaeub7JSDXw',
         '9Qh4znoHA5oK7utia60A7A',
