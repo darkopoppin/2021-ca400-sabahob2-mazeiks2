@@ -15,7 +15,7 @@ before_script:
   - python3 get-pip.py
   - python3 -m pip --version
   - curl -sL https://firebase.tools | bash
-  - sudo apt-get install openjdk-8-jre
+  - apt-get -y install openjdk-8-jre
 
 scan:
   stage: verify style
