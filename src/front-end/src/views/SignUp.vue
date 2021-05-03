@@ -90,12 +90,10 @@ export default defineComponent({
               age: this.user.age,
               gender: this.user.gender
             })
+            this.$router.push("/categories");  
           })
           .catch((error) => {
             alert(error.message);
-          })
-          .finally(() => {
-            this.$router.push("/categories");  
           })
       });
     },

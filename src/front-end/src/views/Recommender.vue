@@ -87,8 +87,8 @@ import {
 } from "@ionic/vue";
 
 import { defineComponent, ref } from "vue";
-import { auth } from "../firebase";
 import axios from "axios";
+import { auth } from "../firebase";
 
 export default defineComponent({
   name: "Recommender",
@@ -153,7 +153,6 @@ export default defineComponent({
       }, 500);
     }
 
-    let loggedIn = false;
     let userProfile = null;
     const recommend = () => {
       const userUid = userProfile.uid;
@@ -170,24 +169,15 @@ export default defineComponent({
     }
 
     onIonViewWillEnter(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          userProfile = user;
-          loggedIn = true;
-          console.log('Logged in');
+          userProfile = auth.currentUser;
           recommend();
-        } else {
-          user = null;
-        }
-      });
     });
 
     return {
       isDisabled,
       loadData,
       items,
-      images,
-      loggedIn
+      images
     }
   }
 })

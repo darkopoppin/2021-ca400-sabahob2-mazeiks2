@@ -1,15 +1,23 @@
 <template>
   <ion-page>
-  <button class="return" @click="dismiss"> Cancel</button>
-  <ion-content >
-    <ion-list style="display: inline-block;">
-      <ion-item style="display: inline-block; width:50%;" lines="none" v-for="(value) in values" v-bind:key="value">
-        <ion-chip v-on:click="selected(value)" v-bind:class="{selected: selectedCategories[value]}">{{ value }}</ion-chip>
-      </ion-item>
-    </ion-list>
+    <button class="return" @click="dismiss">Cancel</button>
+    <ion-content>
+      <ion-list style="display: inline-block">
+        <ion-item
+          style="display: inline-block; width: 50%"
+          lines="none"
+          v-for="value in values"
+          v-bind:key="value">
+          <ion-chip
+            v-on:click="selected(value)"
+            v-bind:class="{ selected: selectedCategories[value] }"
+            >{{ value }}
+            </ion-chip>
+        </ion-item>
+      </ion-list>
 
-    <ion-button class="button" v-on:click="submit()"> Submit</ion-button>
-  </ion-content>
+      <ion-button class="button" v-on:click="submit()"> Submit</ion-button>
+    </ion-content>
   </ion-page>
 </template>
 
@@ -18,36 +26,61 @@ import {
   IonContent,
   IonList,
   IonItem,
-  // IonLabel,
   IonPage,
   IonButton,
-  IonChip
+  IonChip,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import axios from "axios";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 
 export default defineComponent({
   name: "Modal",
   props: {
     title: { type: String, default: "Super Modal" },
-    values: {type: Array},
-    close: { type: Function }
+    values: { type: Array },
+    close: { type: Function },
   },
-  data () {
-    return { selectedCategories: {}}
+  data() {
+    return { selectedCategories: {} };
+  },
+  created() {
+    const user = auth.currentUser;
+    db.collection("users")
+      .doc(user.uid)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          doc.data()["likedCategories"].forEach(category => {
+            this.selectedCategories[category] = true;
+          });
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
   },
   methods: {
     selected(value) {
       this.selectedCategories[value] = !this.selectedCategories[value];
     },
     submit() {
-      const finalCategories = Object.keys(this.selectedCategories).filter(k => this.selectedCategories[k] === true)
+      const selectedCategories = Object.keys(this.selectedCategories).filter(
+        (k) => this.selectedCategories[k] === true
+      );
       const user = auth.currentUser;
-      axios.post('http://127.0.0.1:5000/categorySelection', { params: [finalCategories, user.uid]}).then(response => console.log(response)).catch(error => console.log(error))
+      db.collection("users").doc(user.uid).set(
+        {
+          likedCategories: selectedCategories,
+        },
+        { merge: true }
+      );
+      this.close();
     },
     dismiss() {
-      this.close()
+      this.close();
     },
   },
   components: { IonContent, IonList, IonButton, IonItem, IonChip, IonPage },
@@ -61,7 +94,8 @@ ion-content {
 }
 
 .selected {
-  color: green;
+  color: white;
+  background-color: green;
 }
 
 .return {

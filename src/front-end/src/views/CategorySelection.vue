@@ -11,7 +11,6 @@
       </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-button class="homeButton" @click="regress"> Home </ion-button>
   </ion-card>
   </ion-content>
   </ion-page>
@@ -42,9 +41,6 @@ export default defineComponent({
       currentModal: null };
   },
   methods: {
-    regress() {
-      this.$router.push('/')
-    },
     async openModal(category) {
       const modal = await modalController
         .create({
