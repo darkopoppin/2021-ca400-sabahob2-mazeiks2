@@ -75,11 +75,17 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
-  if (requiresAuth && !auth.currentUser) {
-    next('/SignIn')
+  if(requiresAuth){
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        next();
+      } else {
+        next('/SignIn');
+      }
+    });
   }
   else {
-    next()
+    next();
   }
 })
 export default router

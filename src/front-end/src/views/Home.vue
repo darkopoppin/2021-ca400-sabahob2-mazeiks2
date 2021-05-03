@@ -23,6 +23,7 @@
         </ion-tab-button>
       </ion-tab-bar>
       <ion-tab-bar v-else slot="top">
+        <ion-title class="title">Welcome to CiteCy!</ion-title>
         <ion-tab-button tab="planner" href="/Planner">
           <ion-icon :icon="calendar"></ion-icon>
           <ion-label>Planner</ion-label>
@@ -50,27 +51,26 @@
 <script>
 import {
   IonPage,
-  IonTitle,
   IonTabBar,
   IonTabButton,
   IonTabs,
   IonIcon,
   IonLabel,
+  IonTitle,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import axios from "axios";
 import { list, calendar, settings, bulb } from "ionicons/icons";
 
 export default defineComponent({
   name: "Home",
   components: {
     IonPage,
-    IonTitle,
     IonTabBar,
     IonTabButton,
     IonTabs,
     IonIcon,
     IonLabel,
+    IonTitle,
   },
   setup() {
     return {
