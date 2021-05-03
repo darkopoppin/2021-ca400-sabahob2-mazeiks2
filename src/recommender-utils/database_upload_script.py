@@ -49,6 +49,7 @@ def main():
 
         doc_ref = db.collection(u'users')
         doc_ref.add(user_profile)
+        categories.clear()
 
 
 if __name__ == '__main__':
