@@ -1,19 +1,19 @@
 <template>
   <ion-page>
     <ion-content>
-      <ion-card>
+      <ion-card class="card">
         <form @submit.prevent="userRegistration">
-          <h3>Sign Up</h3>
+          <h3 class="header">Sign Up</h3>
 
-          <ion-item>
+          <ion-item class="input">
             <ion-input type="text" v-model="user.name" placeholder="Name" />
           </ion-item>
 
-          <ion-item>
+          <ion-item class="input">
             <ion-input type="email" v-model="user.email" placeholder="Email" />
           </ion-item>
 
-          <ion-item>
+          <ion-item class="input">
             <ion-input
               type="password"
               v-model="user.password"
@@ -21,11 +21,11 @@
             />
           </ion-item>
 
-          <ion-button type="submit"> Sign Up </ion-button>
+          <ion-button type="submit" class="submit-button"> Sign Up </ion-button>
 
-          <p>
+          <p class="link-back">
             Already registered
-            <router-link to="/">sign in?</router-link>
+            <router-link to="/SignIn">sign in?</router-link>
           </p>
         </form>
       </ion-card>
@@ -47,7 +47,7 @@ import {
   IonItem,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import firebase from "firebase";
+import { auth, persistence } from "../firebase";
 
 export default defineComponent({
   name: "SignUp",
@@ -73,12 +73,10 @@ export default defineComponent({
   },
   methods: {
     userRegistration() {
-      firebase
-        .auth()
-        .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        auth
+        .setPersistence(persistence.LOCAL)
         .then(() => {
-          return firebase
-            .auth()
+          return auth
             .createUserWithEmailAndPassword(this.user.email, this.user.password)
             .then((res) => {
               res.user
