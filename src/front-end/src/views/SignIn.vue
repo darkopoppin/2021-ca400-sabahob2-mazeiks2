@@ -183,6 +183,7 @@ ion-content {
 }
 
 .input {
+  --highlight-background: none;
   position: relative;
   --min-height: 0px;
   --padding-start: 0px;
