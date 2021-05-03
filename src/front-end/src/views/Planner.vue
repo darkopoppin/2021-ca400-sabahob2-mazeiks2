@@ -56,7 +56,6 @@ import {
   IonLabel,
   IonItem,
   onIonViewWillEnter,
-  // IonInput,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import axios from "axios";
@@ -73,7 +72,6 @@ export default defineComponent({
     IonDatetime,
     IonLabel,
     IonItem,
-    // IonInput,
     VueGoogleAutocomplete,
   },
   data() {
