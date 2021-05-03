@@ -17,6 +17,7 @@ def handle_client_error(error):
     response.status_code = error.status_code
     return response
 
+
 # TODO Handle Get requests
 @main_service.route('/categorySelection', methods=['GET', 'POST'])
 @cross_origin()

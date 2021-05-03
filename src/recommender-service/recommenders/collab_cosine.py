@@ -42,7 +42,9 @@ def collab_cosine(user_profile, related_users):
         cosine_values = cosine_similarity(count_matrix[-1], count_matrix[:-1])
 
         user_score = potential_reccomms[poi_id]['user_score']
-        poi_score = potential_reccomms[poi_id]['poi_score'] / len(pois_categories)
+        poi_score = (
+            potential_reccomms[poi_id]['poi_score']
+            / len(pois_categories))
         score = cosine_values.max() * 100 * user_score * poi_score
         potential_reccomms[poi_id]['final_score'] = score
 

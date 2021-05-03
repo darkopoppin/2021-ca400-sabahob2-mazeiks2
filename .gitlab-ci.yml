@@ -1,8 +1,7 @@
-image: python
-
 stages:
   - verify style
   - unit-tests
+  - beta
 
 variables:
   FLASK_APP: "./run.py"
@@ -21,6 +20,8 @@ scan:
     - flake8 --per-file-ignores='**/__init__.py:F401,F403,E402' ./src/back-end/**/*.py
     - flake8 --per-file-ignores='**/__init__.py:F401,F403,E402' ./src/recommender-service/**/*.py
   allow_failure: true
+  only:
+    - merge_requests
 
 back-end:
   stage: unit-tests
@@ -28,6 +29,8 @@ back-end:
     - cd ./src/back-end
     - pip3 install -r requirements.txt
     - pytest --setup-show tests/unit
+  only:
+    - merge_requests
 
 recommender-service:
   stage: unit-tests
@@ -35,4 +38,16 @@ recommender-service:
     - cd ./src/recommender-service
     - pip3 install -r requirements.txt
     - pytest --setup-show tests/unit
-    
+  only:
+    - merge_requests
+
+functional-tests:
+  stage: beta
+  script:
+    - cd ./src
+    - docker version
+    - docker-compose version
+    - docker-compose down
+    - docker-compose -f docker-compose.yml -f docker-compose.testing.yml build
+    - docker-compose -f docker-compose.yml -f docker-compose.testing.yml up --exit-code-from backend
+

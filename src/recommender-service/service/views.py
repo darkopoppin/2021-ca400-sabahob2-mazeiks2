@@ -1,5 +1,4 @@
 from flask import request, Blueprint, jsonify
-import json
 
 from service import db
 from service.errors import ClientError
@@ -23,7 +22,7 @@ def recommender():
     if len(user_visited) == 0:
         liked_categories = user.to_dict().get('liked_categories')
         result = search_by_categories(liked_categories)
-        return json.dumps(result, indent=4)
+        return jsonify(result)
     else:
         similar_users = get_similar_users(user)
         recommendations = collab_cosine(user, similar_users)

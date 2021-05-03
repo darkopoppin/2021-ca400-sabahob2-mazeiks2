@@ -73,8 +73,8 @@ export default defineComponent({
       this.$router.push("/planner")
     },
     recommend(){
-      axios.get('http://127.0.0.1:5000/recommender', 
-      { params: {'user_id': 'KbcIgBXo6bhtfRtO6iWe'} })
+      axios.get('http://127.0.0.1:5144/recommender', 
+      { params: {'user_id': 'RS9xp8QTvREUKbsxHoWt'} })
       .then(response => console
       .log(response))
       .catch(error => console.log(error))
