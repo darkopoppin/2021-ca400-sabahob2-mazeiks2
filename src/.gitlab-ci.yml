@@ -1,0 +1,13 @@
+image:
+  name: docker/compose:latest
+
+before_script:
+  - docker version
+  - docker-compose version
+
+build:
+  stage: build
+  script:
+    - docker-compose down
+    - docker-compose -f docker-compose.yml -f docker-compose.testing.yml build
+    - docker-compose -f docker-compose.yml -f docker-compose.testing.yml up

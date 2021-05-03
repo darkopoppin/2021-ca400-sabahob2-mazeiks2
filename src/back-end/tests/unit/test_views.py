@@ -12,6 +12,6 @@ def test_recommender_view(test_client):
 
 
 def test_category_view(test_client):
-    response = test_client.get('/categorySelection')
+    response = test_client.post('/user_profile')
     assert response.status_code == 400
     assert b"Expected JSON" in response.data
