@@ -53,4 +53,6 @@ functional-tests:
     - docker-compose down
     - docker-compose -f docker-compose.yml -f docker-compose.testing.yml build
     - docker-compose -f docker-compose.yml -f docker-compose.testing.yml up --exit-code-from backend
+  only:
+    - merge_requests
 

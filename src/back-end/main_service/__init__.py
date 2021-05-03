@@ -14,7 +14,6 @@ redis_client = redis.Redis(
         password=settings.REDIS_PASS)
 
 
-
 def init_blueprints(app):
     from main_service.views import main_service
 
