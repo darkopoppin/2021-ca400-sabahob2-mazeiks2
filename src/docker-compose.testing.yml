@@ -4,5 +4,5 @@ services:
   backend:
     container_name: backend-test
     build: ./back-end
-    image: user-informtion-container
+    image: back-end
     command: ["sh", "-c", "./dockerize -wait tcp://recommender:5001 -timeout 1m && pytest tests/functional"]
