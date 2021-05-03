@@ -34,7 +34,7 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        redirect: 'Categories'
+        redirect: 'Planner'
       },
       {
         path: 'Categories',
