@@ -1,6 +1,6 @@
 import pytest
 
-from main_service import create_service
+from main_service import create_service, redis_client
 from firebase_admin import firestore
 
 
@@ -34,3 +34,8 @@ def test_client():
 def test_db():
     db = firestore.client()
     yield db
+
+
+@pytest.fixture(scope='module')
+def test_redis():
+    yield redis_client

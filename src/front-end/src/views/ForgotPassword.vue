@@ -1,12 +1,12 @@
 <template>
   <ion-page>
     <ion-content>
-      <ion-card>
-          <form @submit.prevent="forgetPassword">
-            <h3>Forgot Password</h3>
+      <ion-card class="card">
+        <form @submit.prevent="forgetPassword">
+          <h3 class="header">Forgot Password</h3>
 
             
-              <ion-item>
+              <ion-item class="input">
                 <ion-input
                   type="email"
                   placeholder="Email"
@@ -14,12 +14,13 @@
                 />
               </ion-item>
 
-            <ion-button type="submit">Reset password</ion-button>
+          <ion-button type="submit" class="submit-button" >Reset password</ion-button>
 
-            <p class="SignUp">
-              <router-link to="/">Back to Sign In</router-link>
-            </p>
-          </form>
+          <p class="link-back">
+            Back to
+            <router-link to="/SignIn">Sign In</router-link>
+          </p>
+        </form>
       </ion-card>
     </ion-content>
   </ion-page>
@@ -38,20 +39,17 @@ import {
   IonItem,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import firebase from "firebase";
+import { auth } from "../firebase";
 
 export default defineComponent({
   name: "ForgotPassword",
   components: {
     IonContent,
-    // IonHeader,
     IonInput,
     IonCard,
     IonItem,
     IonButton,
     IonPage,
-    // IonTitle,
-    // IonToolbar
   },
   data() {
     return {
@@ -62,8 +60,7 @@ export default defineComponent({
   },
   methods: {
     forgetPassword() {
-      firebase
-        .auth()
+        auth
         .sendPasswordResetEmail(this.user.email)
         .then(() => {
           alert("Check your registered email to reset the password!");

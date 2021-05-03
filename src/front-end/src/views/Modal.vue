@@ -27,7 +27,7 @@ import {
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import axios from "axios";
-import firebase from "firebase";
+import { auth } from "../firebase";
 
 export default defineComponent({
   name: "Modal",
@@ -44,9 +44,8 @@ export default defineComponent({
   },
   methods: {
     submit() {
-      const user = firebase.auth().currentUser;
-      console.log(user)
-      axios.post('http://127.0.0.1:5000/categorySelection', {params: [this.categories, user.uid]}).then(response => console.log(response)).catch(error => console.log(error))
+      const user = auth.currentUser;
+      axios.post('http://127.0.0.1:5000/categorySelection', { params: [this.categories, user.uid]}).then(response => console.log(response)).catch(error => console.log(error))
     },
     dismiss() {
       this.close()

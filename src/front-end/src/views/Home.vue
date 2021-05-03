@@ -6,10 +6,17 @@
       <ion-button @click="redirect" >Category selection</ion-button>
       <ion-button
         type="submit"
+        v-on:click="recommender()"
+      >
+        plan me a day!
+      </ion-button>
+      <ion-button
+        type="submit"
         v-on:click="logOut()"
       >
         Log out
       </ion-button>
+
       <ion-button @click="recommend">Recommend</ion-button>
   </ion-page>
 </template>
@@ -21,18 +28,15 @@ import {
   IonContent
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import firebase from "firebase";
+import { auth } from "../firebase";
 import axios from "axios";
 
 export default defineComponent({
   name: "Home",
   components: {
     IonContent,
-    // IonHeader,
     IonPage,
     IonButton,
-    // IonTitle,
-    // IonToolbar
   },
   data() {
     return {
@@ -41,7 +45,7 @@ export default defineComponent({
     };
   },
   created() {
-    firebase.auth().onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
       if (user) {
         this.user = user;
         this.loggedIn = true;
@@ -53,12 +57,11 @@ export default defineComponent({
   },
   methods: {
     logOut() {
-      this.$router.push("/");
-      firebase
-        .auth()
+      this.$router.push("/SignIn");
+        auth
         .signOut()
         .then(() => {
-          firebase.auth().onAuthStateChanged(() => {
+          auth.onAuthStateChanged(() => {
             // this.$router.push("/");
           });
         });
@@ -66,9 +69,12 @@ export default defineComponent({
     redirect() {
       this.$router.push('/categorySelection')
     },
+    recommender() {
+      this.$router.push("/planner")
+    },
     recommend(){
-      axios.get('http://127.0.0.1:5000/recommender', 
-      { params: {'user_id': 'KbcIgBXo6bhtfRtO6iWe'} })
+      axios.get('http://127.0.0.1:5144/recommender', 
+      { params: {'user_id': 'RS9xp8QTvREUKbsxHoWt'} })
       .then(response => console
       .log(response))
       .catch(error => console.log(error))
