@@ -4,6 +4,23 @@ from main_service import create_service, redis_client
 from firebase_admin import firestore
 
 
+@pytest.fixture(scope='module')
+def test_user():
+    user = {
+        "user_id": "test",
+        "age": 21,
+        "gender": "male",
+        "location": "Dublin",
+        "liked_categories": [
+            "Hiking",
+            "Parks",
+            "Mountain Biking",
+            "Piano Bars"],
+        'visited': {}
+    }
+    return user
+
+
 @pytest.fixture(scope='session')
 def test_client():
     app = create_service()

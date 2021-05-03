@@ -8,7 +8,7 @@ def test_new_user(test_client, test_db, test_redis):
 
 
 def test_existing_user(test_client, test_db, test_redis):
-    user_id = 'RS9xp8QTvREUKbsxHoWt'
+    user_id = 'myself'
 
     before_cache = obtain_recommendations(user_id, test_client, test_db)
     compare_result_and_cached(user_id, before_cache, test_client, test_redis)

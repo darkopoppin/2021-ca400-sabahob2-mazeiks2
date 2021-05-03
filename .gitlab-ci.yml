@@ -7,11 +7,14 @@ variables:
   FLASK_APP: "./run.py"
   GOOGLE_APPLICATION_CREDENTIALS: "./credentials/citycydev-firebase.json"
   FLASK_ENV: "testing"
+  FIRESTORE_EMULATOR_HOST: "localhost:8080"
 
 before_script:
   - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
   - python3 get-pip.py
   - python3 -m pip --version
+  - curl -sL https://firebase.tools | bash
+  - sudo apt-get --yes --force-yes install openjdk-8-jre
 
 scan:
   stage: verify style
@@ -28,7 +31,7 @@ back-end:
   script:
     - cd ./src/back-end
     - pip3 install -r requirements.txt
-    - pytest --setup-show tests/unit
+    - firebase emulators:exec --only firestore --import ../ "pytest --setup-show tests/unit"
   only:
     - merge_requests
 
@@ -37,7 +40,7 @@ recommender-service:
   script:
     - cd ./src/recommender-service
     - pip3 install -r requirements.txt
-    - pytest --setup-show tests/unit
+    - firebase emulators:exec --only firestore --import ../ "pytest --setup-show tests/unit"
   only:
     - merge_requests
 
@@ -50,4 +53,6 @@ functional-tests:
     - docker-compose down
     - docker-compose -f docker-compose.yml -f docker-compose.testing.yml build
     - docker-compose -f docker-compose.yml -f docker-compose.testing.yml up --exit-code-from backend
+  only:
+    - merge_requests
 
