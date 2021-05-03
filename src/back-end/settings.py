@@ -13,4 +13,8 @@ if environ.get('FLASK_ENV') == 'development':
 else:
     RECOMM_HOST = 'recommender'
 
+if environ.get('FLASK_ENV') == 'development':
+    PLANNER_HOST = '127.0.0.1'
+else:
+    PLANNER_HOST = 'planner'
 YELP_API = environ.get('YELP_API')
