@@ -11,13 +11,14 @@ def test_get_business_info():
     result = get_businesses_info(ids)
     assert len(ids) == len(result.keys())
     for business, fields in result.items():
-        assert len(fields) == 5
+        assert len(fields) == 6
         assert 'id' in fields
         assert 'location' in fields
         assert 'address1' in fields['location']
         assert 'name' in fields
         assert 'rating' in fields
         assert 'categories' in fields
+        assert 'coordinates' in fields
 
 
 def test_search_yelp():
