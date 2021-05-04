@@ -135,6 +135,7 @@ export default defineComponent({
     },
     submitPlan() {
       console.log(this.address, this.startTime, this.endTime);
+      this.$router.push({name:"PlannerResults" , params:{begin: this.startTime, end:this.endTime}});
     },
     updateStartTime(newTime) {
       this.startTime = newTime;

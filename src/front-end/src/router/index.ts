@@ -9,6 +9,7 @@ import Modal from '../views/Modal.vue';
 import Planner from '../views/Planner.vue';
 import Settings from '../views/Settings.vue';
 import Recommender from '../views/Recommender.vue';
+import PlannerResults from '../views/PlannerResults.vue';
 import { auth } from '../firebase';
 
 const routes: Array<RouteRecordRaw> = [
@@ -42,7 +43,15 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'Planner',
-        component: Planner
+        component: Planner,
+        children: [
+          {
+            path: '/PlannerResults',
+            name: 'PlannerResults',
+            component: PlannerResults,
+            props: true,
+          }
+        ],
       },
       {
         path: 'Settings',
