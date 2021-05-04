@@ -9,7 +9,7 @@
 
         <ion-tab-button tab="Recommender" href="/Recommender">
           <ion-icon :icon="bulb"></ion-icon>
-          <ion-label>Recommender</ion-label>
+          <ion-label>Recommendations</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="settings" href="/Settings">
@@ -31,7 +31,7 @@
 
         <ion-tab-button tab="Recommender" href="/Recommender">
           <ion-icon :icon="bulb"></ion-icon>
-          <ion-label>Recommender</ion-label>
+          <ion-label>Recommendations</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="settings" href="/Settings">

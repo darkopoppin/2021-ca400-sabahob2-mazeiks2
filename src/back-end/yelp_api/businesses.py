@@ -19,7 +19,7 @@ def get_businesses_info(ids):
         query_string.append('{...Info}')
     query_string.append('} ')
     query_string.append('fragment Info on Business \
-                        {id name rating location {address1} \
+                        {id name rating url location {address1} \
                         categories {title}}')
 
     query = gql(''.join(query_string))
