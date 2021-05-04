@@ -1,5 +1,8 @@
 <template>
   <ion-page>
+      <ion-header>
+      <ion-title size="small" class="component-title">Please select some preferences for CiteC to know you better! </ion-title>
+    </ion-header>
   <ion-content>
   <ion-card class="card">
     <ion-grid>
@@ -67,6 +70,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.component-title{
+  text-align: center;
+  font-size: x-large;
+}
 .card {
   position: relative;
   --background: #ffffff;

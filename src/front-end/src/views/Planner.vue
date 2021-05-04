@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-title class="component-title">Planner! </ion-title>
+      <ion-title size="small" class="component-title">Plan your adventure! </ion-title>
     </ion-header>
     <ion-content>
       <ion-card class="card">
