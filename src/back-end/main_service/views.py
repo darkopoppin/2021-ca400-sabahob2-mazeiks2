@@ -7,7 +7,7 @@ from main_service import db
 from main_service.errors import ClientError
 from main_service.utils import get_recommendations
 from models.user import User
-from yelp_api import search_yelp
+from yelp_api import yelp
 
 main_service = Blueprint("main_service_bp", __name__)
 
@@ -56,7 +56,7 @@ def recommender():
     else:
         raise ClientError("Invalid or no parameter/s was passed")
 
-    recommendations = get_recommendations(user_id)
+    recommendations = get_recommendations(user_id, 'recommender')
     return recommendations
 
 
@@ -75,7 +75,7 @@ def planner():
     if latitude is None or longitude is None:
         raise ClientError("Coordinates were not passed")
 
-    recommendations = get_recommendations(user_id)
+    recommendations = get_recommendations(user_id, planner)
 
     response = requests.get(
             f'http://{settings.PLANNER_HOST}:5003/plan',
@@ -98,5 +98,5 @@ def search():
     else:
         raise ClientError("Invalid or no parameter/s was passed")
 
-    search_results = search_yelp(term, location)
+    search_results = yelp.search_yelp(term, location)
     return search_results

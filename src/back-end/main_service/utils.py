@@ -2,14 +2,17 @@ import requests
 
 import settings
 from main_service import redis_client
-from yelp_api import get_businesses_info
+from yelp_api import yelp
 
 
-def get_recommendations(user_id):
+def get_recommendations(user_id, type):
     if redis_client.get(user_id) is not None:
         string = redis_client.get(user_id).decode('UTF-8')
         recommendations_ids = string.split(' ')
-        results = get_businesses_info(recommendations_ids)
+        if type == 'planner':
+            results = yelp.get_businesses_info_planner(recommendations_ids)
+        else:
+            results = yelp.get_businesses_info(recommendations_ids)
         return results
 
     response = requests.get(
@@ -27,5 +30,9 @@ def get_recommendations(user_id):
     redis_client.set(user_id, ' '.join(recommendations_ids))
     redis_client.expire(user_id, 60*60*24)
 
-    results = get_businesses_info(recommendations_ids)
+    if type == 'planner':
+        results = yelp.get_businesses_info_planner(recommendations_ids)
+    else:
+        results = yelp.get_businesses_info(recommendations_ids)
     return results
+
