@@ -3,10 +3,11 @@ from flask import request, Blueprint, jsonify
 from flask_cors import cross_origin
 
 import settings
-from main_service import redis_client, db
+from main_service import db
 from main_service.errors import ClientError
+from main_service.utils import get_recommendations
 from models.user import User
-from yelp_api import get_businesses_info, search_yelp
+from yelp_api import yelp
 
 main_service = Blueprint("main_service_bp", __name__)
 
@@ -55,29 +56,37 @@ def recommender():
     else:
         raise ClientError("Invalid or no parameter/s was passed")
 
-    if redis_client.get(user_id) is not None:
-        string = redis_client.get(user_id).decode('UTF-8')
-        recommendations_ids = string.split(' ')
-        results = get_businesses_info(recommendations_ids)
-        return results
+    recommendations = get_recommendations(user_id, 'recommender')
+    return recommendations
+
+
+@main_service.route('/planner', methods=['GET'])
+@cross_origin()
+def planner():
+    user_id = request.args.get('user_id')
+    end_time = request.args.get('end_time')
+    start_time = request.args.get('start_time')
+    latitude = request.args.get('latitude')
+    longitude = request.args.get('longitude')
+
+    if user_id is None or end_time is None or start_time is None:
+        raise ClientError("No parameter/s was/were passed")
+
+    if latitude is None or longitude is None:
+        raise ClientError("Coordinates were not passed")
+
+    recommendations = get_recommendations(user_id, 'planner')
 
     response = requests.get(
-            f'http://{settings.RECOMM_HOST}:5001/recommendations',
-            params={'user_id': user_id})
+            f'http://{settings.PLANNER_HOST}:5003/plan',
+            params={'user_id': user_id,
+                    'start_time': start_time,
+                    'end_time': end_time,
+                    'latitude': latitude,
+                    'longitude': longitude},
+            json=recommendations)
 
-    if response.status_code != 200:
-        return (response.content,
-                response.status_code,
-                response.headers.items())
-
-    recommendations = response.json()
-    recommendations_ids = list(recommendations)
-
-    redis_client.set(user_id, ' '.join(recommendations_ids))
-    redis_client.expire(user_id, 60*60*24)
-
-    results = get_businesses_info(recommendations_ids)
-    return results
+    return response.text
 
 
 @main_service.route('/search', methods=['GET'])
@@ -89,5 +98,5 @@ def search():
     else:
         raise ClientError("Invalid or no parameter/s was passed")
 
-    search_results = search_yelp(term, location)
+    search_results = yelp.search_yelp(term, location)
     return search_results
