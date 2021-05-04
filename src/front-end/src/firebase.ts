@@ -4,14 +4,13 @@ import 'firebase/firestore';
 
 // firebase config from CiteCy
 const firebaseConfig = {
-    apiKey : "AIzaSyBO0wRTtvrYhE6V6ublQmb7bNmQf7NVEsU",
-    authDomain : "citecy.firebaseapp.com",
-    databaseURL : "https://citecy-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId : "citecy",
-    storageBucket : "citecy.appspot.com",
-    messagingSenderId : "908044652058",
-    appId : "1:908044652058:web:cad032412cb5bdaf430ba3",
-    measurementId : "G-BN9SW7SVVB"
+  apiKey: "AIzaSyCzt8TEXDXmGSPMK_Z0H3obcSb36iceUb4",
+  authDomain: "citycydev.firebaseapp.com",
+  databaseURL: "https://citycydev-default-rtdb.firebaseio.com",
+  projectId: "citycydev",
+  storageBucket: "citycydev.appspot.com",
+  messagingSenderId: "153875323476",
+  appId: "1:153875323476:web:c27b38b118f60168f7ebc1"
 }
 
 firebase.initializeApp(firebaseConfig)
