@@ -1,18 +1,32 @@
+from datetime import datetime, timedelta
+
+
 class Time(object):
+
     def __init__(self, start_time, end_time):
-        self.start_time = (int(start_time[0]), int(start_time[1]))
-        self.end_time = (int(end_time[0]), int(end_time[1]))
-        self.duration = (((self.end_time[0] - self.start_time[0]) * 60)
-                         + self.end_time[1] + self.start_time[1])
+        self.start_time = start_time[0] + ':' + start_time[1]
+        self.end_time = end_time[0] + ':' + end_time[1]
+        date_format = '%H:%M'
+        self.duration = (
+            (datetime.strptime(self.end_time, date_format) -
+                datetime.strptime(self.start_time, date_format)).seconds / 60
+        )
         self.meal_timer = 180
 
     def decriment_duration(self, activity):
         if activity == 'meal':
             self.duration -= 60
-            self.meal_timer = 180
         elif activity == 'activity':
             self.duration -= 45
             self.meal_timer -= 45
+
+    def get_current_time(self):
+        date_format = '%H:%M'
+        current_time = (
+            datetime.strptime(self.end_time, date_format) -
+            timedelta(hours=0, minutes=self.duration)
+        )
+        return current_time
 
     def main_loop(self):
         if self.duration <= 30:
@@ -21,13 +35,20 @@ class Time(object):
             return True
 
     def is_meal_time(self):
-        if self.meal_timer <= 20:
+        if (
+            self.meal_timer <= 20 and
+            self.get_current_time() > datetime.strptime('11:00', '%H:%M') and
+            self.get_current_time() < datetime.strptime('21:10', '%H:%M')
+        ):
+            self.meal_timer = 180
             return True
         else:
             return False
 
     def __repr__(self):
+        current_time = self.get_current_time().strftime('%H:%M')
         return (
             f'Duration: {self.duration} mins\n'
             f'Start time: {self.start_time}\n'
-            f'End time: {self.end_time}\n')
+            f'End time: {self.end_time}\n'
+            f'Current time: {current_time}\n')

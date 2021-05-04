@@ -1,15 +1,15 @@
-from planner.my_time import Time
 from planner.plan import Plan
 
 
 def create_plan(activities, start_time, end_time, coordinates):
-    time = Time(start_time, end_time)
-    planner = Plan(activities, coordinates)
-    while time.main_loop():
-        if time.is_meal_time():
-            print('Meal time')
-            time.decriment_duration('meal')
+    planner = Plan(activities, coordinates, start_time, end_time)
+    while planner.main_loop():
+        print(planner)
+        if planner.is_meal_time():
+            if planner.add_meal():
+                planner.decriment_duration('meal')
         else:
-            print('Activity time')
-            time.decriment_duration('activity')
-        print(time)
+            if planner.add_activity():
+                planner.decriment_duration('activity')
+
+    return planner.plan

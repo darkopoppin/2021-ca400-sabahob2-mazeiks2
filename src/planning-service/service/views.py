@@ -34,4 +34,4 @@ def planner():
 
     recommendations = request.json
     plan = create_plan(recommendations, start_time, end_time, coordinates)
-    return "success"
+    return plan
