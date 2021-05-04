@@ -1,7 +1,7 @@
 FROM node
 
 # install simple http server for serving static content
-RUN npm install -g @ionic/cli
+RUN npm install -g @ionic/cli@latest
 
 # make the 'app' folder the current working directory
 WORKDIR /app

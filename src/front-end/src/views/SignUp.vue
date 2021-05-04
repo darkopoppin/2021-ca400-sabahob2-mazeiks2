@@ -6,7 +6,15 @@
           <h3 class="header">Sign Up</h3>
 
           <ion-item class="input">
-            <ion-input type="text" v-model="user.name" placeholder="Name" />
+            <ion-input type="number" v-model="user.age" placeholder="age" />
+          </ion-item>
+
+          <ion-item class="input">
+            <ion-label>Gender</ion-label>
+            <ion-select placeholder="Select" v-model="user.gender">
+              <ion-select-option value="Female">Female</ion-select-option>
+              <ion-select-option value="Male">Male</ion-select-option>
+            </ion-select>
           </ion-item>
 
           <ion-item class="input">
@@ -37,26 +45,26 @@
 <script>
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
+  IonSelect,
+  IonSelectOption,
+  IonLabel,
   IonButton,
   IonCard,
   IonInput,
   IonItem,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import { auth, persistence } from "../firebase";
+import { auth, persistence, db } from "../firebase";
 
 export default defineComponent({
   name: "SignUp",
   components: {
     IonContent,
-    // IonHeader,
     IonPage,
-    // IonTitle,
-    // IonToolbar,
+    IonSelect,
+    IonSelectOption,
+    IonLabel,
     IonButton,
     IonCard,
     IonInput,
@@ -65,7 +73,8 @@ export default defineComponent({
   data() {
     return {
       user: {
-        name: "",
+        age: "",
+        gender: "",
         email: "",
         password: "",
       },
@@ -73,24 +82,20 @@ export default defineComponent({
   },
   methods: {
     userRegistration() {
-        auth
-        .setPersistence(persistence.LOCAL)
-        .then(() => {
-          return auth
-            .createUserWithEmailAndPassword(this.user.email, this.user.password)
-            .then((res) => {
-              res.user
-                .updateProfile({
-                  displayName: this.user.name,
-                })
-                .then(() => {
-                  this.$router.push("/categorySelection");
-                });
+      auth.setPersistence(persistence.LOCAL).then(() => {
+        return auth
+          .createUserWithEmailAndPassword(this.user.email, this.user.password)
+          .then((res) => {
+            db.collection("users").doc(res.user.uid).set({
+              age: this.user.age,
+              gender: this.user.gender
             })
-            .catch((error) => {
-              alert(error.message);
-            });
-        });
+            this.$router.push("/categories");  
+          })
+          .catch((error) => {
+            alert(error.message);
+          })
+      });
     },
   },
 });

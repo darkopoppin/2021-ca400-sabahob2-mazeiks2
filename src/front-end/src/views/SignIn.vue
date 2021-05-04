@@ -30,7 +30,7 @@
             </ion-item>
             </div>
             <ion-item class="checkbox">
-              <ion-checkbox @update:modelValue="rememberMe = $event"></ion-checkbox>
+              <ion-checkbox class="checkbox-icon" @update:modelValue="rememberMe.isChecked = $event"></ion-checkbox>
               <ion-label class="checkbox-label">Remember me</ion-label>
             </ion-item>
             <ion-button type="submit" class="submit-button">Sign In </ion-button>
@@ -84,7 +84,7 @@ export default defineComponent({
   },
   data() {
     return {
-      rememberMe : {val: "checkBox", isChecked: true},
+      rememberMe : {val: "checkBox", isChecked: false},
       user: {
         email: "",
         password: "",
@@ -93,7 +93,7 @@ export default defineComponent({
   },
   methods: {
     userLogin() {
-        if (this.rememberMe){
+        if (this.rememberMe.isChecked){
           auth
           .setPersistence(persistence.LOCAL)
           .then(() => {
@@ -115,8 +115,11 @@ export default defineComponent({
         }
         else {
           auth
-          .signInWithEmailAndPassword(this.user.email, this.user.password)
-              .then((res) => {
+          .setPersistence(persistence.SESSION)
+          .then(() => {
+            return auth
+                .signInWithEmailAndPassword(this.user.email, this.user.password)
+                  .then((res) => {
                   res
                   .user
                   .updateProfile({
@@ -128,6 +131,7 @@ export default defineComponent({
               })
               .catch((error) => {
                 alert(error.message);
+              });
               });
           }
     },
@@ -183,6 +187,7 @@ ion-content {
 }
 
 .input {
+  --highlight-background: none;
   position: relative;
   --min-height: 0px;
   --padding-start: 0px;
@@ -210,13 +215,14 @@ ion-content {
   padding-bottom: 10%; 
 }
 
-.checkbox {
+.checkbox{
   --border-style: none;
   --color: black;
   --background: white;
-  
 }
-
+.checkbox-icon {
+  --background: grey;
+}
 .checkbox-label {
   padding-left: 3%;
 }

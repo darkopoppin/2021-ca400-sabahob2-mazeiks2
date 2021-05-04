@@ -7,6 +7,8 @@ import ForgotPassword from '../views/ForgotPassword.vue';
 import CategorySelection from '../views/CategorySelection.vue';
 import Modal from '../views/Modal.vue';
 import Planner from '../views/Planner.vue';
+import Settings from '../views/Settings.vue';
+import Recommender from '../views/Recommender.vue';
 import { auth } from '../firebase';
 
 const routes: Array<RouteRecordRaw> = [
@@ -29,14 +31,28 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     component: Home,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    path: '/CategorySelection',
-    name: 'CategorySelection',
-    component: CategorySelection,
+    children: [
+      {
+        path: '',
+        redirect: 'Planner'
+      },
+      {
+        path: 'Categories',
+        component: CategorySelection
+      },
+      {
+        path: 'Planner',
+        component: Planner
+      },
+      {
+        path: 'Settings',
+        component: Settings
+      },
+      {
+        path: 'Recommender',
+        component: Recommender
+      },
+    ],
     meta: {
       requiresAuth: true
     }
@@ -45,14 +61,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/Modal',
     name: 'Modal',
     component: Modal,
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    path: '/planner',
-    name: 'Planner',
-    component: Planner,
     meta: {
       requiresAuth: true
     }
@@ -67,11 +75,17 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
-  if (requiresAuth && !auth.currentUser) {
-    next('/SignIn')
+  if(requiresAuth){
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        next();
+      } else {
+        next('/SignIn');
+      }
+    });
   }
   else {
-    next()
+    next();
   }
 })
 export default router
