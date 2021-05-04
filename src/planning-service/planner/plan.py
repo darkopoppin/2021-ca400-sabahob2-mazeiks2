@@ -13,7 +13,7 @@ class Plan(Time):
         self.coordinates = coordinates
         self.activity_keys = []
         self.meal_keys = []
-
+        self.walking_distance = self.duration/(200 + 2/self.duration)
         self.extract_nearby_meals_activities(activities, coordinates)
 
     def extract_nearby_meals_activities(self, activities, coordinates):
@@ -22,7 +22,7 @@ class Plan(Time):
             longitude = activity['coordinates'][1]
             distance_to_activity = distance.distance(
                 (latitude, longitude), coordinates).km
-            if distance_to_activity <= 5:
+            if distance_to_activity <= self.walking_distance:
                 meal = False
                 for parent in activity['parents']:
                     if parent == 'Restaurants':
