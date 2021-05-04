@@ -75,7 +75,7 @@ def planner():
     if latitude is None or longitude is None:
         raise ClientError("Coordinates were not passed")
 
-    recommendations = get_recommendations(user_id, planner)
+    recommendations = get_recommendations(user_id, 'planner')
 
     response = requests.get(
             f'http://{settings.PLANNER_HOST}:5003/plan',
