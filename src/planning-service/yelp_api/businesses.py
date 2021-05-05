@@ -41,8 +41,9 @@ class Yelp(object):
             query_string.append(f's{i}: search(categories: $category{i},')
             query_string.append('limit: 50, latitude: $lat, longitude: $long,')
             query_string.append('radius: $rad) ')
-            query_string.append('{business {id url rating categories')
+            query_string.append('{business {id name url rating categories')
             query_string.append('{title parent_categories {title}}')
+            query_string.append('location { address1 }}')
             query_string.append('coordinates { latitude longitude }}}')
         query_string.append('} ')
 
@@ -72,10 +73,12 @@ class Yelp(object):
                     for parent in category['parent_categories']:
                         parents.add(parent['title'])
 
+                fields['id'] = business['id']
+                fields['name'] = business['name']
+                fields['location'] = business['location']
+                fields['rating'] = business['rating']
                 fields['categories'] = categories
                 fields['parents'] = list(parents)
-                fields['id'] = business['id']
-                fields['rating'] = business['rating']
                 fields['coordinates'] = (
                     business['coordinates']['latitude'],
                     business['coordinates']['longitude']

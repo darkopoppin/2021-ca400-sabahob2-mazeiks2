@@ -34,7 +34,7 @@ class Yelp(object):
 
         if type == 'planner':
             query_string.append('fragment Info on Business \
-                                {id rating url location {address1} \
+                                {id name rating url location {address1} \
                                 categories {title parent_categories {title}} \
                                 coordinates {latitude,longitude}}')
         else:
@@ -96,6 +96,8 @@ class Yelp(object):
                 for parent in category['parent_categories']:
                     parents.add(parent['title'])
             fields['id'] = business['id']
+            fields['name'] = business['name']
+            fields['location'] = business['location']
             fields['categories'] = categories
             fields['parents'] = list(parents)
             fields['coordinates'] = (
