@@ -16,20 +16,19 @@ class Plan():
         self.target_categories = target_categories
         self.start_coordinates = coordinates
         self.plan = {}
+        self.position = 0
         self.activity_keys = []
         self.meal_keys = []
+        self.visited = set()
         self.walking_distance = (
             self.timer.time_left/(200 + 2/self.timer.time_left)
         )
         self.extract_nearby_meals_activities(activities)
 
     def extract_nearby_meals_activities(self, activities):
+        self.calculate_distances(activities)
         for key, activity in activities.items():
-            latitude = activity['coordinates'][0]
-            longitude = activity['coordinates'][1]
-            distance_to_activity = distance.distance(
-                (latitude, longitude), self.start_coordinates).km
-            if distance_to_activity <= self.walking_distance:
+            if activity['distance'] <= self.walking_distance:
                 meal = False
                 for parent in activity['parents']:
                     if parent == 'Restaurants':
@@ -39,8 +38,18 @@ class Plan():
                 else:
                     self.activity_keys.append(key)
 
+    def calculate_distances(self, activities):
+        for key, activity in activities.items():
+            latitude = activity['coordinates'][0]
+            longitude = activity['coordinates'][1]
+            distance_to_activity = distance.distance(
+                (latitude, longitude), self.start_coordinates).km
+            activity['distance'] = distance_to_activity
+
     def create_plan(self):
         if not self.activity_keys or not self.meal_keys:
+            self.search_yelp()
+        elif (len(self.activity_keys) + len(self.meal_keys))*45 < self.timer.time_left:
             self.search_yelp()
         while self.timer.main_loop():
             if self.timer.is_meal_time():
@@ -55,6 +64,7 @@ class Plan():
     def add_activity(self):
         if not self.activity_keys:
             return False
+
         if self.timer.get_current_time() < datetime.strptime('18:00', '%H:%M'):
             excluded_categories = ['Bars', 'Nightlife']
         else:
@@ -66,31 +76,59 @@ class Plan():
             for parent in activity['parents']:
                 if parent in excluded_categories:
                     exclude = True
+            categories = set(self.activities[key]['categories'])
+            visited_score = (
+                len(self.visited.intersection(categories))/len(categories)
+            )
+            if visited_score >= 0.5:
+                exclude = True
             if exclude is False:
-                distance, time = self.get_graphhopper_distance(
-                    self.start_coordinates, self.activities[key]['coordinates']
-                )
-                activity['distance'] = distance
-                activity['time'] = time
-                self.plan[key] = activity
                 self.activity_keys.remove(key)
-                self.start_coordinates = self.activities[key]['coordinates']
-                del self.activities[key]
+                self.add_to_plan(key)
                 return True
+
+        self.search_yelp()
+        return False
 
     def add_meal(self):
         if not self.meal_keys:
             return False
-        key = self.meal_keys.pop()
+
+        if self.timer.get_current_time() < datetime.strptime('18:00', '%H:%M'):
+            excluded_categories = ['Bars', 'Nightlife']
+
+        for key in self.meal_keys:
+            activity = self.activities[key]
+            exclude = False
+            for parent in activity['parents']:
+                if parent in excluded_categories:
+                    exclude = True
+                    
+            categories = set(self.activities[key]['categories'])
+            visited_score = (
+                len(self.visited.intersection(categories))/len(categories)
+            )
+            if visited_score >= 0.5:
+                exclude = True
+            if exclude is False:
+                self.meal_keys.remove(key)
+                self.add_to_plan(key)
+                return True
+
+    def add_to_plan(self, key):
         distance, time = self.get_graphhopper_distance(
             self.start_coordinates, self.activities[key]['coordinates']
         )
-        self.activities[key]['distance'] = distance
-        self.activities[key]['time'] = time
-        self.plan[key] = self.activities[key]
+        self.timer.decriment_time_left('activity', time)
+        self.activities[key]['position'] = self.position
+        self.position += 1
         self.start_coordinates = self.activities[key]['coordinates']
-        del self.activities[key]
-        return True
+        self.calculate_distances(self.activities)
+        for category in self.activities[key]['categories']:
+            self.visited.add(category)
+        self.plan[key] = self.activities.pop(key)
+        self.plan[key]['distance'] = distance
+        self.plan[key]['time'] = time
 
     def search_yelp(self):
         activities = yelp.search_by_categories(
