@@ -5,7 +5,7 @@ from gql import gql
 
 from yelp_api import yelp_client
 
-with open(str(path.dirname(__file__)) + '/alias_mappings.txt') as f:
+with open(str(path.dirname(__file__)) + '/alias_mappings.json') as f:
     alias_mappings = json.load(f)
 
 
