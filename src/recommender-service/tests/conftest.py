@@ -40,7 +40,7 @@ def yelp_client():
 
 @pytest.fixture(scope='function')
 def alias_mappings():
-    with open('./yelp_api/alias_mappings.txt') as f:
+    with open('./yelp_api/alias_mappings.json') as f:
         yield json.load(f)
 
 
