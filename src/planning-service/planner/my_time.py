@@ -13,12 +13,14 @@ class Time(object):
         )
         self.meal_timer = 180
 
-    def decriment_time_left(self, activity):
+    def decriment_time_left(self, activity, time=None):
         if activity == 'meal':
             self.time_left -= 60
         elif activity == 'activity':
             self.time_left -= 45
             self.meal_timer -= 45
+        else:
+            self.time_left -= time
 
     def get_current_time(self):
         date_format = '%H:%M'

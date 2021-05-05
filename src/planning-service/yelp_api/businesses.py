@@ -73,7 +73,7 @@ class Yelp(object):
                         parents.add(parent['title'])
 
                 fields['categories'] = categories
-                fields['parents'] = parents
+                fields['parents'] = list(parents)
                 fields['id'] = business['id']
                 fields['rating'] = business['rating']
                 fields['coordinates'] = (
