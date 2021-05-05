@@ -55,9 +55,13 @@ class Plan():
             if self.timer.is_meal_time():
                 if self.add_meal():
                     self.timer.decriment_time_left('meal')
+                else:
+                    return self.plan
             else:
                 if self.add_activity():
                     self.timer.decriment_time_left('activity')
+                else:
+                    return self.plan
 
         return self.plan
 
@@ -87,8 +91,8 @@ class Plan():
                 self.add_to_plan(key)
                 return True
 
-        self.search_yelp()
-        return False
+        if not self.search_yelp():
+            return False
 
     def add_meal(self):
         if not self.meal_keys:
@@ -103,7 +107,7 @@ class Plan():
             for parent in activity['parents']:
                 if parent in excluded_categories:
                     exclude = True
-                    
+
             categories = set(self.activities[key]['categories'])
             visited_score = (
                 len(self.visited.intersection(categories))/len(categories)
@@ -114,6 +118,9 @@ class Plan():
                 self.meal_keys.remove(key)
                 self.add_to_plan(key)
                 return True
+
+        if not self.search_yelp():
+            return False
 
     def add_to_plan(self, key):
         distance, time = self.get_graphhopper_distance(
@@ -140,6 +147,10 @@ class Plan():
 
         self.activities.update(activities)
         self.extract_nearby_meals_activities(activities)
+        if self.activities:
+            return True
+        else:
+            return False
 
     def get_graphhopper_distance(self, start, stop):
         params = {
