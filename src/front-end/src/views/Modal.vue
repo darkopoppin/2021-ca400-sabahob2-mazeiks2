@@ -50,7 +50,7 @@ export default defineComponent({
       .get()
       .then((doc) => {
         if (doc.exists) {
-          doc.data()["likedCategories"].forEach(category => {
+          doc.data()["liked_categories"].forEach(category => {
             this.selectedCategories[category] = true;
           });
         } else {
@@ -73,7 +73,7 @@ export default defineComponent({
       const user = auth.currentUser;
       db.collection("users").doc(user.uid).set(
         {
-          likedCategories: selectedCategories,
+          "liked_categories": selectedCategories,
         },
         { merge: true }
       );

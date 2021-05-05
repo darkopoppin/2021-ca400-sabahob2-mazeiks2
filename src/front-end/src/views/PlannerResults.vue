@@ -6,8 +6,7 @@
     <ion-content>
       <ion-item-sliding v-for="(item, id) in selectedBusinesses" :key="item">
         <ion-item-options side="end">
-          <ion-item-option @click="favorite(item)">Favorite</ion-item-option>
-          <ion-item-option color="danger" @click="loadOther(id)"
+          <ion-item-option color="secondary" @click="loadOther(id)"
             >Load new</ion-item-option
           >
         </ion-item-options>
@@ -18,7 +17,7 @@
                 item.name
               }}</ion-card-title>
               <ion-card-subtitle class="ion-text-center">{{
-                item.location.address1
+                item.address1
               }}</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
@@ -43,7 +42,8 @@
             </ion-card-content>
           </ion-card>
         </ion-item>
-        <div class="line line0" :style="{ marginLeft: '50%' }"></div>
+        
+        <div class="line line0" :style="{ marginLeft: '50%' }"> {{item.distance}}km {{item.time}} time to walk</div>
       </ion-item-sliding>
       <ion-button>
         <ion-label> Open in Map! </ion-label>
@@ -103,20 +103,23 @@ export default defineComponent({
   },
   props: ["begin", "end"],
   created() {
-    const start = new Date(this.begin);
-    const finish = new Date(this.end);
-    const timeAllocated = finish.getHours() - start.getHours();
-    console.log(timeAllocated);
-    for (let i = 0; i <= timeAllocated; i++) {
-      this.selectedBusinesses[i] = this.businesses["b".concat(i.toString())];
-      delete this.businesses["b".concat(i.toString())];
+    // const timeAllocated = this.end.slice(0, 2) - this.begin.slice(0, 2);
+    // for (let i = 0; i <= timeAllocated; i++) {
+    //   this.selectedBusinesses[i] = this.businesses["b".concat(i.toString())];
+    //   delete this.businesses["b".concat(i.toString())];
+    // }
+    // this.lastSelected = timeAllocated + 1;
+    for (const key in this.businesses) {
+      this.selectedBusinesses[
+        this.businesses[key]["position"]
+      ] = this.businesses[key];
     }
-    this.lastSelected = timeAllocated + 1;
+    console.log(this.selectedBusinesses[0]);
   },
   data() {
     return {
       selectedBusinesses: {},
-      businesses: {
+      secondaryBusinesses: {
         b0: {
           categories: ["British", "Coffee & Tea"],
           id: "7-jSaf5DJ7iEQlwpCRuL_A",
@@ -124,6 +127,7 @@ export default defineComponent({
             address1: "2 Merchants Arch",
           },
           name: "Hanley's Cornish Pasties",
+          position: 2,
           url: "https://www.google.com",
           rating: 4,
         },
@@ -134,6 +138,7 @@ export default defineComponent({
             address1: "13-17 Dawson St",
           },
           name: "The Ivy",
+          position: 0,
           url: "https://www.google.com",
           rating: 3.5,
         },
@@ -144,6 +149,7 @@ export default defineComponent({
             address1: "Marks and Spencers",
           },
           name: "The Restaurant",
+          position: 3,
           url: "https://www.google.com",
           rating: 3.5,
         },
@@ -154,6 +160,7 @@ export default defineComponent({
             address1: "South William Street South William Street",
           },
           name: "Bar Mizu",
+          position: 3,
           url: "https://www.google.com",
           rating: 3.5,
         },
@@ -164,6 +171,7 @@ export default defineComponent({
             address1: "37 Parnell Street",
           },
           name: "Bennys",
+          position: 2,
           url: "https://www.google.com",
           rating: 4,
         },
@@ -174,6 +182,7 @@ export default defineComponent({
             address1: "3a Clanbrassil St",
           },
           name: "Favourite Fried Chicken",
+          position: 4,
           url: "https://www.google.com",
           rating: 3,
         },
@@ -184,6 +193,7 @@ export default defineComponent({
             address1: "Unit 4 Malpas St Lower clanbrassil St",
           },
           name: "Chicken Hut D8",
+          position: 1,
           url: "https://www.google.com",
           rating: 4,
         },
@@ -194,6 +204,7 @@ export default defineComponent({
             address1: "40 S Richmond St",
           },
           name: "K O Kebabish",
+          position: 1,
           url: "https://www.google.com",
           rating: 3,
         },
@@ -204,8 +215,81 @@ export default defineComponent({
             address1: "Lower Mercer Street",
           },
           name: "Cusack's Restaurant",
+          position: 4,
           url: "https://www.google.com",
           rating: 2,
+        },
+      },
+      businesses: {
+        b1: {
+          name: "test",
+          address1: "Baltimore park",
+          categories: ["Bus Tours"],
+          coordinates: [53.3444366, -6.2604351],
+          distance: 1.095,
+          id: "-7gq19hmemQzrqVLfwe0sg",
+          parents: ["Tours"],
+          position: 0,
+          rating: 4.0,
+          time: 13.15,
+          url:
+            "https://www.yelp.com/biz/hidden-dublin-gravediggers-ghost-bus-tour-dublin-2?adjust_creative=m3FleKsUG-1UNqJsJZid9A&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=m3FleKsUG-1UNqJsJZid9A",
+        },
+        b11: {
+          name: "test",
+          address1: "Baltimore park",
+          categories: ["Bike tours", "Walking Tours", "Bus Tours"],
+          coordinates: [53.3374334371297, -6.29585266113281],
+          distance: 2.745,
+          id: "6cVqoG_bmcuRCnIKlwlFhw",
+          parents: ["Tours"],
+          position: 1,
+          rating: 4.5,
+          time: 32.93333333333333,
+          url:
+            "https://www.yelp.com/biz/irish-day-tours-christchuch?adjust_creative=m3FleKsUG-1UNqJsJZid9A&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=m3FleKsUG-1UNqJsJZid9A",
+        },
+        b19: {
+          name: "test",
+          address1: "Baltimore park",
+          categories: ["Architectural Tours"],
+          coordinates: [53.34157, -6.23901],
+          distance: 4.123,
+          id: "DV7XKwQtF-3TqVcVBHCnRA",
+          parents: ["Tours"],
+          position: 3,
+          rating: 5.0,
+          time: 49.56666666666667,
+          url:
+            "https://www.yelp.com/biz/grayline-dublin-city-tours-dublin?adjust_creative=m3FleKsUG-1UNqJsJZid9A&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=m3FleKsUG-1UNqJsJZid9A",
+        },
+        b5: {
+          name: "test",
+          address1: "Baltimore park",
+          categories: ["Mexican"],
+          coordinates: [53.3651312, -6.2717154],
+          distance: 4.247,
+          id: "03U0yOXlz8ut6rO1bZc18Q",
+          parents: ["Restaurants"],
+          position: 2,
+          rating: 2.0,
+          time: 51.05,
+          url:
+            "https://www.yelp.com/biz/hola-amigo-dublin?adjust_creative=m3FleKsUG-1UNqJsJZid9A&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=m3FleKsUG-1UNqJsJZid9A",
+        },
+        b64: {
+          name: "test",
+          address1: "Baltimore park",
+          categories: ["Beaches"],
+          coordinates: [53.3480682373047, -6.24827003479004],
+          distance: 1.332,
+          id: "k9ltvySRAKivJvEzBZZzxg",
+          parents: ["Active Life"],
+          position: 4,
+          rating: 3.0,
+          time: 16.083333333333332,
+          url:
+            "https://www.yelp.com/biz/dollymount-strand-dublin-2?adjust_creative=m3FleKsUG-1UNqJsJZid9A&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=m3FleKsUG-1UNqJsJZid9A",
         },
       },
       user: "",
@@ -213,12 +297,13 @@ export default defineComponent({
   },
   methods: {
     loadOther(i) {
-      console.log(this.selectedBusinesses);
-      console.log(this.businesses);
-      this.selectedBusinesses[i] = this.businesses[
-        "b".concat(this.lastSelected.toString())
-      ];
-      this.lastSelected++;
+      for (const key in this.secondaryBusinesses) {
+      if (this.secondaryBusinesses[key]["position"] == i){
+        this.selectedBusinesses[i] = this.secondaryBusinesses[key]
+        delete this.secondaryBusinesses[key]
+        break;
+        }
+      }
     },
   },
 });
@@ -260,6 +345,8 @@ ion-card-header {
   height: 75px;
   width: 1px;
   border: 0.5px solid #c1bfbf;
+  color: black;
+  display: flex;
 }
 
 ion-card-title {

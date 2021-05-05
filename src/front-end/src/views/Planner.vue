@@ -59,6 +59,7 @@ import {
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import axios from "axios";
+import { auth } from "../firebase";
 
 export default defineComponent({
   name: "planner",
@@ -86,16 +87,16 @@ export default defineComponent({
   },
   created() {
     onIonViewWillEnter(() => {
-      // initialises the local time and sets default planner to be 2 hours
-      const tzoffset = new Date().getTimezoneOffset() * 60000;
-      const localISOTime = new Date(Date.now() - tzoffset)
-        .toISOString()
-        .slice(0, -1);
-      this.startTime = localISOTime;
-      const datetime = new Date(localISOTime);
-      datetime.setHours(datetime.getHours() + 3);
-      this.endTime = datetime.toISOString().slice(0, -1);
-
+      const time = new Date()
+      this.startTime = time.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false })
+      let futureTime = time.setTime(time.getHours() + 2);
+      if (futureTime > 24){
+        futureTime = futureTime - 24;
+        if (futureTime < 10){
+          futureTime = "0" + futureTime
+        }
+      }
+      this.endTime = futureTime.toString() + this.startTime.slice(2)
       const options = {
         useLocale: true,
         maxResults: 5,
@@ -135,6 +136,13 @@ export default defineComponent({
     },
     submitPlan() {
       console.log(this.address, this.startTime, this.endTime);
+      // const userUid = auth.currentUser.uid;
+      // axios.get('http://127.0.0.1:5144/planner', 
+      // { params: {'user_id': userUid, 'start_time': this.startTime, 'end_time': this.endTime, 'latitude': '53.3471', 'longitude': '-6.2719'} })
+      // .then(response => {
+      //   const data = response.data;
+      //   console.log(data);
+      // }).catch(error => console.log(error))
       this.$router.push({name:"PlannerResults" , params:{begin: this.startTime, end:this.endTime}});
     },
     updateStartTime(newTime) {
