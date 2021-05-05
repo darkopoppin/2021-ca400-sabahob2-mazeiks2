@@ -28,11 +28,11 @@ def test_get_business_info_planner(test_yelp):
     assert len(ids) == len(result.keys())
     for business, fields in result.items():
         assert len(fields) == 6
-        assert 'location' in fields
-        assert 'address1' in fields['location']
         assert 'rating' in fields
         assert 'categories' in fields
-        assert 'parent_categories' in fields['categories'][0].keys()
+        assert 'parents' in fields
+        assert 'coordinates' in fields
+        assert 'url' in fields
 
 
 def test_search_yelp(test_yelp):
