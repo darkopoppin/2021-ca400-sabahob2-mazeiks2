@@ -3,7 +3,7 @@ from flask import request, Blueprint, jsonify
 
 from service import db
 from service.errors import ClientError
-from planner.make import create_plan
+from planner.user import User
 
 service_bp = Blueprint("service_bp", __name__)
 
@@ -32,6 +32,11 @@ def planner():
     except ValueError:
         raise ClientError("start_time or end_time are not in correct format")
 
+    user_id = request.args.get('user_id')
     recommendations = request.json
-    plan = create_plan(recommendations, start_time, end_time, coordinates)
+    user_ref = db.collection('users').document(user_id).get()
+
+    user = User.from_dict(user_ref.to_dict())
+    user.init_plan(recommendations, coordinates, start_time, end_time)
+    plan = user.plan.create_plan()
     return plan
