@@ -39,4 +39,4 @@ def planner():
     user = User.from_dict(user_ref.to_dict())
     user.init_plan(recommendations, coordinates, start_time, end_time)
     plan = user.plan.create_plan()
-    return plan
+    return jsonify(plan)

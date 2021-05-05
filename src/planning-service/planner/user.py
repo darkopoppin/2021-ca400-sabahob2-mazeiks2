@@ -41,7 +41,10 @@ class User(object):
         db.collection('users').document(self.user_id).set(self.to_dict())
 
     def init_plan(self, activities, coordinates, start_time, end_time):
-        self.plan = Plan(activities, coordinates, start_time, end_time)
+        self.plan = Plan(
+            activities, coordinates, start_time, end_time,
+            self.liked_categories
+        )
 
     def __repr__(self):
         return (

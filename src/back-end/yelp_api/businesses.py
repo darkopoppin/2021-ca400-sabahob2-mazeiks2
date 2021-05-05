@@ -34,13 +34,13 @@ class Yelp(object):
 
         if type == 'planner':
             query_string.append('fragment Info on Business \
-                                {id rating location {address1} \
+                                {id rating url location {address1} \
                                 categories {title parent_categories {title}} \
                                 coordinates {latitude,longitude}}')
         else:
             query_string.append('fragment Info on Business \
                                 {id name rating location {address1} \
-                                categories {title}}')
+                                url categories {title}}')
 
         query = gql(''.join(query_string))
         results = self.yelp_client.execute(query, variable_values=params)
@@ -102,6 +102,8 @@ class Yelp(object):
                 business['coordinates']['latitude'],
                 business['coordinates']['longitude']
             )
+            fields['url'] = business['url']
+            fields['rating'] = business['rating']
             formatted[key] = fields
 
         return formatted

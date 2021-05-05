@@ -14,3 +14,4 @@ else:
     RECOMM_HOST = 'recommender'
 
 YELP_API = environ.get('YELP_API')
+GRAPHH = environ.get('GRAPHH')
