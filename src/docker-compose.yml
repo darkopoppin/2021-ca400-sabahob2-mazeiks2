@@ -17,6 +17,15 @@ services:
     ports:
       - 5001
 
+  planner:
+    container_name: planner
+    depends_on:
+      - backend
+    build: ./planning-service
+    image: planning-service
+    ports:
+      - 5003
+
   redis-server:
     container_name: redis-server
     depends_on:
