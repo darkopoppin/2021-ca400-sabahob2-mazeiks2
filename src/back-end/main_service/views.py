@@ -77,16 +77,16 @@ def planner():
 
     recommendations = get_recommendations(user_id, 'planner')
 
-    response = requests.get(
+    plan = requests.get(
             f'http://{settings.PLANNER_HOST}:5003/plan',
             params={'user_id': user_id,
                     'start_time': start_time,
                     'end_time': end_time,
                     'latitude': latitude,
                     'longitude': longitude},
-            json=recommendations)
+            json=recommendations).json()
 
-    return response.text
+    return plan
 
 
 @main_service.route('/search', methods=['GET'])

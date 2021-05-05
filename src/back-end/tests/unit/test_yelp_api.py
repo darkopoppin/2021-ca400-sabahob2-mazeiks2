@@ -8,7 +8,7 @@ def test_get_business_info(test_yelp):
     result = test_yelp.get_businesses_info(ids)
     assert len(ids) == len(result.keys())
     for business, fields in result.items():
-        assert len(fields) == 5
+        assert len(fields) == 6
         assert 'id' in fields
         assert 'location' in fields
         assert 'address1' in fields['location']
@@ -27,7 +27,7 @@ def test_get_business_info_planner(test_yelp):
     result = test_yelp.get_businesses_info_planner(ids)
     assert len(ids) == len(result.keys())
     for business, fields in result.items():
-        assert len(fields) == 5
+        assert len(fields) == 6
         assert 'location' in fields
         assert 'address1' in fields['location']
         assert 'rating' in fields

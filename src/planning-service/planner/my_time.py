@@ -7,29 +7,29 @@ class Time(object):
         self.start_time = start_time[0] + ':' + start_time[1]
         self.end_time = end_time[0] + ':' + end_time[1]
         date_format = '%H:%M'
-        self.duration = (
+        self.time_left = (
             (datetime.strptime(self.end_time, date_format) -
                 datetime.strptime(self.start_time, date_format)).seconds / 60
         )
         self.meal_timer = 180
 
-    def decriment_duration(self, activity):
+    def decriment_time_left(self, activity):
         if activity == 'meal':
-            self.duration -= 60
+            self.time_left -= 60
         elif activity == 'activity':
-            self.duration -= 45
+            self.time_left -= 45
             self.meal_timer -= 45
 
     def get_current_time(self):
         date_format = '%H:%M'
         current_time = (
             datetime.strptime(self.end_time, date_format) -
-            timedelta(hours=0, minutes=self.duration)
+            timedelta(hours=0, minutes=self.time_left)
         )
         return current_time
 
     def main_loop(self):
-        if self.duration <= 30:
+        if self.time_left <= 30:
             return False
         else:
             return True
@@ -48,7 +48,7 @@ class Time(object):
     def __repr__(self):
         current_time = self.get_current_time().strftime('%H:%M')
         return (
-            f'Duration: {self.duration} mins\n'
+            f'Time left: {self.time_left} mins\n'
             f'Start time: {self.start_time}\n'
             f'End time: {self.end_time}\n'
             f'Current time: {current_time}\n')
