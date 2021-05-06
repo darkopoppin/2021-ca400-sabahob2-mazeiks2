@@ -20,16 +20,8 @@ def planner():
     start_time = request.args.get('start_time')
     end_time = request.args.get('end_time')
     coordinates = (request.args.get('latitude'), request.args.get('longitude'))
-    try:
-        if re.compile(r'^\d\d:\d\d$').match(start_time):
-            start_time = start_time.split(':')
-        else:
-            raise ValueError
-        if re.compile(r"^\d\d:\d\d$").match(end_time):
-            end_time = end_time.split(':')
-        else:
-            raise ValueError
-    except ValueError:
+    regex = re.compile(r'^\d\d:\d\d$')
+    if not regex.match(start_time) or not regex.match(end_time):
         raise ClientError("start_time or end_time are not in correct format")
 
     user_id = request.args.get('user_id')

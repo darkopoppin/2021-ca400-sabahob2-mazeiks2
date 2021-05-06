@@ -9,9 +9,10 @@ def test_get_recommendations(test_db, test_redis):
 
     assert len(ids) == len(result.keys())
     for business, fields in result.items():
-        assert len(fields) == 5
+        assert len(fields) == 8
         assert 'location' in fields
         assert 'address1' in fields['location']
         assert 'rating' in fields
         assert 'categories' in fields
-        assert 'parent_categories' in fields['categories'][0].keys()
+        assert 'parents' in fields
+        assert 'name' in fields

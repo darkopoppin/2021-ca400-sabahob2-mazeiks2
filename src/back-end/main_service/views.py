@@ -19,6 +19,7 @@ def handle_client_error(error):
     return response
 
 
+# Deprecated - front end handles user profile
 @main_service.route('/user_profile', methods=['GET', 'POST'])
 @cross_origin()
 def user_profile():

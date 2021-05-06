@@ -4,8 +4,8 @@ from datetime import datetime, timedelta
 class Time(object):
 
     def __init__(self, start_time, end_time):
-        self.start_time = start_time[0] + ':' + start_time[1]
-        self.end_time = end_time[0] + ':' + end_time[1]
+        self.start_time = start_time
+        self.end_time = end_time
         date_format = '%H:%M'
         self.time_left = (
             (datetime.strptime(self.end_time, date_format) -
@@ -15,7 +15,7 @@ class Time(object):
 
     def decriment_time_left(self, activity, time=None):
         if activity == 'meal':
-            self.time_left -= 60
+            self.time_left -= 50
         elif activity == 'activity':
             self.time_left -= 45
             self.meal_timer -= 45

@@ -27,7 +27,7 @@ def test_get_business_info_planner(test_yelp):
     result = test_yelp.get_businesses_info_planner(ids)
     assert len(ids) == len(result.keys())
     for business, fields in result.items():
-        assert len(fields) == 6
+        assert len(fields) == 8
         assert 'rating' in fields
         assert 'categories' in fields
         assert 'parents' in fields
