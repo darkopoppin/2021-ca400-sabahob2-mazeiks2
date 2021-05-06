@@ -10,7 +10,9 @@ class TestPlan():
         )
         assert plan.timer.time_left == 135
 
-        assert len(plan.target_categories) == len(test_user['liked_categories'])
+        assert (
+            len(plan.target_categories) == len(test_user['liked_categories'])
+        )
         assert plan.activity_keys != []
         assert plan.meal_keys != []
 

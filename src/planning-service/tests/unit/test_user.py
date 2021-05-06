@@ -1,5 +1,6 @@
 from planner.user import User
 
+
 class TestUser():
 
     def create_user(self, test_user):
@@ -32,7 +33,8 @@ class TestUser():
         assert test_user == user_dict
 
     def test_from_dict(self, test_db, test_user):
-        user_ref = test_db.collection('users').document('FBUmHzsMQcEl6KAiAzNB').get()
+        user_ref = test_db.collection(
+            'users').document('FBUmHzsMQcEl6KAiAzNB').get()
         user = user_ref.to_dict()
 
         assert test_user['age'] == user['age']

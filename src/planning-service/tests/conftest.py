@@ -29,6 +29,7 @@ def test_recommended():
 
 @pytest.fixture(scope='module')
 def test_user(test_db):
-    user_ref = test_db.collection('users').document('FBUmHzsMQcEl6KAiAzNB').get()
+    user_ref = test_db.collection(
+        'users').document('FBUmHzsMQcEl6KAiAzNB').get()
     yield user_ref.to_dict()
     del user_ref

@@ -89,10 +89,10 @@ class Plan():
                 self.activity_keys.remove(key)
                 self.add_to_plan(key)
                 return True
-        
+
         if self.yelp_searched:
             return False
-        
+
         self.search_yelp()
         return self.add_activity()
 
@@ -126,7 +126,6 @@ class Plan():
 
         self.search_yelp()
         return self.add_meal()
-        
 
     def add_to_plan(self, key):
         distance, time = self.get_graphhopper_distance(
@@ -170,7 +169,9 @@ class Plan():
             'key': settings.GRAPHH
 
         }
-        response = requests.get('https://graphhopper.com/api/1/matrix', params).json()
+        response = requests.get(
+            'https://graphhopper.com/api/1/matrix', params
+        ).json()
 
         distance = response['distances'][0][1]/1000
         time = response['times'][0][1]/60
