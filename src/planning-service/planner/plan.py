@@ -19,6 +19,7 @@ class Plan():
         self.position = 0
         self.activity_keys = []
         self.meal_keys = []
+        self.yelp_searched = False
         self.visited = set()
         self.walking_distance = (
             self.timer.time_left/(200 + 2/self.timer.time_left)
@@ -49,15 +50,17 @@ class Plan():
     def create_plan(self):
         if not self.activity_keys or not self.meal_keys:
             self.search_yelp()
-        elif (len(self.activity_keys) + len(self.meal_keys))*45 < self.timer.time_left:
-            self.search_yelp()
         while self.timer.main_loop():
             if self.timer.is_meal_time():
                 if self.add_meal():
                     self.timer.decriment_time_left('meal')
+                else:
+                    return self.plan
             else:
                 if self.add_activity():
                     self.timer.decriment_time_left('activity')
+                else:
+                    return self.plan
 
         return self.plan
 
@@ -87,8 +90,11 @@ class Plan():
                 self.add_to_plan(key)
                 return True
 
+        if self.yelp_searched:
+            return False
+
         self.search_yelp()
-        return False
+        return self.add_activity()
 
     def add_meal(self):
         if not self.meal_keys:
@@ -103,7 +109,7 @@ class Plan():
             for parent in activity['parents']:
                 if parent in excluded_categories:
                     exclude = True
-                    
+
             categories = set(self.activities[key]['categories'])
             visited_score = (
                 len(self.visited.intersection(categories))/len(categories)
@@ -115,11 +121,17 @@ class Plan():
                 self.add_to_plan(key)
                 return True
 
+        if self.yelp_searched:
+            return False
+
+        self.search_yelp()
+        return self.add_meal()
+
     def add_to_plan(self, key):
         distance, time = self.get_graphhopper_distance(
             self.start_coordinates, self.activities[key]['coordinates']
         )
-        self.timer.decriment_time_left('activity', time)
+        self.timer.decriment_time_left('walk', time)
         self.activities[key]['position'] = self.position
         self.position += 1
         self.start_coordinates = self.activities[key]['coordinates']
@@ -140,6 +152,11 @@ class Plan():
 
         self.activities.update(activities)
         self.extract_nearby_meals_activities(activities)
+        self.yelp_searched = True
+        if self.activities:
+            return True
+        else:
+            return False
 
     def get_graphhopper_distance(self, start, stop):
         params = {
@@ -152,7 +169,9 @@ class Plan():
             'key': settings.GRAPHH
 
         }
-        response = requests.get('https://graphhopper.com/api/1/matrix', params).json()
+        response = requests.get(
+            'https://graphhopper.com/api/1/matrix', params
+        ).json()
 
         distance = response['distances'][0][1]/1000
         time = response['times'][0][1]/60

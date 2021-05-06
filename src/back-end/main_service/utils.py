@@ -35,4 +35,3 @@ def get_recommendations(user_id, type):
     else:
         results = yelp.get_businesses_info(recommendations_ids)
     return results
-

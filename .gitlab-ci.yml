@@ -7,7 +7,6 @@ variables:
   FLASK_APP: "./run.py"
   GOOGLE_APPLICATION_CREDENTIALS: "./credentials/citycydev-firebase.json"
   FLASK_ENV: "testing"
-  FIRESTORE_EMULATOR_HOST: "localhost:8080"
 
 before_script:
   - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
@@ -22,12 +21,15 @@ scan:
     - pip3 install flake8
     - flake8 --per-file-ignores='**/__init__.py:F401,F403,E402' ./src/back-end/**/*.py
     - flake8 --per-file-ignores='**/__init__.py:F401,F403,E402' ./src/recommender-service/**/*.py
+    - flake8 --per-file-ignores='**/__init__.py:F401,F403,E402' ./src/planning-service/**/*.py
   allow_failure: true
   only:
     - merge_requests
 
 back-end:
   stage: unit-tests
+  variables: 
+    FIRESTORE_EMULATOR_HOST: "localhost:8080"
   script:
     - cd ./src/back-end
     - pip3 install -r requirements.txt
@@ -37,10 +39,21 @@ back-end:
 
 recommender-service:
   stage: unit-tests
+  variables: 
+    FIRESTORE_EMULATOR_HOST: "localhost:8080"
   script:
     - cd ./src/recommender-service
     - pip3 install -r requirements.txt
     - firebase emulators:exec --only firestore --import ../ "pytest --setup-show tests/unit"
+  only:
+    - merge_requests
+
+planning-service:
+  stage: unit-tests
+  script:
+    - cd ./src/planning-service
+    - pip3 install -r requirements.txt
+    - pytest --setup-show tests/unit
   only:
     - merge_requests
 

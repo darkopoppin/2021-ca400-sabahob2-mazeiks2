@@ -1,0 +1,1112 @@
+{
+    "b0": {
+        "categories": [
+            "Cafes",
+            "Breakfast & Brunch"
+        ],
+        "coordinates": [
+            53.3513298,
+            -6.2677102
+        ],
+        "id": "-IoeXFfBd7wpaYUJ9rRprg",
+        "location": {
+            "address1": "26 King's Inns Street"
+        },
+        "name": "Blas Café",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.5,
+        "url": "https://www.yelp.com/biz/blas-caf%C3%A9-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b1": {
+        "categories": [
+            "Malaysian"
+        ],
+        "coordinates": [
+            53.3442993,
+            -6.2665
+        ],
+        "id": "-Nn9dILUd3VbGH-zV_EFXA",
+        "location": {
+            "address1": "76 Dame Street"
+        },
+        "name": "Nyonya Malaysian Cuisine",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/nyonya-malaysian-cuisine-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b10": {
+        "categories": [
+            "Chinese",
+            "Malaysian"
+        ],
+        "coordinates": [
+            53.336841631589,
+            -6.26559578952527
+        ],
+        "id": "BEcKJagL_bzSLYbcopzjRg",
+        "location": {
+            "address1": "32 Wexford Street"
+        },
+        "name": "The Noodle House",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 3.5,
+        "url": "https://www.yelp.com/biz/the-noodle-house-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b11": {
+        "categories": [
+            "Italian",
+            "Pizza"
+        ],
+        "coordinates": [
+            53.334232,
+            -6.245108
+        ],
+        "id": "BfpzSleAdViptG42fNvyHA",
+        "location": {
+            "address1": "1-2 Haddington Road"
+        },
+        "name": "Milano",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 3.5,
+        "url": "https://www.yelp.com/biz/milano-dublin-2?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b12": {
+        "categories": [
+            "Italian",
+            "Coffee & Tea"
+        ],
+        "coordinates": [
+            53.34642,
+            -6.26524
+        ],
+        "id": "BjvsLlw54JTUs2_9M_SVdA",
+        "location": {
+            "address1": "Bloom's Lane"
+        },
+        "name": "Caffe Cagliostro",
+        "parents": [
+            "Restaurants",
+            "Food"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/caffe-cagliostro-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b13": {
+        "categories": [
+            "Dance Clubs"
+        ],
+        "coordinates": [
+            53.3357187,
+            -6.263619
+        ],
+        "id": "C-VgRRjIgPor_Fxe3DBocw",
+        "location": {
+            "address1": "21-25 Harcourt Street"
+        },
+        "name": "Krystle",
+        "parents": [
+            "Nightlife"
+        ],
+        "rating": 3.0,
+        "url": "https://www.yelp.com/biz/krystle-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b14": {
+        "categories": [
+            "Bars",
+            "Tapas Bars",
+            "Fast Food"
+        ],
+        "coordinates": [
+            53.342059565211,
+            -6.26406620823968
+        ],
+        "id": "GMMMIuyb2hlxfKVNZ2DsSA",
+        "location": {
+            "address1": "14 Fade Street"
+        },
+        "name": "The Market Bar",
+        "parents": [
+            "Nightlife",
+            "Restaurants"
+        ],
+        "rating": 3.5,
+        "url": "https://www.yelp.com/biz/the-market-bar-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b15": {
+        "categories": [
+            "Fast Food",
+            "Chinese"
+        ],
+        "coordinates": [
+            53.3554611,
+            -6.24612
+        ],
+        "id": "HGuPkY9CgNGKMfODf6uyNA",
+        "location": {
+            "address1": "14 N Strand Road"
+        },
+        "name": "Long Thanh Takeaway",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 3.5,
+        "url": "https://www.yelp.com/biz/long-thanh-takeaway-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b16": {
+        "categories": [
+            "Chinese"
+        ],
+        "coordinates": [
+            53.31016,
+            -6.2828799
+        ],
+        "id": "JauYBwgET5-KwqzAI9xUww",
+        "location": {
+            "address1": "90 Terenure Rd E"
+        },
+        "name": "Royal Garden Chinese Restaurant and Take Away",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 3.0,
+        "url": "https://www.yelp.com/biz/royal-garden-chinese-restaurant-and-take-away-dublin-2?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b17": {
+        "categories": [
+            "Asian Fusion",
+            "Japanese"
+        ],
+        "coordinates": [
+            53.34692,
+            -6.25707
+        ],
+        "id": "JgTh-UMGQ_j-xduP5JHBSg",
+        "location": {
+            "address1": "1 Poolbeg Street"
+        },
+        "name": "J's Noodle & Sushi House",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 3.5,
+        "url": "https://www.yelp.com/biz/js-noodle-and-sushi-house-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b18": {
+        "categories": [
+            "Recreation Centers",
+            "Climbing"
+        ],
+        "coordinates": [
+            53.3364716,
+            -6.3221698
+        ],
+        "id": "JyQ9VDKQ00EMyz0YyEjwmQ",
+        "location": {
+            "address1": "6a, Goldenbridge Industrial Estate"
+        },
+        "name": "Gravity Climbing Centre",
+        "parents": [
+            "Active Life"
+        ],
+        "rating": 4.5,
+        "url": "https://www.yelp.com/biz/gravity-climbing-centre-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b19": {
+        "categories": [
+            "Sports Clubs",
+            "Stadiums & Arenas"
+        ],
+        "coordinates": [
+            53.33541,
+            -6.23279
+        ],
+        "id": "Mr9t5SP_HJnmUDyNMnIpJA",
+        "location": {
+            "address1": "Shelbourne Park"
+        },
+        "name": "Shelbourne Park Greyhound Stadium",
+        "parents": [
+            "Arts & Entertainment",
+            "Active Life"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/shelbourne-park-greyhound-stadium-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b2": {
+        "categories": [
+            "Mexican",
+            "Sandwiches"
+        ],
+        "coordinates": [
+            53.3409033,
+            -6.2630113
+        ],
+        "id": "0EJBVoe2bch68uFHMVju0g",
+        "location": {
+            "address1": "5 Clarendon Market"
+        },
+        "name": "Pablo's Tortas",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/pablos-tortas-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b20": {
+        "categories": [
+            "Malaysian"
+        ],
+        "coordinates": [
+            53.34915,
+            -6.2689
+        ],
+        "id": "MzRMeaHDci_QFfcCGkYgLw",
+        "location": {
+            "address1": "53 Capel Street"
+        },
+        "name": "Kopitiam Dublin",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.5,
+        "url": "https://www.yelp.com/biz/kopitiam-dublin-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b21": {
+        "categories": [
+            "Chinese"
+        ],
+        "coordinates": [
+            53.3677483,
+            -6.3263001
+        ],
+        "id": "O-hyAN-GL9e0YEK0uv7MYg",
+        "location": {
+            "address1": "18 Blackhorse Ave"
+        },
+        "name": "The Rising Phoenix",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/the-rising-phoenix-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b22": {
+        "categories": [
+            "Coffee & Tea",
+            "Breakfast & Brunch"
+        ],
+        "coordinates": [
+            53.3336566,
+            -6.2726184
+        ],
+        "id": "P3yMNMe5rqc69LUnXgdUOg",
+        "location": {
+            "address1": "14b Emorville Ave"
+        },
+        "name": "Bibi's Cafe",
+        "parents": [
+            "Restaurants",
+            "Food"
+        ],
+        "rating": 4.5,
+        "url": "https://www.yelp.com/biz/bibis-cafe-dublin-3?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b23": {
+        "categories": [
+            "Mexican"
+        ],
+        "coordinates": [
+            53.347373,
+            -6.265509
+        ],
+        "id": "Rn649tadQwhHK_HQ79E-OA",
+        "location": {
+            "address1": "Millennium Walkway"
+        },
+        "name": "Boojum",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.5,
+        "url": "https://www.yelp.com/biz/boojum-north-city?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b24": {
+        "categories": [
+            "Asian Fusion",
+            "Malaysian"
+        ],
+        "coordinates": [
+            53.3090087,
+            -6.2250849
+        ],
+        "id": "SdJQ_q3vUt_9xmQD1KI_Fw",
+        "location": {
+            "address1": "Dundrum Town Centre"
+        },
+        "name": "Cafe Mao",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 2.5,
+        "url": "https://www.yelp.com/biz/cafe-mao-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b25": {
+        "categories": [
+            "Japanese",
+            "Sushi Bars"
+        ],
+        "coordinates": [
+            53.288558979063,
+            -6.20503639695986
+        ],
+        "id": "TX7c5aSkNn3GGrEgSJefDA",
+        "location": {
+            "address1": "3 Lower Kilmacud Road"
+        },
+        "name": "Aoshima Sushi & Grill",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/aoshima-sushi-and-grill-dublin-2?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b26": {
+        "categories": [
+            "Mexican"
+        ],
+        "coordinates": [
+            53.357414,
+            -6.256631
+        ],
+        "id": "VGuwlMva9MEZ6G2Zp8N6yg",
+        "location": {
+            "address1": "20 Mountjoy Square E"
+        },
+        "name": "El Grito Mexican Taqueria",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 5.0,
+        "url": "https://www.yelp.com/biz/el-grito-mexican-taqueria-mountjoy?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b27": {
+        "categories": [
+            "Mexican"
+        ],
+        "coordinates": [
+            53.3398453844875,
+            -6.26092124365539
+        ],
+        "id": "WFkWsAtWw4LjTOynRq5d6A",
+        "location": {
+            "address1": "Green & Baker Food Village"
+        },
+        "name": "El Gringo Burrito",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 3.5,
+        "url": "https://www.yelp.com/biz/el-gringo-burrito-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b28": {
+        "categories": [
+            "Mexican"
+        ],
+        "coordinates": [
+            53.3507113,
+            -6.2709769
+        ],
+        "id": "YPtmo6ckOblnCsYF5hfeNQ",
+        "location": {
+            "address1": "4 King Street N"
+        },
+        "name": "El Patron",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/el-patron-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b29": {
+        "categories": [
+            "Cafes",
+            "Venues & Event Spaces",
+            "Breakfast & Brunch"
+        ],
+        "coordinates": [
+            53.3522384374442,
+            -6.28456516613159
+        ],
+        "id": "Zfau5HKSJ11L5-6WAC7tyg",
+        "location": {
+            "address1": "56 Manor Street Place"
+        },
+        "name": "Slice",
+        "parents": [
+            "Event Planning & Services",
+            "Restaurants"
+        ],
+        "rating": 4.5,
+        "url": "https://www.yelp.com/biz/slice-dublin-2?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b3": {
+        "categories": [
+            "Dance Clubs"
+        ],
+        "coordinates": [
+            53.3384,
+            -6.28072
+        ],
+        "id": "0iFgmpOaOfOA1joXf4z7Rw",
+        "location": {
+            "address1": "Phoenix Street"
+        },
+        "name": "One Nightclub",
+        "parents": [
+            "Nightlife"
+        ],
+        "rating": 3.0,
+        "url": "https://www.yelp.com/biz/one-nightclub-cork?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b30": {
+        "categories": [
+            "Chinese"
+        ],
+        "coordinates": [
+            53.3252791521641,
+            -6.26502402069105
+        ],
+        "id": "_Me0H8qTA_VSPrupqhqB3w",
+        "location": {
+            "address1": "89 Rathmines Road"
+        },
+        "name": "Zen Chinese Restaurant",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 3.0,
+        "url": "https://www.yelp.com/biz/zen-chinese-restaurant-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b31": {
+        "categories": [
+            "Cafes",
+            "Breakfast & Brunch",
+            "Mediterranean"
+        ],
+        "coordinates": [
+            53.3461,
+            -6.26556
+        ],
+        "id": "a7IwEXov1sUOspXe1TOKVg",
+        "location": {
+            "address1": "20-24 Lower Ormond Quay"
+        },
+        "name": "Mochaland Cafe",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/mochaland-cafe-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b32": {
+        "categories": [
+            "Chinese",
+            "Fast Food"
+        ],
+        "coordinates": [
+            53.3482082,
+            -6.294197
+        ],
+        "id": "aeRNZiONWpOQlM5j1e-z9Q",
+        "location": {
+            "address1": "34 Parkgate St"
+        },
+        "name": "Riris Chinese",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 2.5,
+        "url": "https://www.yelp.com/biz/riris-chinese-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b33": {
+        "categories": [
+            "Korean",
+            "Grocery"
+        ],
+        "coordinates": [
+            53.3468,
+            -6.26585
+        ],
+        "id": "cgRTJCOhE9AfqUgcdW70nw",
+        "location": {
+            "address1": "22 Great Strand Street"
+        },
+        "name": "Han Sung",
+        "parents": [
+            "Restaurants",
+            "Food"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/han-sung-dublin-2?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b34": {
+        "categories": [
+            "Sports Clubs"
+        ],
+        "coordinates": [
+            53.33923,
+            -6.2511599
+        ],
+        "id": "eHSR8rNgqAO-xOQPRJ---g",
+        "location": {
+            "address1": "80 Merrion Square"
+        },
+        "name": "FAI National League",
+        "parents": [
+            "Active Life"
+        ],
+        "rating": 2.5,
+        "url": "https://www.yelp.com/biz/fai-national-league-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b35": {
+        "categories": [
+            "Breakfast & Brunch",
+            "Cafes"
+        ],
+        "coordinates": [
+            53.36084,
+            -6.27158
+        ],
+        "id": "fD00BdZNnWn_GN7QXgSlrA",
+        "location": {
+            "address1": "375 North Circular Road"
+        },
+        "name": "Two Boys Brew",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.5,
+        "url": "https://www.yelp.com/biz/two-boys-brew-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b36": {
+        "categories": [
+            "Hotels",
+            "Bars",
+            "Dance Clubs"
+        ],
+        "coordinates": [
+            53.34572,
+            -6.26509
+        ],
+        "id": "gC6S48MDZVV4AYszGbqqYQ",
+        "location": {
+            "address1": "21-22 Wellington Quay"
+        },
+        "name": "Fitzsimons Hotel",
+        "parents": [
+            "Event Planning & Services",
+            "Nightlife",
+            "Hotels & Travel"
+        ],
+        "rating": 2.5,
+        "url": "https://www.yelp.com/biz/fitzsimons-hotel-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b37": {
+        "categories": [
+            "Turkish",
+            "Fast Food"
+        ],
+        "coordinates": [
+            53.337536,
+            -6.26628
+        ],
+        "id": "hRRA_Hj6WXYVQwBjgdMqag",
+        "location": {
+            "address1": "Kevin St Lower"
+        },
+        "name": "Hot Chilli",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/hot-chilli-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b38": {
+        "categories": [
+            "Italian",
+            "Cafes"
+        ],
+        "coordinates": [
+            53.340974,
+            -6.258893
+        ],
+        "id": "iRAdczCr5BAOeWfUG2fRxw",
+        "location": {
+            "address1": "20 South Anne Street"
+        },
+        "name": "Dolce Sicily",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.5,
+        "url": "https://www.yelp.com/biz/dolce-sicily-dublin-5?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b39": {
+        "categories": [
+            "Landmarks & Historical Buildings",
+            "Parks"
+        ],
+        "coordinates": [
+            53.33632,
+            -6.26721
+        ],
+        "id": "jT1arRC--HGehMYdLup5pA",
+        "location": {
+            "address1": "Camden Row"
+        },
+        "name": "St. Kevin's Park",
+        "parents": [
+            "Active Life",
+            "Public Services & Government"
+        ],
+        "rating": 4.5,
+        "url": "https://www.yelp.com/biz/st-kevins-park-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b4": {
+        "categories": [
+            "Sandwiches",
+            "Breakfast & Brunch",
+            "Salad"
+        ],
+        "coordinates": [
+            53.3349149014265,
+            -6.26526183684238
+        ],
+        "id": "2ydsm0m89zXT3odIP6Rcig",
+        "location": {
+            "address1": "71 Camden Street"
+        },
+        "name": "Cracked Nut",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.5,
+        "url": "https://www.yelp.com/biz/cracked-nut-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b40": {
+        "categories": [
+            "Mexican"
+        ],
+        "coordinates": [
+            53.343394,
+            -6.2601121
+        ],
+        "id": "krtx-sND8bivHn65oHb79w",
+        "location": {
+            "address1": "21 Suffolk Street"
+        },
+        "name": "Tolteca",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 3.5,
+        "url": "https://www.yelp.com/biz/tolteca-dublin-2?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b41": {
+        "categories": [
+            "Breakfast & Brunch",
+            "Cafes"
+        ],
+        "coordinates": [
+            53.33789,
+            -6.25207
+        ],
+        "id": "lsCTWo35GVwgUaWwtttUWQ",
+        "location": {
+            "address1": "14 Lower Baggot St"
+        },
+        "name": "Voilà",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.5,
+        "url": "https://www.yelp.com/biz/voil%C3%A0-dublin-2?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b42": {
+        "categories": [
+            "Parks"
+        ],
+        "coordinates": [
+            53.3507,
+            -6.30143
+        ],
+        "id": "mi_PcF3zK_KXhziUP_p87w",
+        "location": {
+            "address1": "Chesterfield Avenue"
+        },
+        "name": "The People's Gardens",
+        "parents": [
+            "Active Life"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/the-peoples-gardens-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b43": {
+        "categories": [
+            "Italian",
+            "Pizza",
+            "Breakfast & Brunch"
+        ],
+        "coordinates": [
+            53.3344606,
+            -6.2441984
+        ],
+        "id": "nxITczF-507pHEvPbcP-Bg",
+        "location": {
+            "address1": "55 Percy Place"
+        },
+        "name": "Angelina's",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/angelinas-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b44": {
+        "categories": [
+            "Chinese",
+            "Thai",
+            "Japanese"
+        ],
+        "coordinates": [
+            53.3654961435717,
+            -6.27152959006452
+        ],
+        "id": "qFVMsC-9ltjmivMmRXqdLA",
+        "location": {
+            "address1": "13 Prospect Road"
+        },
+        "name": "Hong Kee",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 3.0,
+        "url": "https://www.yelp.com/biz/hong-kee-glasnevin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b45": {
+        "categories": [
+            "Dance Clubs",
+            "Sports Bars",
+            "Pubs"
+        ],
+        "coordinates": [
+            53.3342,
+            -6.26305
+        ],
+        "id": "rEmx2e1fN4kjLtPPu3zenQ",
+        "location": {
+            "address1": "60 Harcourt Street"
+        },
+        "name": "Dtwo",
+        "parents": [
+            "Bars",
+            "Nightlife"
+        ],
+        "rating": 3.0,
+        "url": "https://www.yelp.com/biz/dtwo-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b46": {
+        "categories": [
+            "Breakfast & Brunch",
+            "Irish"
+        ],
+        "coordinates": [
+            53.3313855548291,
+            -6.27965211868286
+        ],
+        "id": "rYMse1Q0mbConqdbztwTfA",
+        "location": {
+            "address1": "186 S Circular Road"
+        },
+        "name": "Noshington Cafe",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/noshington-cafe-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b47": {
+        "categories": [
+            "Korean",
+            "Food Stands",
+            "Health Markets"
+        ],
+        "coordinates": [
+            53.291458,
+            -6.259143
+        ],
+        "id": "s81QiwdycFHdj7kz8X7MWQ",
+        "location": {
+            "address1": "9 Churchtown Business Park"
+        },
+        "name": "Jaru",
+        "parents": [
+            "Specialty Food",
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/jaru-dublin-2?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b48": {
+        "categories": [
+            "Mexican"
+        ],
+        "coordinates": [
+            53.337453,
+            -6.265529
+        ],
+        "id": "uZQ3ldQuq_Vh7DgtZY_C1w",
+        "location": {
+            "address1": "2 Wexford Street"
+        },
+        "name": "Burritos & Blues",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/burritos-and-blues-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b49": {
+        "categories": [
+            "Italian",
+            "Bistros"
+        ],
+        "coordinates": [
+            53.3482415,
+            -6.2779367
+        ],
+        "id": "vmwmvSTZ8f1H76plvX4plw",
+        "location": {
+            "address1": "Unit 3, Block C"
+        },
+        "name": "Cafe Sparks Smithfield",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.5,
+        "url": "https://www.yelp.com/biz/cafe-sparks-smithfield-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b5": {
+        "categories": [
+            "Irish",
+            "Steakhouses",
+            "Breakfast & Brunch"
+        ],
+        "coordinates": [
+            53.3721131,
+            -6.2526076
+        ],
+        "id": "5m4U8Xz-2VXLc0yDz6wlxA",
+        "location": {
+            "address1": "104 Upper Drumcondra Road"
+        },
+        "name": "Restaurant 104",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/restaurant-104-dublin-6?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b50": {
+        "categories": [
+            "Korean",
+            "Buffets",
+            "Chinese"
+        ],
+        "coordinates": [
+            53.3535416,
+            -6.2587324
+        ],
+        "id": "vvPSTa8ybz1Bb4xFtURcoQ",
+        "location": {
+            "address1": "102 Parnell Street"
+        },
+        "name": "Lao",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 3.0,
+        "url": "https://www.yelp.com/biz/lao-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b51": {
+        "categories": [
+            "Cafes",
+            "Mexican"
+        ],
+        "coordinates": [
+            53.3471589785458,
+            -6.27167425373724
+        ],
+        "id": "xPiJlhVIuE3f4tv-QBTqZg",
+        "location": {
+            "address1": "7 St Michan's St"
+        },
+        "name": "Rico Loco",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/rico-loco-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b52": {
+        "categories": [
+            "Breakfast & Brunch",
+            "Cafes"
+        ],
+        "coordinates": [
+            53.3446732307851,
+            -6.23847484588623
+        ],
+        "id": "zB6W3YTsHUDRjD98bEyhHQ",
+        "location": {
+            "address1": "Unit 1, Grand Canal Dock"
+        },
+        "name": "Lolly and Cooks",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/lolly-and-cooks-dublin-3?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b53": {
+        "categories": [
+            "Italian"
+        ],
+        "coordinates": [
+            53.3401,
+            -6.25856
+        ],
+        "id": "zT-G8xTNygnktS8wwZ-QyQ",
+        "location": {
+            "address1": "38 Dawson Street"
+        },
+        "name": "Milano",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 3.5,
+        "url": "https://www.yelp.com/biz/milano-dublin-3?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b54": {
+        "categories": [
+            "Malaysian",
+            "Chinese"
+        ],
+        "coordinates": [
+            53.350879,
+            -6.282159
+        ],
+        "id": "zj4jgPhhgBdDoK0LO_SXag",
+        "location": {
+            "address1": "16 Stoneybatter"
+        },
+        "name": "Shangri-La",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/shangri-la-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b6": {
+        "categories": [
+            "Cafes",
+            "Breakfast & Brunch"
+        ],
+        "coordinates": [
+            53.339489,
+            -6.258318
+        ],
+        "id": "6SZCGWMACsF-n1cMlKByzg",
+        "location": {
+            "address1": "15 St Stephen's Green"
+        },
+        "name": "Hatch and Sons",
+        "parents": [
+            "Restaurants"
+        ],
+        "rating": 4.0,
+        "url": "https://www.yelp.com/biz/hatch-and-sons-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b7": {
+        "categories": [
+            "Korean",
+            "Bagels"
+        ],
+        "coordinates": [
+            53.3478985072972,
+            -6.2630404276764
+        ],
+        "id": "7DXz-qDhB9LZTigI7Fnfsg",
+        "location": {
+            "address1": "Epicurean Food Hall"
+        },
+        "name": "Boga Boga",
+        "parents": [
+            "Restaurants",
+            "Food"
+        ],
+        "rating": 3.0,
+        "url": "https://www.yelp.com/biz/boga-boga-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b8": {
+        "categories": [
+            "Coffee & Tea",
+            "Breakfast & Brunch"
+        ],
+        "coordinates": [
+            53.345620022821,
+            -6.2586355993747
+        ],
+        "id": "8mfFFgr5m7DwhNhT_70fUQ",
+        "location": {
+            "address1": "Westmoreland Street"
+        },
+        "name": "The Atrium Lounge",
+        "parents": [
+            "Restaurants",
+            "Food"
+        ],
+        "rating": 4.5,
+        "url": "https://www.yelp.com/biz/the-atrium-lounge-dublin?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    },
+    "b9": {
+        "categories": [
+            "Hotels",
+            "Golf"
+        ],
+        "coordinates": [
+            53.3666687,
+            -6.3879199
+        ],
+        "id": "9Qh4znoHA5oK7utia60A7A",
+        "location": {
+            "address1": "Porterstown Road"
+        },
+        "name": "Castleknock Hotel and Country Club",
+        "parents": [
+            "Event Planning & Services",
+            "Hotels & Travel",
+            "Active Life"
+        ],
+        "rating": 3.5,
+        "url": "https://www.yelp.com/biz/castleknock-hotel-and-country-club-castleknock?adjust_creative=yyQuTuyaxyo-9jG7KyZtnQ&utm_campaign=yelp_api_v3&utm_medium=api_v3_graphql&utm_source=yyQuTuyaxyo-9jG7KyZtnQ"
+    }
+}
