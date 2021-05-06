@@ -12,6 +12,7 @@ def test_get_business_info(test_yelp):
         assert 'id' in fields
         assert 'location' in fields
         assert 'address1' in fields['location']
+        assert 'url' in fields
         assert 'name' in fields
         assert 'rating' in fields
         assert 'categories' in fields

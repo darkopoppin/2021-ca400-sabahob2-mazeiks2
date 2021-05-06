@@ -1,7 +1,7 @@
 <template>
   <ion-page>
       <ion-header>
-        <ion-title class="component-title"> User Settings </ion-title>
+        <ion-title size="small" class="component-title"> User Settings </ion-title>
       </ion-header>
     <ion-content>
       <ion-button type="submit" v-on:click="logOut()"> Log out </ion-button>
@@ -45,5 +45,7 @@ export default defineComponent({
 .component-title {
   background-color: white;
   color: black;
+  text-align: center;
+  font-size: x-large;
 }
 </style>

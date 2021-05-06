@@ -18,6 +18,10 @@
           </ion-item>
 
           <ion-item class="input">
+            <ion-input type="text" v-model="user.location" placeholder="Primary city" />
+          </ion-item>
+
+          <ion-item class="input">
             <ion-input type="email" v-model="user.email" placeholder="Email" />
           </ion-item>
 
@@ -75,6 +79,7 @@ export default defineComponent({
       user: {
         age: "",
         gender: "",
+        location: "",
         email: "",
         password: "",
       },
@@ -82,21 +87,29 @@ export default defineComponent({
   },
   methods: {
     userRegistration() {
+      if (this.user.age == "" || this.user.gender == "" || this.user.location == ""){
+        alert("fill in all inputs!")
+      }
+      else{
       auth.setPersistence(persistence.LOCAL).then(() => {
         return auth
           .createUserWithEmailAndPassword(this.user.email, this.user.password)
           .then((res) => {
             db.collection("users").doc(res.user.uid).set({
               age: this.user.age,
-              gender: this.user.gender
+              gender: this.user.gender,
+              location: this.user.location,
+              "liked_categories": {},
+              visited: {}
             })
-            this.$router.push("/categories");  
+            this.$router.push("/categories");
           })
           .catch((error) => {
             alert(error.message);
           })
       });
-    },
+    }
+  },
   },
 });
 </script>
