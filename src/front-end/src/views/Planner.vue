@@ -55,6 +55,7 @@ import { defineComponent } from "vue";
 import axios from "axios";
 import MapModal from "./MapModal.vue";
 import { locateOutline } from 'ionicons/icons';
+import { auth } from "../firebase";
 
 export default defineComponent({
   name: "planner",
@@ -102,7 +103,7 @@ export default defineComponent({
         maxResults: 5,
       };
       // gets user location using ionic geolocation
-      Geolocation.getCurrentPosition(this.options)
+      Geolocation.getCurrentPosition(options)
         .then((geoPosition) => {
           this.lat = geoPosition.coords.latitude;
           this.lng = geoPosition.coords.longitude;
@@ -160,15 +161,12 @@ export default defineComponent({
       }
     },
     submitPlan() {
-      console.log(this.address, this.startTime, this.endTime);
-      // const userUid = auth.currentUser.uid;
-      // axios.get('http://127.0.0.1:5144/planner', 
-      // { params: {'user_id': userUid, 'start_time': this.startTime, 'end_time': this.endTime, 'latitude': '53.3471', 'longitude': '-6.2719'} })
-      // .then(response => {
-      //   const data = response.data;
-      //   console.log(data);
-      // }).catch(error => console.log(error))
-      this.$router.push({name:"PlannerResults" , params:{begin: this.startTime, end:this.endTime, userLocation: JSON.stringify(this.coOrdinates)}});
+      const userUid = auth.currentUser.uid;
+      axios.get('http://127.0.0.1:5144/planner', 
+      { params: {'user_id': userUid, 'start_time': this.startTime, 'end_time': this.endTime, 'latitude': this.lat, 'longitude': this.lng} })
+      .then(response => {
+        this.$router.push({name:"PlannerResults" , params:{begin: this.startTime, end:this.endTime, userLocation: JSON.stringify(this.coOrdinates), businesses: JSON.stringify(response.data)}});
+      }).catch(error => console.log(error))
     },
     updateStartTime(newTime) {
       this.startTime = newTime;
