@@ -10,6 +10,8 @@ import Planner from '../views/Planner.vue';
 import Settings from '../views/Settings.vue';
 import Recommender from '../views/Recommender.vue';
 import PlannerResults from '../views/PlannerResults.vue';
+import Map from '../views/Map.vue';
+import MapModal from '../views/MapModal.vue';
 import { auth } from '../firebase';
 
 const routes: Array<RouteRecordRaw> = [
@@ -50,6 +52,13 @@ const routes: Array<RouteRecordRaw> = [
             name: 'PlannerResults',
             component: PlannerResults,
             props: true,
+            children: [  {
+              path: '/Map',
+              name: 'Map',
+              component: Map,
+              props: true,
+            },
+            ]
           }
         ],
       },
@@ -70,6 +79,14 @@ const routes: Array<RouteRecordRaw> = [
     path: '/Modal',
     name: 'Modal',
     component: Modal,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/MapModal',
+    name: 'MapModal',
+    component: MapModal,
     meta: {
       requiresAuth: true
     }

@@ -42,10 +42,9 @@
             </ion-card-content>
           </ion-card>
         </ion-item>
-        
         <div class="line line0" :style="{ marginLeft: '50%' }"> {{item.distance}}km {{item.time}} time to walk</div>
       </ion-item-sliding>
-      <ion-button>
+      <ion-button v-on:click="openTheMap()">
         <ion-label> Open in Map! </ion-label>
       </ion-button>
     </ion-content>
@@ -101,7 +100,7 @@ export default defineComponent({
       globeOutline,
     };
   },
-  props: ["begin", "end"],
+  props: ["begin", "end", "userLocation"],
   created() {
     // const timeAllocated = this.end.slice(0, 2) - this.begin.slice(0, 2);
     // for (let i = 0; i <= timeAllocated; i++) {
@@ -114,10 +113,13 @@ export default defineComponent({
         this.businesses[key]["position"]
       ] = this.businesses[key];
     }
+    console.log(this.begin)
+    console.log(this.userLocation)
     console.log(this.selectedBusinesses[0]);
   },
   data() {
     return {
+      markers: {},
       selectedBusinesses: {},
       secondaryBusinesses: {
         b0: {
@@ -305,6 +307,16 @@ export default defineComponent({
         }
       }
     },
+    openTheMap() {
+      for (const key in this.selectedBusinesses){
+        const formatedCoords = {}
+        formatedCoords["lat"] = this.selectedBusinesses[key]["coordinates"][0]
+        formatedCoords["lng"] = this.selectedBusinesses[key]["coordinates"][1]
+        this.markers[key] = formatedCoords
+      }
+      console.log(this.userLocation)
+      this.$router.push({name:"Map" , params:{markers : JSON.stringify(this.markers), userLocation : this.userLocation}});
+    }
   },
 });
 </script>
