@@ -7,7 +7,6 @@ variables:
   FLASK_APP: "./run.py"
   GOOGLE_APPLICATION_CREDENTIALS: "./credentials/citycydev-firebase.json"
   FLASK_ENV: "testing"
-  FIRESTORE_EMULATOR_HOST: "localhost:8080"
 
 before_script:
   - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
@@ -29,6 +28,8 @@ scan:
 
 back-end:
   stage: unit-tests
+  variables: 
+    FIRESTORE_EMULATOR_HOST: "localhost:8080"
   script:
     - cd ./src/back-end
     - pip3 install -r requirements.txt
@@ -38,6 +39,8 @@ back-end:
 
 recommender-service:
   stage: unit-tests
+  variables: 
+    FIRESTORE_EMULATOR_HOST: "localhost:8080"
   script:
     - cd ./src/recommender-service
     - pip3 install -r requirements.txt
