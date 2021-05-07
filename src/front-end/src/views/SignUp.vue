@@ -77,7 +77,7 @@ export default defineComponent({
   data() {
     return {
       user: {
-        age: "",
+        age: Number,
         gender: "",
         location: "",
         email: "",

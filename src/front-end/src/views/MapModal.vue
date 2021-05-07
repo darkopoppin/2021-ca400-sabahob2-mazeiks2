@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { IonContent, IonPage } from "@ionic/vue";
+import { IonContent, IonPage, IonTitle, IonButton } from "@ionic/vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -17,7 +17,7 @@ export default defineComponent({
   props: {
     title: { type: String, default: "Super Modal" },
     values: { type: Array },
-    location: {type : Array},
+    location: {type : Object},
     close: { type: Function },
   },
   mounted() {
@@ -50,7 +50,7 @@ export default defineComponent({
       this.close(this.marker);
     },
   },
-  components: { IonContent, IonPage },
+  components: { IonContent, IonPage, IonTitle, IonButton },
 });
 </script>
 

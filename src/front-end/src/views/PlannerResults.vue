@@ -117,6 +117,9 @@ export default defineComponent({
     };
   },
   methods: {
+    redirect(url){
+      window.open(url, '_blank');
+    },
     loadOther(i) {
       for (const key in this.secondaryBusinesses) {
       if (this.secondaryBusinesses[key]["position"] == i){

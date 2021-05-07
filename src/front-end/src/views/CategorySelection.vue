@@ -26,6 +26,8 @@ import {
   IonButton,
   IonContent,
   IonGrid,
+  IonTitle,
+  IonHeader,
   IonRow,
   IonCol,
   IonCard,
@@ -37,7 +39,7 @@ import categories from "../../categories";
 
 
 export default defineComponent({
-  components: { IonPage, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent },
+  components: { IonPage, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent, IonTitle, IonHeader },
   data() {
     return { 
       categories: categories,
