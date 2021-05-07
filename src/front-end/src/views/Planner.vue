@@ -54,8 +54,9 @@ import {
   IonItem,
   onIonViewWillEnter,
   modalController,
+  loadingController
 } from "@ionic/vue";
-import { defineComponent } from "vue";
+import { defineComponent  } from "vue";
 import axios from "axios";
 import MapModal from "./MapModal.vue";
 import { locateOutline } from "ionicons/icons";
@@ -82,6 +83,7 @@ export default defineComponent({
   },
   data() {
     return {
+      timeout: { type: Number, default: 10000 },
       isLoading: true,
       lat: 0,
       lng: 0,
@@ -163,8 +165,19 @@ export default defineComponent({
         });
       }
     },
+    async presentLoadingWithOptions() {
+      this.loading = await loadingController
+        .create({
+          message: 'Planning your day...',
+          duration: this.timeout,
+          backdropDismiss: true
+        });
+
+      return await this.loading.present();
+    },
     submitPlan() {
       const userUid = auth.currentUser.uid;
+      this.loading = this.presentLoadingWithOptions();
       axios
         .get("http://127.0.0.1:5144/planner", {
           params: {
@@ -176,6 +189,7 @@ export default defineComponent({
           },
         })
         .then((response) => {
+          this.loading.dismiss()
           this.$router.push({
             name: "PlannerResults",
             params: {
@@ -186,7 +200,9 @@ export default defineComponent({
             },
           });
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          this.loading.dismiss()
+          alert(error)});
     },
     updateStartTime(newTime) {
       this.startTime = newTime;
