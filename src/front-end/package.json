@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "cy:open": "cypress open",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
@@ -28,7 +29,9 @@
     "vue": "^3.0.11",
     "vue-google-autocomplete": "^1.1.1",
     "vue-router": "^4.0.6",
-    "vue-star-rating": "^2.1.0"
+    "vue-star-rating": "^2.1.0",
+    "cypress": "^7.1.0",
+    "xvfb": "^0.4.0"
   },
   "devDependencies": {
     "axios": "^0.21.1",
