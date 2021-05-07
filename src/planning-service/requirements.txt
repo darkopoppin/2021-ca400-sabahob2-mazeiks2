@@ -1,0 +1,7 @@
+firebase-admin==4.5.3
+flask==1.1.2
+gql==2.0.0
+pytest-flask==1.2.0
+redis==3.5.3
+python-dotenv==0.17.0
+geopy==2.1.0

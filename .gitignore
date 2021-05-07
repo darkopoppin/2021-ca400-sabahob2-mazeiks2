@@ -23,9 +23,6 @@ venv.bak/
 **/recommender_utils/**/*.json
 **/recommender_utils/**/*.txt
 
-# Credentials
-**/credentials
-
 # FrontEnd built files
 **/android/
 **/dist/

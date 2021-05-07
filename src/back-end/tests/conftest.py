@@ -1,7 +1,8 @@
 import pytest
+from firebase_admin import firestore
 
 from main_service import create_service, redis_client
-from firebase_admin import firestore
+from yelp_api import yelp
 
 
 @pytest.fixture(scope='module')
@@ -39,3 +40,9 @@ def test_db():
 @pytest.fixture(scope='module')
 def test_redis():
     yield redis_client
+
+
+@pytest.fixture(scope='module')
+def test_yelp():
+    yield yelp
+    yelp.yelp_client.close()
