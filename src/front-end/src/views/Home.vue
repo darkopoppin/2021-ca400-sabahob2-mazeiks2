@@ -23,7 +23,7 @@
         </ion-tab-button>
       </ion-tab-bar>
       <ion-tab-bar v-else slot="top">
-        <ion-title class="title">Welcome to CiteCy!</ion-title>
+        <ion-title class="title">Welcome to CiteC!</ion-title>
         <ion-tab-button tab="planner" href="/Planner">
           <ion-icon :icon="calendar"></ion-icon>
           <ion-label>Planner</ion-label>

@@ -99,7 +99,7 @@ export default defineComponent({
         minute: "2-digit",
         hour12: false,
       });
-      let futureTime = time.setTime(time.getHours() + 2);
+      let futureTime = time.setTime(time.getHours() + 5);
       if (futureTime > 24) {
         futureTime = futureTime - 24;
         if (futureTime < 10) {

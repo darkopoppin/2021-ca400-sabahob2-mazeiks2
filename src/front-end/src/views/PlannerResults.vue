@@ -9,6 +9,7 @@
           <ion-item-option color="secondary" @click="loadOther(id)"
             >Load new</ion-item-option
           >
+          <ion-item-option color="primary" @click="openModal(id)">Visited!</ion-item-option>
         </ion-item-options>
         <ion-item>
           <ion-card>
@@ -44,8 +45,11 @@
         </ion-item>
         <div class="line line0" :style="{ marginLeft: '50%' }"> {{item.distance}}km {{item.time}} time to walk</div>
       </ion-item-sliding>
+      <ion-button v-on:click="googleMaps()">
+        <ion-label> Open in Google Maps </ion-label>
+      </ion-button>
       <ion-button v-on:click="openTheMap()">
-        <ion-label> Open in Map! </ion-label>
+        <ion-label> Open Preview Map! </ion-label>
       </ion-button>
     </ion-content>
   </ion-page>
@@ -69,10 +73,12 @@ import {
   IonItemOptions,
   IonLabel,
   IonTitle,
+  modalController,
 } from "@ionic/vue";
 import StarRating from "vue-star-rating";
 import { globeOutline } from "ionicons/icons";
 import { defineComponent } from "vue";
+import RatingModal from "../views/RatingModal.vue";
 
 export default defineComponent({
   name: "PlannerResults",
@@ -96,9 +102,7 @@ export default defineComponent({
     StarRating,
   },
   setup() {
-    return {
-      globeOutline,
-    };
+    return {globeOutline}
   },
   props: ["begin", "end", "userLocation", "businesses"],
   created() {
@@ -111,6 +115,7 @@ export default defineComponent({
   },
   data() {
     return {
+      rating: 0,
       markers: {},
       selectedBusinesses: {},
       user: "",
@@ -119,6 +124,26 @@ export default defineComponent({
   methods: {
     redirect(url){
       window.open(url, '_blank');
+    },
+    async openModal(id) {
+      const selected = this.selectedBusinesses[id]
+      const modal = await modalController.create({
+        component: RatingModal,
+        cssClass: "my-modal",
+        componentProps: {
+          business: selected,
+          close: (data) => this.closeModal(data),
+        },
+      });
+      this.currentModal = modal;
+      return modal.present();
+    },
+    closeModal() {
+      if (this.currentModal) {
+        this.currentModal.dismiss().then(() => {
+          this.currentModal = null;
+        });
+      }
     },
     loadOther(i) {
       for (const key in this.secondaryBusinesses) {
@@ -137,6 +162,18 @@ export default defineComponent({
         this.markers[key] = formatedCoords
       }
       this.$router.push({name:"Map" , params:{markers : JSON.stringify(this.markers), userLocation : this.userLocation}});
+    },
+    googleMaps(){
+      const userLocation = JSON.parse(this.userLocation)
+      let mapsUrl = 'https://www.google.com/maps/dir/'
+      mapsUrl += userLocation["lat"] + "," + userLocation["lng"] + "/"
+      for (const key in this.selectedBusinesses){
+        let formatedString = ""
+        formatedString += this.selectedBusinesses[key]["coordinates"][0] + ","
+        formatedString += this.selectedBusinesses[key]["coordinates"][1] + "/"
+        mapsUrl += formatedString
+      }
+    this.redirect(mapsUrl)
     }
   },
 });

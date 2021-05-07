@@ -49,6 +49,9 @@ export default defineComponent({
     submit() {
       this.close(this.marker);
     },
+    dismiss() {
+      this.close();
+    },
   },
   components: { IonContent, IonPage, IonTitle, IonButton },
 });

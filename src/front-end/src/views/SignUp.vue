@@ -96,13 +96,13 @@ export default defineComponent({
           .createUserWithEmailAndPassword(this.user.email, this.user.password)
           .then((res) => {
             db.collection("users").doc(res.user.uid).set({
-              age: this.user.age,
+              age: parseInt(this.user.age),
               gender: this.user.gender,
               location: this.user.location,
               "liked_categories": {},
               visited: {}
             })
-            this.$router.push("/categories");
+            this.$router.push("/home/categories");
           })
           .catch((error) => {
             alert(error.message);

@@ -23,7 +23,7 @@ export default defineComponent({
   mounted() {
     const places = JSON.parse(this.markers);
     const userLocation = JSON.parse(this.userLocation);
-    this.initMap(userLocation);
+    this.initMap();
     this.directions(userLocation, places["0"])
     for (let i = 0; i < Object.keys(places).length - 1; i++) {
         this.directions(places[i.toString()], places[(i + 1).toString()]);
