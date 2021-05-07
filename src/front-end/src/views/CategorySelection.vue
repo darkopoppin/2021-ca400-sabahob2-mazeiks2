@@ -75,6 +75,7 @@ export default defineComponent({
 .component-title{
   text-align: center;
   font-size: x-large;
+  background-color: lightslategrey;
 }
 .card {
   position: relative;

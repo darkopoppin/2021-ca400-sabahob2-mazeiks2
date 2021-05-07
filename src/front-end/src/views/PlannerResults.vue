@@ -1,8 +1,5 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-title class="component-title"> Planner results </ion-title>
-    </ion-header>
     <ion-content>
       <ion-item-sliding v-for="(item, id) in selectedBusinesses" :key="item">
         <ion-item-options side="end">
@@ -44,7 +41,7 @@
           </ion-card>
         </ion-item>
         <div class="line line0" :style="{ marginLeft: '50%' }"> 
-        <ion-chip class="information">  {{Math.round(item.distance)}}km or {{Math.round(item.time)}} minutes ! </ion-chip></div>
+        <ion-chip class="information">  {{Math.round(item.distance)}}km or {{Math.round(item.time)}} minutes! </ion-chip></div>
       </ion-item-sliding>
       <ion-list class="mapButtons">
       <ion-button v-on:click="googleMaps()">
@@ -61,7 +58,7 @@
 <script>
 import {
   IonContent,
-  IonHeader,
+  // IonHeader,
   IonPage,
   IonButton,
   IonCard,
@@ -75,7 +72,7 @@ import {
   IonItemOption,
   IonItemOptions,
   IonLabel,
-  IonTitle,
+  // IonTitle,
   IonChip,
   modalController,
 } from "@ionic/vue";
@@ -88,7 +85,7 @@ export default defineComponent({
   name: "PlannerResults",
   components: {
     IonContent,
-    IonHeader,
+    // IonHeader,
     IonPage,
     IonCard,
     IonItem,
@@ -102,14 +99,29 @@ export default defineComponent({
     IonIcon,
     IonLabel,
     IonButton,
-    IonTitle,
+    // IonTitle,
     IonChip,
     StarRating,
   },
   setup() {
     return {globeOutline}
   },
-  props: ["begin", "end", "userLocation", "businesses"],
+  props: {
+    begin: {
+    default: "10:00",
+    type: String
+  },
+   end: {
+     default: "15:00",
+     type: String
+   }, userLocation: {
+     default: "{lat: 53.213, lng: -6.5332}",
+     type: String
+   }, 
+   businesses: {
+     default: "{}",
+     type: String
+   }},
   created() {
     const jsonBusinesses = JSON.parse(this.businesses)
     for (const key in jsonBusinesses) {
@@ -185,21 +197,29 @@ export default defineComponent({
 </script>
 <style scoped>
 .component-title {
-  background-color: white;
+  background-color:lightblue;
   color: black;
 }
-ion-card {
-  background: rgb(34, 193, 195);
-  background: linear-gradient(
-    0deg,
-    rgba(34, 193, 195, 1) 0%,
-    rgba(22, 50, 48, 0.7707457983193278) 20%,
-    rgba(17, 15, 10, 1) 100%,
-    rgba(253, 187, 45, 1) 100%
-  );
-  box-shadow: 5px 14px 80px rgba(34, 35, 58, 0.2);
-  width: 70%;
-  margin-left: 15%;
+@media only screen and (max-width: 800px) {
+  ion-card {
+    width:100%;
+    display:block;
+    margin: 0 auto;
+    text-align: center;
+    min-width: fit-content;
+    border-radius: 4px;
+    background: linear-gradient(to bottom right, #666699 -16%, #99ccff 73%);
+  }
+}
+@media only screen and (min-width: 801px) {
+  ion-card {
+    display: inline-block;
+    margin-left: 35%;
+    width: 30% !important;
+    text-align: center;
+    border-radius: 4px;
+    background: linear-gradient(to bottom right, #666699 -16%, #99ccff 73%);
+  }
 }
 .tags {
   display: inline-block;
@@ -209,19 +229,26 @@ ion-card {
   width: 150px;
 }
 .mapButtons{
-  background-color: white;
+  background-color: rgb(246, 241, 242);
   text-align: center;
 }
 .yelp {
   color: white;
   --background: darkred;
 }
+ion-content{
+  --ion-background-color: rgb(246, 241, 242);
+}
 ion-item {
   --background: transparent;
   --border-style: none;
 }
+vue-star-rating{
+  display: block;
+  text-align: center;
+}
 ion-card-header {
-  --background: white;
+  --background: #c9efef;
 }
 .line {
   margin-left: 1.6%;

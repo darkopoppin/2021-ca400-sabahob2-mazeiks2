@@ -3,8 +3,8 @@
     <ion-content>
       <ion-card class="card">
         <form @submit.prevent="userRegistration">
-          <h3 class="header">Sign Up</h3>
-
+          <h3 class="header">Sign Up To CiteC!</h3>
+          <h1 class="header2">To get activities planned and recommended just for you!</h1>
           <ion-item class="input">
             <ion-input type="number" v-model="user.age" placeholder="age" />
           </ion-item>
@@ -102,7 +102,7 @@ export default defineComponent({
               "liked_categories": {},
               visited: {}
             })
-            this.$router.push("/home/categories");
+            this.$router.push("/categories");
           })
           .catch((error) => {
             alert(error.message);

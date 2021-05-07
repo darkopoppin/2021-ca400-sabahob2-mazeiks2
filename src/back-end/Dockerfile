@@ -6,7 +6,7 @@ ADD ./ /user-information
 ENV DOCKERIZE_VERSION v0.6.1
 
 ENV GOOGLE_APPLICATION_CREDENTIALS=credentials/citycydev-firebase.json
-ENV YELP_API=TcqBLne8S_-RzVwebu7ozPWddmjVmoq2vNJn9Ma0ScMV6_0OkRnsejiF3eC5BphraKVna5BJgsf9nrPn-3wrn1-2De0RSg88M1FysrTRavrVSeADQV0_3YZmAD6UYHYx
+ENV YELP_API=-qkQqVfTLb3hsK477izbVvwnUqyQHwxu79M5TAt0TwGfV819k97Gjvn1IXQWjVzsRBswfhT9ZD6yeDz-rLK8AHFarhf4JKeTLVRJrvTv5hFscCbrskKMTeZ10yeVYHYx
 # the redis pass should be in single quotes because it contains bash syntax
 ENV REDIS_PASS='K4Ws$$65?}z$e:p\qm7_ycu<Ak]k:}m$'
 

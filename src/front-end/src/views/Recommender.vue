@@ -1,22 +1,7 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-segment
-        @ionChange="segmentChanged($event)"
-        style="background: #3880ff"
-      >
-        <ion-item>
-          <ion-label>Filter</ion-label>
-          <ion-select multiple="true">
-            <ion-select-option value="bird">Bird</ion-select-option>
-            <ion-select-option value="cat">Cat</ion-select-option>
-            <ion-select-option value="dog">Dog</ion-select-option>
-            <ion-select-option value="honeybadger"
-              >Honey Badger</ion-select-option
-            >
-          </ion-select>
-        </ion-item>
-      </ion-segment>
+      <ion-title class="component-title"> your personalised recommendations!</ion-title>
     </ion-header>
     <ion-content>
       <ion-loading
@@ -95,9 +80,7 @@ import {
   IonCardTitle,
   IonCardSubtitle,
   IonCardHeader,
-  IonSegment,
-  IonSelectOption,
-  IonSelect,
+  IonTitle,
   IonLabel,
   IonGrid,
   IonRow,
@@ -126,10 +109,8 @@ export default defineComponent({
     IonCardTitle,
     IonCardSubtitle,
     IonCardHeader,
-    IonSegment,
+    IonTitle,
     IonLabel,
-    IonSelectOption,
-    IonSelect,
     IonGrid,
     IonRow,
     IonCol,
@@ -179,7 +160,6 @@ export default defineComponent({
     };
 
     const recommend = () => {
-      // this.loading = this.presentLoadingWithOptions()
       const userUid = auth.currentUser.uid;
       axios
         .get("http://127.0.0.1:5144/recommender", {
@@ -187,7 +167,6 @@ export default defineComponent({
         })
         .then((response) => {
           setOpen(false)
-          // this.loading.dismiss()
           const data = response.data;
           for (const key in data) {
             recommendations.push(data[key]);
@@ -197,7 +176,6 @@ export default defineComponent({
         .catch((error) => {
           console.log(error);
           setOpen(false)
-          // this.loading.dismiss()
         });
     };
     onIonViewWillEnter(() => {
@@ -224,8 +202,10 @@ export default defineComponent({
 <style scoped>
 @media only screen and (max-width: 800px) {
   ion-card {
+    text-align: center;
     min-width: fit-content;
-    background: blue;
+    border-radius: 4px;
+    background: linear-gradient(to bottom right, #666699 -16%, #99ccff 73%);
     box-shadow: 5px 14px 80px rgba(34, 35, 58, 0.2);
   }
 }
@@ -233,30 +213,34 @@ export default defineComponent({
   ion-card {
     display: inline-block;
     width: 30% !important;
-    background: rgb(34, 193, 195);
-    background: linear-gradient(
-      0deg,
-      rgba(34, 193, 195, 1) 0%,
-      rgba(22, 50, 48, 0.7707457983193278) 20%,
-      rgba(17, 15, 10, 1) 100%,
-      rgba(253, 187, 45, 1) 100%
-    );
+    text-align: center;
+    border-radius: 4px;
+    background: linear-gradient(to bottom right, #666699 -16%, #99ccff 73%);
     box-shadow: 5px 14px 80px rgba(34, 35, 58, 0.2);
   }
 }
 .tags {
+  color: black;
+  font-size: large;
   display: inline-block;
 }
 .yelp {
   color: white;
   --background: darkred;
 }
+vue-star-rating{
+  display: block;
+  text-align: center;
+}
+ion-content{
+  --ion-background-color: rgb(246, 241, 242);
+}
 ion-item {
   --background: transparent;
   --border-style: none;
 }
 ion-card-header {
-  --background: white;
+  --background: #c9efef;
 }
 ion-card-title {
   color: black;

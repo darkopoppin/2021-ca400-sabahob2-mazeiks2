@@ -2,7 +2,8 @@
   <ion-page>
     <ion-content>
       <ion-card class="card">
-          <h3 class="header">Login</h3>
+          <h3 class="header">Welcome to CiteC!</h3>
+          <h1 class="header2">Plenty of recommended sights around for you to see!</h1>
           <form @submit.prevent="userLogin">
             <div class = "email-form">
             <ion-item class ="input">
@@ -141,7 +142,7 @@ export default defineComponent({
 
 <style>
 ion-content {
-  --ion-background-color: white;
+  --ion-background-color: rgb(246, 241, 242);
 }
 
 .card {
@@ -212,9 +213,11 @@ ion-content {
   font-style: bold;
   color: black;
   font-weight: 600;
-  padding-bottom: 10%; 
+  padding-bottom: 0%; 
 }
-
+.header2{
+  padding-bottom: 8%;
+}
 .checkbox{
   --border-style: none;
   --color: black;

@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-title size="small" class="component-title"
-        >Plan your adventure!
+        >Plan your adventure with CiteC!
       </ion-title>
     </ion-header>
     <ion-content>
@@ -213,3 +213,24 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.component-title{
+  background-color: lightgrey;
+}
+ion-item{
+  --inner-border-width: 0px;
+  --highlight-background: none;
+  position: relative;
+  text-decoration: none;
+  --min-height: 0px;
+  --padding-start: 0px;
+  --inner-padding-end: 10px;
+  --border-radius: 100px;
+  --background: lightgray;
+  --ion-text-color: black;
+  padding-bottom: 10px;
+  text-indent: 10px;
+  --border-width: 0px;
+}
+</style>

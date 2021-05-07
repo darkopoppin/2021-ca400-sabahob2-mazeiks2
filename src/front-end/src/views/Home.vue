@@ -13,14 +13,14 @@
         </ion-tab-button>
 
         <ion-tab-button tab="settings" href="/Settings">
-          <ion-icon :icon="settings"></ion-icon>
+          <ion-icon :icon="personOutline"></ion-icon>
           <ion-label>Settings</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="category" href="/Categories">
+        <!-- <ion-tab-button tab="category" href="/Categories">
           <ion-icon :icon="list"></ion-icon>
           <ion-label>Categories</ion-label>
-        </ion-tab-button>
+        </ion-tab-button> -->
       </ion-tab-bar>
       <ion-tab-bar v-else slot="top">
         <ion-title class="title">Welcome to CiteC!</ion-title>
@@ -35,14 +35,14 @@
         </ion-tab-button>
 
         <ion-tab-button tab="settings" href="/Settings">
-          <ion-icon :icon="settings"></ion-icon>
+          <ion-icon :icon="personOutline"></ion-icon>
           <ion-label>Settings</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="category" href="/Categories">
+        <!-- <ion-tab-button tab="category" href="/Categories">
           <ion-icon :icon="list"></ion-icon>
           <ion-label>Categories</ion-label>
-        </ion-tab-button>
+        </ion-tab-button> -->
       </ion-tab-bar>
     </ion-tabs>
   </ion-page>
@@ -59,7 +59,7 @@ import {
   IonTitle,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import { list, calendar, settings, bulb } from "ionicons/icons";
+import { list, calendar, personOutline, bulb } from "ionicons/icons";
 
 export default defineComponent({
   name: "Home",
@@ -76,7 +76,7 @@ export default defineComponent({
     return {
       list,
       calendar,
-      settings,
+      personOutline,
       bulb,
     };
   },
@@ -101,5 +101,17 @@ export default defineComponent({
 <style scoped>
 .title {
   text-align: left;
+}
+ion-tab-bar{
+  background-color:darkred;
+  color: white;
+}
+.tab-selected{
+  color:grey;
+}
+ion-tab-button{
+  border: black;
+  background-color: darkred;
+  color: white;
 }
 </style>
