@@ -1,5 +1,8 @@
 <template>
   <ion-page>
+      <ion-header>
+      <ion-title size="small" class="component-title">Please select some preferences for CiteC to know you better! </ion-title>
+    </ion-header>
   <ion-content>
   <ion-card class="card">
     <ion-grid>
@@ -23,6 +26,8 @@ import {
   IonButton,
   IonContent,
   IonGrid,
+  IonTitle,
+  IonHeader,
   IonRow,
   IonCol,
   IonCard,
@@ -34,7 +39,7 @@ import categories from "../../categories";
 
 
 export default defineComponent({
-  components: { IonPage, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent },
+  components: { IonPage, IonButton, IonCard, IonGrid, IonRow, IonCol, IonContent, IonTitle, IonHeader },
   data() {
     return { 
       categories: categories,
@@ -67,6 +72,11 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.component-title{
+  text-align: center;
+  font-size: x-large;
+  background-color: lightslategrey;
+}
 .card {
   position: relative;
   --background: #ffffff;

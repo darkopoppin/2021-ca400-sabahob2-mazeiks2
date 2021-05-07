@@ -3,8 +3,8 @@
     <ion-content>
       <ion-card class="card">
         <form @submit.prevent="userRegistration">
-          <h3 class="header">Sign Up</h3>
-
+          <h3 class="header">Sign Up To CiteC!</h3>
+          <h1 class="header2">To get activities planned and recommended just for you!</h1>
           <ion-item class="input">
             <ion-input type="number" v-model="user.age" placeholder="age" />
           </ion-item>
@@ -15,6 +15,10 @@
               <ion-select-option value="Female">Female</ion-select-option>
               <ion-select-option value="Male">Male</ion-select-option>
             </ion-select>
+          </ion-item>
+
+          <ion-item class="input">
+            <ion-input type="text" v-model="user.location" placeholder="Primary city" />
           </ion-item>
 
           <ion-item class="input">
@@ -73,8 +77,9 @@ export default defineComponent({
   data() {
     return {
       user: {
-        age: "",
+        age: Number,
         gender: "",
+        location: "",
         email: "",
         password: "",
       },
@@ -82,21 +87,29 @@ export default defineComponent({
   },
   methods: {
     userRegistration() {
+      if (this.user.age == "" || this.user.gender == "" || this.user.location == ""){
+        alert("fill in all inputs!")
+      }
+      else{
       auth.setPersistence(persistence.LOCAL).then(() => {
         return auth
           .createUserWithEmailAndPassword(this.user.email, this.user.password)
           .then((res) => {
             db.collection("users").doc(res.user.uid).set({
-              age: this.user.age,
-              gender: this.user.gender
+              age: parseInt(this.user.age),
+              gender: this.user.gender,
+              location: this.user.location,
+              "liked_categories": {},
+              visited: {}
             })
-            this.$router.push("/categories");  
+            this.$router.push("/categories");
           })
           .catch((error) => {
             alert(error.message);
           })
       });
-    },
+    }
+  },
   },
 });
 </script>

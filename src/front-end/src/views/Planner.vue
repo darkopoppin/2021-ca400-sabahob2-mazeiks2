@@ -1,20 +1,18 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-title class="component-title">Planner! </ion-title>
+      <ion-title size="small" class="component-title"
+        >Plan your adventure with CiteC!
+      </ion-title>
     </ion-header>
     <ion-content>
       <ion-card class="card">
         <form>
           <ion-item>
-            <vue-google-autocomplete
-              id="map"
-              ref="address"
-              classname="form-control"
-              placeholder="Start typing"
-              v-on:placechanged="getAddressData"
-            >
-            </vue-google-autocomplete>
+            <ion-label> {{ address }}</ion-label>
+            <ion-button @click="openModal()"
+              ><ion-icon :icon="locateOutline" />
+            </ion-button>
           </ion-item>
           <ion-item>
             <ion-label>Start time:</ion-label>
@@ -43,8 +41,6 @@
 
 <script>
 import { Geolocation } from "@ionic-native/geolocation";
-import { NativeGeocoder } from "@ionic-native/native-geocoder/";
-import VueGoogleAutocomplete from "vue-google-autocomplete";
 import {
   IonContent,
   IonHeader,
@@ -53,12 +49,18 @@ import {
   IonButton,
   IonCard,
   IonDatetime,
+  IonIcon,
   IonLabel,
   IonItem,
   onIonViewWillEnter,
+  modalController,
+  loadingController
 } from "@ionic/vue";
-import { defineComponent } from "vue";
+import { defineComponent  } from "vue";
 import axios from "axios";
+import MapModal from "./MapModal.vue";
+import { locateOutline } from "ionicons/icons";
+import { auth } from "../firebase";
 
 export default defineComponent({
   name: "planner",
@@ -70,57 +72,57 @@ export default defineComponent({
     IonButton,
     IonCard,
     IonDatetime,
+    IonIcon,
     IonLabel,
     IonItem,
-    VueGoogleAutocomplete,
+  },
+  setup() {
+    return {
+      locateOutline,
+    };
   },
   data() {
     return {
+      timeout: { type: Number, default: 10000 },
       isLoading: true,
       lat: 0,
       lng: 0,
-      address: "default",
+      address: "loading",
+      coOrdinates: { lat: 0, lng: 0 },
       startTime: "00:00",
       endTime: "02:00",
     };
   },
   created() {
     onIonViewWillEnter(() => {
-      // initialises the local time and sets default planner to be 2 hours
-      const tzoffset = new Date().getTimezoneOffset() * 60000;
-      const localISOTime = new Date(Date.now() - tzoffset)
-        .toISOString()
-        .slice(0, -1);
-      this.startTime = localISOTime;
-      const datetime = new Date(localISOTime);
-      datetime.setHours(datetime.getHours() + 3);
-      this.endTime = datetime.toISOString().slice(0, -1);
-
+      const time = new Date();
+      this.startTime = time.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      });
+      let futureTime = time.setTime(time.getHours() + 5);
+      if (futureTime > 24) {
+        futureTime = futureTime - 24;
+        if (futureTime < 10) {
+          futureTime = "0" + futureTime;
+        }
+      } else if (futureTime < 10) {
+        futureTime = "0" + futureTime;
+      }
+      this.endTime = futureTime.toString() + this.startTime.slice(2);
       const options = {
         useLocale: true,
         maxResults: 5,
       };
       // gets user location using ionic geolocation
-      Geolocation.getCurrentPosition(this.options)
+      Geolocation.getCurrentPosition(options)
         .then((geoPosition) => {
           this.lat = geoPosition.coords.latitude;
           this.lng = geoPosition.coords.longitude;
-          // if mobile is used ionic native reverse geocoder otherwise browsers use google maps API
-          if (screen.width <= 760) {
-            NativeGeocoder.reverseGeocode(this.lat, this.lng, options)
-              .then((result) => console.log(JSON.stringify(result[0])))
-              .catch((error) => console.log(error));
-          } else {
-            axios
-              .get(`https://maps.google.com/maps/api/geocode/json?latlng=${this.lat},${this.lng}&key=${""}`)
-              .then((response) => {
-                this.address = response.data.results[0]["formatted_address"];
-              })
-              .catch((error) => {
-                console.log(error);
-              })
-              .finally(() => (this.isLoading = false));
-          }
+          this.coOrdinates["lat"] = this.lat;
+          this.coOrdinates["lng"] = this.lng;
+          this.getAddressData(this.lat, this.lng);
         })
         .catch((err) => {
           console.log(err);
@@ -130,11 +132,77 @@ export default defineComponent({
     });
   },
   methods: {
-    getAddressData: function (addressData) {
-      this.address = addressData;
+    getAddressData(lat, lng) {
+      axios
+        .get(
+          `https://maps.google.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${"AIzaSyAidt7QaA1ZsyKRK23PDYWas-Y2heHZkAQ"}`
+        )
+        .then((response) => {
+          this.address = response.data.results[0]["formatted_address"];
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    async openModal() {
+      const modal = await modalController.create({
+        component: MapModal,
+        cssClass: "my-modal",
+        componentProps: {
+          location: this.coOrdinates,
+          close: (data) => this.closeModal(data),
+        },
+      });
+      this.currentModal = modal;
+      return modal.present();
+    },
+    closeModal(data) {
+      this.coOrdinates = data;
+      this.getAddressData(data["lat"], data["lng"]);
+      if (this.currentModal) {
+        this.currentModal.dismiss().then(() => {
+          this.currentModal = null;
+        });
+      }
+    },
+    async presentLoadingWithOptions() {
+      this.loading = await loadingController
+        .create({
+          message: 'Planning your day...!',
+          duration: this.timeout,
+          backdropDismiss: true
+        });
+
+      return await this.loading.present();
     },
     submitPlan() {
-      console.log(this.address, this.startTime, this.endTime);
+      const userUid = auth.currentUser.uid;
+      this.loading = this.presentLoadingWithOptions();
+      axios
+        .get("http://127.0.0.1:5144/planner", {
+          params: {
+            "user_id": userUid,
+            "start_time": this.startTime,
+            "end_time": this.endTime,
+            latitude: this.lat,
+            longitude: this.lng,
+          },
+        })
+        .then((response) => {
+          this.loading.dismiss()
+          this.$router.push({
+            name: "PlannerResults",
+            params: {
+              begin: this.startTime,
+              end: this.endTime,
+              userLocation: JSON.stringify(this.coOrdinates),
+              businesses: JSON.stringify(response.data),
+            },
+          });
+        })
+        .catch((error) => {
+          this.loading.dismiss()
+          alert(error)});
     },
     updateStartTime(newTime) {
       this.startTime = newTime;
@@ -145,3 +213,24 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.component-title{
+  background-color: lightgrey;
+}
+ion-item{
+  --inner-border-width: 0px;
+  --highlight-background: none;
+  position: relative;
+  text-decoration: none;
+  --min-height: 0px;
+  --padding-start: 0px;
+  --inner-padding-end: 10px;
+  --border-radius: 100px;
+  --background: lightgray;
+  --ion-text-color: black;
+  padding-bottom: 10px;
+  text-indent: 10px;
+  --border-width: 0px;
+}
+</style>

@@ -1,5 +1,16 @@
 version: '3'
 services:
+  frontend:
+    container_name: frontend
+    restart: always
+    build: ./front-end
+    image: front-end
+    volumes:
+      - ~/2021-ca400-sabahob2-mazeiks2/src/front-end:/app
+      - /app/node_modules
+    ports:
+     - 80:8100
+
   backend:
     container_name: backend
     build: ./back-end

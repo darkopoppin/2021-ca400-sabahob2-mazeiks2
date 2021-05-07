@@ -8,8 +8,8 @@ ENV FLASK_APP=run.py
 ENV FLASK_ENV=production
 ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_RUN_PORT=5003
-ENV YELP_API=f-625oQS3C7MH4ksSS2Bz30c5vtkbg669c4DHqzqrrmMStzihXNwEClzXZ6vrya_38Ol2aw0Inf6z90IePHjjAG7UZGCDhXbP3hhskIGaiyygD15bhvUtqsb6swjYHYx
+ENV GRAPHH=f44fbd4f-5b89-4d99-838e-c4e48c2c3861
+ENV YELP_API=-qkQqVfTLb3hsK477izbVvwnUqyQHwxu79M5TAt0TwGfV819k97Gjvn1IXQWjVzsRBswfhT9ZD6yeDz-rLK8AHFarhf4JKeTLVRJrvTv5hFscCbrskKMTeZ10yeVYHYx
 
 RUN pip install --no-cache-dir -r requirements.txt
-
 CMD ["flask", "run", "--no-debugger"]

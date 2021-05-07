@@ -1,92 +1,95 @@
 <template>
   <ion-page>
-      <div class="main-page">
-        <ion-header>
-          <ion-segment @ionChange="segmentChanged($event)" style="background: #3880ff;">
-            <ion-item>
-              <ion-label>Pets</ion-label>
-              <ion-select multiple="true">
-                <ion-select-option value="bird">Bird</ion-select-option>
-                <ion-select-option value="cat">Cat</ion-select-option>
-                <ion-select-option value="dog">Dog</ion-select-option>
-                <ion-select-option value="honeybadger">Honey Badger</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-segment>
-        </ion-header>
-      <ion-content>
-        <div class="content">
-        <ion-list>
-          <ion-card v-for="item in items" :key="item">
-            <ion-grid>
-              <ion-row>
-                <ion-col>
-                  <ion-card-header style="padding: 0%;">
-                  <ion-card-title>{{item.name}}</ion-card-title>
-                  <ion-card-subtitle>{{item.categories}}</ion-card-subtitle>
-                  </ion-card-header>
-                  <ion-list>
-                    <ion-item>Address: {{item.location.address1}}</ion-item>
-                    <ion-item>Rating: {{item.rating}}</ion-item>
-                  </ion-list>
-                </ion-col>
-                  <ion-list>
-                    <ion-thumbnail>
-                      <img :src="item.photos[0]">
-                    </ion-thumbnail>
-                  </ion-list>
-                <ion-col>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-            <ion-card-content>
-
-            </ion-card-content>
-          </ion-card>
-        </ion-list>
-        <ion-infinite-scroll
-          @ionInfinite="loadData($event)" 
-          threshold="100px" 
-          id="infinite-scroll"
-          :disabled="isDisabled">
-        
-          <ion-infinite-scroll-content
-            loading-spinner="bubbles"
-            loading-text="Loading more data...">
-          </ion-infinite-scroll-content>
-        </ion-infinite-scroll>
-      </div>
-      </ion-content>
-      </div>
+    <ion-header>
+      <ion-title class="component-title"> your personalised recommendations!</ion-title>
+    </ion-header>
+    <ion-content>
+      <ion-loading
+        :is-open="isOpenRef"
+        cssClass="my-custom-class"
+        message="Loading recommendations...!"
+        :duration="timeout"
+        @didDismiss="setOpen(false)"
+      >
+      </ion-loading>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-card v-for="item in items" :key="item">
+              <ion-card-header>
+                <ion-card-title class="ion-text-center">{{
+                  item.name
+                }}</ion-card-title>
+                <ion-card-subtitle class="ion-text-center">{{
+                  item.location.address1
+                }}</ion-card-subtitle>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-item
+                  v-for="tag in item.categories"
+                  v-bind:key="tag.title"
+                  class="tags"
+                >
+                  {{ tag.title }}</ion-item
+                >
+                <star-rating
+                  :star-size="20"
+                  :increment="0.5"
+                  :rating="item.rating"
+                  :read-only="true"
+                  :show-rating="false"
+                ></star-rating>
+                <ion-button class="yelp" @Click="redirect(item.url)">
+                  <ion-icon :icon="globeOutline" />
+                  <ion-label>Yelp</ion-label>
+                </ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-infinite-scroll
+        @ionInfinite="loadData($event)"
+        threshold="100px"
+        id="infinite-scroll"
+        :disabled="isDisabled"
+      >
+        <ion-infinite-scroll-content
+          loading-spinner="bubbles"
+          loading-text="Loading more data..."
+        >
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </ion-content>
   </ion-page>
 </template>
 
 <script>
 import {
   IonHeader,
-  IonContent, 
-  IonInfiniteScroll, 
+  IonContent,
+  IonInfiniteScroll,
   IonInfiniteScrollContent,
-  IonList,
   IonItem,
   IonPage,
   onIonViewWillEnter,
-  IonCard, 
-  IonCardContent, 
+  IonCard,
+  IonIcon,
+  IonButton,
+  IonCardContent,
   IonCardTitle,
   IonCardSubtitle,
   IonCardHeader,
-  IonSegment,
-  IonSelectOption,
-  IonSelect,
+  IonTitle,
   IonLabel,
   IonGrid,
   IonRow,
   IonCol,
-  IonThumbnail
+  IonLoading,
 } from "@ionic/vue";
-
 import { defineComponent, ref } from "vue";
+import StarRating from "vue-star-rating";
+import { globeOutline } from "ionicons/icons";
 import axios from "axios";
 import { auth } from "../firebase";
 
@@ -96,31 +99,35 @@ export default defineComponent({
     IonContent,
     IonHeader,
     IonPage,
-    IonInfiniteScroll, 
+    IonIcon,
+    IonButton,
+    IonInfiniteScroll,
     IonInfiniteScrollContent,
-    IonList,
     IonItem,
     IonCard,
     IonCardContent,
     IonCardTitle,
     IonCardSubtitle,
     IonCardHeader,
-    IonSegment,
+    IonTitle,
     IonLabel,
-    IonSelectOption,
-    IonSelect,
     IonGrid,
     IonRow,
     IonCol,
-    IonThumbnail,
+    StarRating,
+    IonLoading,
+  },
+  props: {
+    timeout: { type: Number, default: 10000 },
   },
   setup() {
+    const isOpenRef = ref(false);
+    const setOpen = (state) => isOpenRef.value = state;
+
     const isDisabled = ref(false);
     const recommendations = [];
     const items = ref([]);
-    const images = ref([]);
-    console.log('Setup');
-    
+
     const pushData = () => {
       let max = 0;
       let min = 0;
@@ -134,70 +141,111 @@ export default defineComponent({
       }
       for (let i = min; i < max; i++) {
         items.value.push(recommendations[i]);
-        images.value.push(recommendations[i]['photos'][0])
       }
-    }
+    };
 
     const loadData = (ev) => {
       setTimeout(() => {
         pushData();
-        console.log('Loaded data');
+        console.log("Loaded data");
         ev.target.complete();
 
         // App logic to determine if all data is loaded
         // and disable the infinite scroll
         if (items.value.length == recommendations.length) {
-          console.log('disable')
+          console.log("disable");
           ev.target.disabled = true;
         }
       }, 500);
-    }
+    };
 
-    let userProfile = null;
     const recommend = () => {
-      const userUid = userProfile.uid;
-      axios.get('http://127.0.0.1:5000/recommender', 
-      { params: {'user_id': userUid} })
-      .then(response => {
-        const data = response.data;
-        for (const key in data){
-          recommendations.push(data[key]);
-        }
-        console.log(recommendations);
-        pushData();
-      }).catch(error => console.log(error))
-    }
-
+      const userUid = auth.currentUser.uid;
+      axios
+        .get("http://127.0.0.1:5144/recommender", {
+          params: { "user_id": userUid },
+        })
+        .then((response) => {
+          setOpen(false)
+          const data = response.data;
+          for (const key in data) {
+            recommendations.push(data[key]);
+          }
+          pushData();
+        })
+        .catch((error) => {
+          console.log(error);
+          setOpen(false)
+        });
+    };
     onIonViewWillEnter(() => {
-          userProfile = auth.currentUser;
-          recommend();
+      setOpen(true)
+      recommend();
     });
 
     return {
       isDisabled,
       loadData,
       items,
-      images
-    }
-  }
-})
+      globeOutline,
+      isOpenRef,
+      setOpen,
+    };
+  },
+  methods: {
+    redirect(url) {
+      window.location.href = url;
+    },
+  },
+});
 </script>
 <style scoped>
-  .main-page   {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    margin-top:3%
+@media only screen and (max-width: 800px) {
+  ion-card {
+    text-align: center;
+    min-width: fit-content;
+    border-radius: 4px;
+    background: linear-gradient(to bottom right, #666699 -16%, #99ccff 73%);
+    box-shadow: 5px 14px 80px rgba(34, 35, 58, 0.2);
   }
-  .content {
-    width: 70%;
+}
+@media only screen and (min-width: 801px) {
+  ion-card {
+    display: inline-block;
+    width: 30% !important;
+    text-align: center;
+    border-radius: 4px;
+    background: linear-gradient(to bottom right, #666699 -16%, #99ccff 73%);
+    box-shadow: 5px 14px 80px rgba(34, 35, 58, 0.2);
   }
-  ion-header {
-    position:fixed;
-    top:0;
-  }
-
-  ion-segment-button{
-    display: flex;
-  }
+}
+.tags {
+  color: black;
+  font-size: large;
+  display: inline-block;
+}
+.yelp {
+  color: white;
+  --background: darkred;
+}
+vue-star-rating{
+  display: block;
+  text-align: center;
+}
+ion-content{
+  --ion-background-color: rgb(246, 241, 242);
+}
+ion-item {
+  --background: transparent;
+  --border-style: none;
+}
+ion-card-header {
+  --background: #c9efef;
+}
+ion-card-title {
+  color: black;
+}
+ion-segment-button {
+  display: flex;
+}
 </style>

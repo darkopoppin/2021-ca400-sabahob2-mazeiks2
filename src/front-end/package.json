@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "cy:open": "cypress open",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
@@ -27,7 +28,9 @@
     "firebase": "^8.4.2",
     "vue": "^3.0.11",
     "vue-google-autocomplete": "^1.1.1",
-    "vue-router": "^4.0.6"
+    "vue-router": "^4.0.6",
+    "vue-star-rating": "^2.1.0",
+    "xvfb": "^0.4.0"
   },
   "devDependencies": {
     "axios": "^0.21.1",
@@ -46,8 +49,8 @@
     "@vue/compiler-sfc": "^3.0.11",
     "@vue/eslint-config-typescript": "^5.0.2",
     "@vue/test-utils": "^2.0.0-rc.6",
-    "axios": "^0.21.1",
     "eslint": "^6.7.2",
+    "cypress": "^7.1.0",
     "eslint-plugin-vue": "^7.9.0",
     "typescript": "~3.9.3",
     "vue-jest": "^5.0.0-0"

@@ -1,7 +1,7 @@
 <template>
   <ion-page>
-    <button class="return" @click="dismiss">Cancel</button>
     <ion-content>
+    <ion-button class="return" @click="dismiss">Cancel</ion-button>
       <ion-list style="display: inline-block">
         <ion-item
           style="display: inline-block; width: 50%"
@@ -50,7 +50,7 @@ export default defineComponent({
       .get()
       .then((doc) => {
         if (doc.exists) {
-          doc.data()["likedCategories"].forEach(category => {
+          doc.data()["liked_categories"].forEach(category => {
             this.selectedCategories[category] = true;
           });
         } else {
@@ -73,7 +73,7 @@ export default defineComponent({
       const user = auth.currentUser;
       db.collection("users").doc(user.uid).set(
         {
-          likedCategories: selectedCategories,
+          "liked_categories": selectedCategories,
         },
         { merge: true }
       );
@@ -95,17 +95,17 @@ ion-content {
 
 .selected {
   color: white;
-  background-color: green;
+  background-color: rgb(79, 165, 79);
 }
-
 .return {
   height: 5%;
   color: white;
-  background-color: blue;
+  --background: white;
   font-weight: 15px;
 }
 
 .button {
+  --ion-background-color: white;
   width: 40%;
   min-width: fit-content;
   margin-left: 30%;
