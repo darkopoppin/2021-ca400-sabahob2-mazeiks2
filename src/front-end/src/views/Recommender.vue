@@ -19,6 +19,14 @@
       </ion-segment>
     </ion-header>
     <ion-content>
+      <ion-loading
+        :is-open="isOpenRef"
+        cssClass="my-custom-class"
+        message="Loading recommendations...!"
+        :duration="timeout"
+        @didDismiss="setOpen(false)"
+      >
+      </ion-loading>
       <ion-grid>
         <ion-row>
           <ion-col size="12">
@@ -94,6 +102,7 @@ import {
   IonGrid,
   IonRow,
   IonCol,
+  IonLoading,
 } from "@ionic/vue";
 import { defineComponent, ref } from "vue";
 import StarRating from "vue-star-rating";
@@ -125,8 +134,15 @@ export default defineComponent({
     IonRow,
     IonCol,
     StarRating,
+    IonLoading,
+  },
+  props: {
+    timeout: { type: Number, default: 10000 },
   },
   setup() {
+    const isOpenRef = ref(false);
+    const setOpen = (state) => isOpenRef.value = state;
+
     const isDisabled = ref(false);
     const recommendations = [];
     const items = ref([]);
@@ -163,21 +179,29 @@ export default defineComponent({
     };
 
     const recommend = () => {
+      // this.loading = this.presentLoadingWithOptions()
       const userUid = auth.currentUser.uid;
       axios
         .get("http://127.0.0.1:5144/recommender", {
-          params: { 'user_id': userUid },
+          params: { "user_id": userUid },
         })
         .then((response) => {
+          setOpen(false)
+          // this.loading.dismiss()
           const data = response.data;
           for (const key in data) {
             recommendations.push(data[key]);
           }
           pushData();
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          setOpen(false)
+          // this.loading.dismiss()
+        });
     };
     onIonViewWillEnter(() => {
+      setOpen(true)
       recommend();
     });
 
@@ -186,6 +210,8 @@ export default defineComponent({
       loadData,
       items,
       globeOutline,
+      isOpenRef,
+      setOpen,
     };
   },
   methods: {

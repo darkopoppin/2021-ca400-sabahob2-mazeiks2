@@ -30,7 +30,6 @@
     "vue-google-autocomplete": "^1.1.1",
     "vue-router": "^4.0.6",
     "vue-star-rating": "^2.1.0",
-    "cypress": "^7.1.0",
     "xvfb": "^0.4.0"
   },
   "devDependencies": {
@@ -51,6 +50,7 @@
     "@vue/eslint-config-typescript": "^5.0.2",
     "@vue/test-utils": "^2.0.0-rc.6",
     "eslint": "^6.7.2",
+    "cypress": "^7.1.0",
     "eslint-plugin-vue": "^7.9.0",
     "typescript": "~3.9.3",
     "vue-jest": "^5.0.0-0"

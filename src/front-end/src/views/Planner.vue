@@ -168,7 +168,7 @@ export default defineComponent({
     async presentLoadingWithOptions() {
       this.loading = await loadingController
         .create({
-          message: 'Planning your day...',
+          message: 'Planning your day...!',
           duration: this.timeout,
           backdropDismiss: true
         });

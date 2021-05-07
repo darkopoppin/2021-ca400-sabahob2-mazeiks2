@@ -43,14 +43,17 @@
             </ion-card-content>
           </ion-card>
         </ion-item>
-        <div class="line line0" :style="{ marginLeft: '50%' }"> {{item.distance}}km {{item.time}} time to walk</div>
+        <div class="line line0" :style="{ marginLeft: '50%' }"> 
+        <ion-chip class="information">  {{Math.round(item.distance)}}km or {{Math.round(item.time)}} minutes ! </ion-chip></div>
       </ion-item-sliding>
+      <ion-list class="mapButtons">
       <ion-button v-on:click="googleMaps()">
         <ion-label> Open in Google Maps </ion-label>
       </ion-button>
       <ion-button v-on:click="openTheMap()">
         <ion-label> Open Preview Map! </ion-label>
       </ion-button>
+      </ion-list>
     </ion-content>
   </ion-page>
 </template>
@@ -73,6 +76,7 @@ import {
   IonItemOptions,
   IonLabel,
   IonTitle,
+  IonChip,
   modalController,
 } from "@ionic/vue";
 import StarRating from "vue-star-rating";
@@ -99,6 +103,7 @@ export default defineComponent({
     IonLabel,
     IonButton,
     IonTitle,
+    IonChip,
     StarRating,
   },
   setup() {
@@ -198,6 +203,14 @@ ion-card {
 }
 .tags {
   display: inline-block;
+}
+.information{
+  display: inline-table;
+  width: 150px;
+}
+.mapButtons{
+  background-color: white;
+  text-align: center;
 }
 .yelp {
   color: white;
